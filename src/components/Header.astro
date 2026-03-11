@@ -1,0 +1,183 @@
+---
+const navLinks = [
+  { href: '/', label: 'Startseite', ariaLabel: 'Zur Startseite' },
+  { href: '/leistungen', label: 'Leistungen', ariaLabel: 'Unsere Leistungen ansehen' },
+  { href: '/kontakt', label: 'Kontakt', ariaLabel: 'Kontakt aufnehmen' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="fixed top-0 left-0 right-0 z-40 bg-background/95 backdrop-blur-sm border-b border-white/5">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-24 md:h-28 py-2">
+      <!-- Logo with Claim -->
+      <a 
+        href="/" 
+        class="flex flex-col items-start focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded py-2"
+        aria-label="METRA Sicherheitsdienste - Zur Startseite"
+      >
+        <img 
+          src="/images/logo-sicherheit.webp" 
+          alt="METRA Sicherheitsdienste Logo" 
+          class="h-14 md:h-16 w-auto object-contain"
+          width="200"
+          height="48"
+        />
+        <span class="text-accent/80 text-xs md:text-sm mt-1 hidden md:block pb-1">Sicherheit & Struktur – auf die Sie bauen können.</span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:block" aria-label="Hauptnavigation">
+        <ul class="flex items-center gap-8">
+          {navLinks.map((link) => {
+            const isActive = currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href));
+            return (
+              <li>
+                <a 
+                  href={link.href}
+                  class={`relative py-2 text-sm font-medium transition-colors hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded px-1 ${
+                    isActive ? 'text-accent' : 'text-white'
+                  }`}
+                  aria-label={link.ariaLabel}
+                  aria-current={isActive ? 'page' : undefined}
+                >
+                  {link.label}
+                  {isActive && (
+                    <span class="absolute bottom-0 left-0 right-0 h-0.5 bg-accent rounded-full" aria-hidden="true" />
+                  )}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+
+      <!-- CTA Button Desktop -->
+      <a 
+        href="/kontakt"
+        class="hidden md:inline-flex items-center px-5 py-2.5 bg-accent text-background font-semibold text-sm rounded hover:bg-accent-hover transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        aria-label="Sicherheitslösung anfragen"
+      >
+        Angebot anfordern
+      </a>
+
+      <!-- Mobile Menu Button -->
+      <button 
+        id="mobile-menu-btn"
+        class="md:hidden p-2 text-white hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
+        aria-label="Menü öffnen"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <svg 
+          id="menu-icon-open" 
+          class="w-6 h-6" 
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24" 
+          aria-hidden="true"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg 
+          id="menu-icon-close" 
+          class="w-6 h-6 hidden" 
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24" 
+          aria-hidden="true"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Navigation -->
+  <div 
+    id="mobile-menu" 
+    class="md:hidden hidden bg-background border-t border-white/5"
+    aria-label="Mobile Navigation"
+  >
+    <nav class="px-4 py-4">
+      <ul class="space-y-2">
+        {navLinks.map((link) => {
+          const isActive = currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href));
+          return (
+            <li>
+              <a 
+                href={link.href}
+                class={`block py-3 px-4 rounded font-medium transition-colors ${
+                  isActive 
+                    ? 'bg-accent/10 text-accent' 
+                    : 'text-white hover:bg-white/5 hover:text-accent'
+                }`}
+                aria-label={link.ariaLabel}
+                aria-current={isActive ? 'page' : undefined}
+              >
+                {link.label}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+      <div class="mt-4 pt-4 border-t border-white/5">
+        <a 
+          href="/kontakt"
+          class="block w-full text-center py-3 bg-accent text-background font-semibold rounded hover:bg-accent-hover transition-colors"
+          aria-label="Sicherheitslösung anfragen"
+        >
+          Angebot anfordern
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- Spacer für fixed Header -->
+<div class="h-24 md:h-28" aria-hidden="true"></div>
+
+<script>
+  (function() {
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const iconOpen = document.getElementById('menu-icon-open');
+    const iconClose = document.getElementById('menu-icon-close');
+    let isOpen = false;
+
+    function toggleMenu() {
+      isOpen = !isOpen;
+      
+      if (isOpen) {
+        mobileMenu?.classList.remove('hidden');
+        iconOpen?.classList.add('hidden');
+        iconClose?.classList.remove('hidden');
+        menuBtn?.setAttribute('aria-expanded', 'true');
+        menuBtn?.setAttribute('aria-label', 'Menü schließen');
+        document.body.style.overflow = 'hidden';
+      } else {
+        mobileMenu?.classList.add('hidden');
+        iconOpen?.classList.remove('hidden');
+        iconClose?.classList.add('hidden');
+        menuBtn?.setAttribute('aria-expanded', 'false');
+        menuBtn?.setAttribute('aria-label', 'Menü öffnen');
+        document.body.style.overflow = '';
+      }
+    }
+
+    menuBtn?.addEventListener('click', toggleMenu);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen) {
+        toggleMenu();
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 768 && isOpen) {
+        toggleMenu();
+      }
+    });
+  })();
+</script>

@@ -1,0 +1,624 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
+
+const benefits = [
+  {
+    title: 'Professioneller Schutz',
+    description: 'Erfahrene Sicherheitsmitarbeiter mit IHK-Zertifizierung für höchste Sicherheitsstandards.',
+    icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+  },
+  {
+    title: '24/7 Verfügbarkeit',
+    description: 'Rund um die Uhr für Sie da – auch an Wochenenden und Feiertagen.',
+    icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z',
+  },
+  {
+    title: 'Klare Verantwortlichkeiten',
+    description: 'Transparente Zuständigkeiten und lückenlose Dokumentation aller Abläufe.',
+    icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z',
+  },
+  {
+    title: 'Schnelle Reaktion',
+    description: 'Sofortige Reaktion bei Sicherheitsvorfällen und flexibel anpassbare Einsatzpläne.',
+    icon: 'M13 10V3L4 14h7v7l9-11h-7z',
+  },
+  {
+    title: 'Sichtbare Präsenz',
+    description: 'Repräsentative Sicherheitskräfte, die für Aufmerksamkeit und klare Abläufe sorgen.',
+    icon: 'M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z',
+  },
+];
+
+const steps = [
+  {
+    number: '01',
+    title: 'Analyse',
+    description: 'Bedarfsanalyse des Objekts. Wir erfassen Risiken, Zugangspunkte und Schutzbedarf.',
+    icon: 'M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z',
+  },
+  {
+    number: '02',
+    title: 'Konzept',
+    description: 'Maßgeschneidertes Sicherheitskonzept. Individuell auf Ihr Objekt und Ihre Anforderungen abgestimmt.',
+    icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01',
+  },
+  {
+    number: '03',
+    title: 'Einsatz',
+    description: 'Qualifiziertes METRA-Team vor Ort. Zuverlässig, diskret, professionell.',
+    icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z',
+  },
+  {
+    number: '04',
+    title: 'Reporting',
+    description: 'Lückenlose Dokumentation. Schichtberichte, Protokolle und direkte Kommunikation mit dem Auftraggeber.',
+    icon: 'M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z',
+  },
+];
+
+const services = [
+  {
+    title: 'Baustellensicherheit',
+    description: 'Wir sichern Baustellen jeder Größe – von innerstädtischen Bauprojekten bis zu langfristigen Großbaustellen.',
+    image: '/images/service-baustelle.webp',
+    icon: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4',
+  },
+  {
+    title: 'Objektschutz',
+    description: 'Professioneller Objektschutz für Bürogebäude, Wohnanlagen, Gewerbeobjekte und Industrieanlagen.',
+    image: '/images/service-objekt.webp',
+    icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6',
+  },
+  {
+    title: 'Brandwachen',
+    description: 'Qualifizierte Brandwachen zur Absicherung gefährdeter Bereiche bei feuergefährlichen Arbeiten.',
+    image: '/images/service-brandwache.webp',
+    icon: 'M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z',
+  },
+  {
+    title: 'Empfangs- & Concierge-Dienste',
+    description: 'Exklusive Empfangs- und Concierge-Dienste verbinden Sicherheit mit professionellem Service.',
+    image: '/images/service-concierge.webp',
+    icon: 'M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z',
+    isPremium: true,
+  },
+  {
+    title: 'Werkschutz / Industrieschutz',
+    description: 'Sicherheitslösungen für Industrieanlagen, Produktionsstandorte und Gewerbeparks.',
+    image: '/images/service-werk.webp',
+    icon: 'M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z',
+  },
+];
+
+const schemaBreadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Startseite',
+      item: 'https://www.metra-sicherheitsdienste.de',
+    },
+  ],
+};
+---
+
+<Layout 
+  title="METRA Sicherheitsdienste GmbH | Schutz · Präsenz · Verantwortung"
+  description="Professionelle Sicherheitslösungen für Baustellen, Immobilien und Unternehmen. 24/7 Sicherheitsdienste, Brandwachen, Objektschutz und exklusive Concierge-Dienste."
+  canonical="/"
+>
+  <script type="application/ld+json" set:html={JSON.stringify(schemaBreadcrumb)} />
+  
+  <Header />
+  
+  <main id="main-content">
+    <!-- Hero Section WITH IMAGE -->
+    <section 
+      class="relative min-h-[90vh] flex items-center overflow-hidden"
+      aria-labelledby="hero-title"
+    >
+      <!-- Background Pattern -->
+      <div class="absolute inset-0 opacity-5" aria-hidden="true">
+        <div class="absolute inset-0" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 40px 40px;"></div>
+      </div>
+      
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-40">
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <!-- Left: Text Content -->
+          <div class="max-w-2xl">
+            <!-- Tagline -->
+            <p class="text-accent font-semibold tracking-wider text-sm md:text-base mb-4 animate-fade-in">
+              SCHUTZ · PRÄSENZ · VERANTWORTUNG
+            </p>
+            
+            <!-- Main Headline -->
+            <h1 
+              id="hero-title" 
+              class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 animate-fade-in-up"
+            >
+              METRA Sicherheitsdienste
+            </h1>
+            
+            <!-- Subheadline -->
+            <p class="text-accent/80 text-sm md:text-base mb-2 animate-fade-in">
+              Sicherheit & Struktur – auf die Sie bauen können.
+            </p>
+            
+            <p class="text-lg md:text-xl text-secondary leading-relaxed mb-4 animate-fade-in-up" style="animation-delay: 0.1s;">
+              Baustellensicherheit · Objektschutz · Empfangs- & Concierge-Dienste
+            </p>
+            
+            <p class="text-secondary leading-relaxed mb-8 animate-fade-in-up" style="animation-delay: 0.15s;">
+              METRA Sicherheitsdienste bietet professionelle Sicherheitslösungen für Baustellen, Immobilien, Industrieanlagen und Unternehmen. Unsere Sicherheitskräfte sorgen für Sicherheit, Präsenz und strukturierte Abläufe zuverlässig und rund um die Uhr.
+            </p>
+            
+            <!-- USP Tags -->
+            <div class="flex flex-wrap gap-3 mb-10 animate-fade-in-up" style="animation-delay: 0.2s;">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent/10 border border-accent/20 rounded-full text-accent text-sm font-medium">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                </svg>
+                24/7 Verfügbarkeit
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent/10 border border-accent/20 rounded-full text-accent text-sm font-medium">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                § 34a GewO zertifiziert
+              </span>
+            </div>
+            
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 animate-fade-in-up" style="animation-delay: 0.3s;">
+              <a 
+                href="/kontakt"
+                class="inline-flex items-center justify-center px-8 py-4 bg-accent text-background font-bold text-base rounded hover:bg-accent-hover transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-accent/50"
+                aria-label="Sicherheitslösung anfragen"
+              >
+                Sicherheitslösung anfragen
+                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+              </a>
+              <a 
+                href="/leistungen"
+                class="inline-flex items-center justify-center px-8 py-4 border-2 border-secondary/30 text-white font-semibold text-base rounded hover:border-accent hover:text-accent transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-accent/50"
+                aria-label="Unsere Leistungen ansehen"
+              >
+                Unsere Leistungen
+              </a>
+            </div>
+          </div>
+          
+          <!-- Right: Hero Image -->
+          <div class="relative lg:h-[600px] flex items-center justify-center animate-fade-in-up" style="animation-delay: 0.2s;">
+            {/* Decorative Glow */}
+            <div class="absolute inset-0 bg-accent/5 rounded-full blur-3xl" aria-hidden="true"></div>
+            
+            {/* Hero Image */}
+            <div class="relative w-full">
+              <img 
+                src="/images/hero-sicherheit.webp" 
+                alt="METRA Sicherheitsdienste"
+                class="w-full h-[300px] md:h-[400px] object-cover rounded-2xl shadow-2xl"
+                width="700"
+                height="400"
+                loading="eager"
+                fetchpriority="high"
+              />
+              
+              {/* Floating Stats Card */}
+              <div class="absolute -bottom-6 -left-6 bg-background border border-accent/20 rounded-xl p-4 shadow-xl">
+                <div class="flex items-center gap-3">
+                  <div class="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center">
+                    <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="text-white font-bold text-lg">100%</p>
+                    <p class="text-secondary text-xs">Zuverlässigkeit</p>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Floating 24/7 Card */}
+              <div class="absolute -top-4 -right-4 bg-accent text-background rounded-xl p-4 shadow-xl">
+                <div class="flex items-center gap-2">
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                  </svg>
+                  <span class="font-bold text-sm">24/7 Bereitschaft</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      {/* Scroll Indicator */}
+      <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 hidden md:block" aria-hidden="true">
+        <div class="w-6 h-10 border-2 border-secondary/30 rounded-full flex justify-center pt-2">
+          <div class="w-1.5 h-3 bg-accent rounded-full animate-bounce"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Problem / Solution Section -->
+    <section class="py-24 md:py-40 bg-black/20" aria-labelledby="problem-solution-title">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <div>
+            <h2 id="problem-solution-title" class="sr-only">Problem und Lösung</h2>
+            <p class="text-accent font-semibold tracking-wider text-sm mb-3">DIE HERAUSFORDERUNG</p>
+            <h3 class="text-3xl md:text-4xl font-bold text-white mb-6">
+              Sicherheitsrisiken auf Baustellen und in Objekten
+            </h3>
+            <p class="text-secondary text-lg mb-6">
+              Baustellen und Gewerbeobjekte sind besonders anfällig für Diebstahl, Vandalismus und unbefugten Zutritt. Ohne professionelle Sicherheit entstehen hohe Schäden und Verzögerungen.
+            </p>
+            <p class="text-secondary text-lg">
+              Professionelle Sicherheitsdienste schützen Ihre Werte, sorgen für reibungslose Abläufe und entlasten Ihre Bauleitung.
+            </p>
+          </div>
+          
+          <div class="bg-background border border-accent/20 rounded-2xl p-8 md:p-10">
+            <p class="text-accent font-semibold tracking-wider text-sm mb-3">UNSERE LÖSUNG</p>
+            <h3 class="text-3xl md:text-4xl font-bold text-white mb-6">
+              Ein Partner. Eine Verantwortung. Eine Lösung.
+            </h3>
+            <p class="text-secondary text-lg mb-8">
+              METRA übernimmt die komplette Sicherheit für Ihr Projekt. Von der Baustellenbewachung bis zum Objektschutz – wir sorgen für professionellen Schutz rund um die Uhr.
+            </p>
+            
+            <!-- Benefits Grid -->
+            <div class="grid sm:grid-cols-2 gap-4">
+              {benefits.map((benefit, index) => (
+                <div class="flex items-start gap-3 p-4 bg-white/5 rounded-lg">
+                  <div class="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={benefit.icon}/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 class="text-white font-semibold text-sm mb-1">{benefit.title}</h4>
+                    <p class="text-secondary text-xs leading-relaxed">{benefit.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4-Step Process -->
+    <section class="py-24 md:py-40" aria-labelledby="process-title">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <p class="text-accent font-semibold tracking-wider text-sm mb-3">UNSER ANSATZ</p>
+          <h2 id="process-title" class="text-3xl md:text-4xl font-bold text-white mb-4">
+            Unser 4-Schritte-Ansatz
+          </h2>
+          <p class="text-secondary text-lg">
+            Systematisch und professionell zum Erfolg – von der ersten Analyse bis zur finalen Dokumentation.
+          </p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {steps.map((step, index) => (
+            <article class="group relative bg-white/5 border border-white/5 rounded-xl p-6 hover:border-accent/30 transition-colors">
+              <span class="absolute -top-3 -right-3 w-12 h-12 bg-accent text-background font-bold text-lg rounded-full flex items-center justify-center">
+                {step.number}
+              </span>
+              <div class="w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
+                <svg class="w-7 h-7 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={step.icon}/>
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-white mb-2">{step.title}</h3>
+              <p class="text-secondary text-sm leading-relaxed">{step.description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Teaser WITH IMAGES -->
+    <section class="py-24 md:py-40 bg-black/20" aria-labelledby="services-title">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <p class="text-accent font-semibold tracking-wider text-sm mb-3">UNSERE LEISTUNGEN</p>
+          <h2 id="services-title" class="text-3xl md:text-4xl font-bold text-white mb-4">
+            Professionelle Sicherheitsdienste aus einer Hand
+          </h2>
+          <p class="text-secondary text-lg">
+            Von der Baustellensicherheit bis zum exklusiven Concierge-Service – wir decken alle Bereiche des professionellen Sicherheitsdienstes ab.
+          </p>
+        </div>
+        
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {services.map((service) => (
+            <a 
+              href="/leistungen"
+              class={`group block bg-background border rounded-xl overflow-hidden hover:border-accent/30 transition-all hover:-translate-y-1 focus:outline-none focus-visible:ring-4 focus-visible:ring-accent/50 ${
+                service.isPremium ? 'border-accent/30 ring-1 ring-accent/20' : 'border-white/5'
+              }`}
+            >
+              <!-- Service Image -->
+              <div class="relative aspect-[16/9] overflow-hidden">
+                <img 
+                  src={service.image} 
+                  alt={service.title}
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                  width="400"
+                  height="225"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-60"></div>
+                
+                <!-- Premium Badge -->
+                {service.isPremium && (
+                  <div class="absolute top-4 right-4 bg-accent text-background px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+                    <span>⭐</span>
+                    <span>PREMIUM</span>
+                  </div>
+                )}
+              </div>
+              
+              <div class="p-6">
+                <div class="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
+                  <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={service.icon}/>
+                  </svg>
+                </div>
+                <h3 class={`text-lg font-bold mb-2 group-hover:text-accent transition-colors ${service.isPremium ? 'text-accent' : 'text-white'}`}>
+                  {service.title}
+                </h3>
+                <p class="text-secondary text-sm leading-relaxed mb-4">
+                  {service.description}
+                </p>
+                <span class="inline-flex items-center text-accent text-sm font-medium">
+                  Mehr erfahren
+                  <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                  </svg>
+                </span>
+              </div>
+            </a>
+          ))}
+        </div>
+        
+        <div class="text-center mt-12">
+          <a 
+            href="/leistungen"
+            class="inline-flex items-center justify-center px-8 py-4 border-2 border-accent text-accent font-semibold text-base rounded hover:bg-accent hover:text-background transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-accent/50"
+            aria-label="Alle Leistungen im Detail ansehen"
+          >
+            Alle Leistungen ansehen
+            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Concierge Highlight Section - Dark Luxury Design -->
+    <section class="py-24 md:py-32 bg-background" aria-labelledby="concierge-title">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col items-center text-center">
+          
+          <!-- Top Icon: Gold Circle with Red Diamond Emoji -->
+          <div class="relative w-16 h-16 mb-8 flex items-center justify-center">
+            <!-- Thin gold circular border -->
+            <div class="absolute inset-0 rounded-full border border-accent/60"></div>
+            <!-- Red diamond emoji in center -->
+            <span class="text-2xl" aria-hidden="true">♦️</span>
+          </div>
+          
+          <!-- Top Label (Overline) with horizontal lines -->
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-12 h-px bg-accent/60"></div>
+            <p class="text-accent text-xs tracking-[0.3em] uppercase font-medium">Exklusiver Service</p>
+            <div class="w-12 h-px bg-accent/60"></div>
+          </div>
+          
+          <!-- Main Heading: Serif font, first line white, rest gold -->
+          <h2 id="concierge-title" class="font-serif mb-4">
+            <span class="block text-4xl md:text-5xl lg:text-6xl text-white tracking-tight" style="font-family: 'Playfair Display', 'Cormorant Garamond', Georgia, 'Times New Roman', serif;">Empfangs- &</span>
+            <span class="block text-4xl md:text-5xl lg:text-6xl text-accent tracking-tight mt-1" style="font-family: 'Playfair Display', 'Cormorant Garamond', Georgia, 'Times New Roman', serif;">Concierge-Dienste</span>
+          </h2>
+          
+          <!-- Sub-Label -->
+          <p class="text-accent text-xs tracking-[0.3em] uppercase font-medium mb-8">Premium Service</p>
+          
+          <!-- Paragraph: Light gray, max-width, relaxed line height -->
+          <p class="text-secondary/90 text-base md:text-lg leading-relaxed max-w-2xl mb-12">
+            Empfangs- und Concierge-Dienste verbinden Sicherheit mit professionellem Service und repräsentativer Präsenz. Unsere Mitarbeiter repräsentieren Ihr Unternehmen im Eingangsbereich und sorgen gleichzeitig für strukturierte Zutrittskontrollen.
+          </p>
+          
+          <!-- Feature List: Boxes with gold border, ✦ symbol -->
+          <div class="w-full max-w-xl space-y-4 mb-12">
+            <div class="border border-accent/40 bg-white/[0.02] px-6 py-4 flex items-center gap-4">
+              <span class="text-accent text-lg">✦</span>
+              <span class="text-white/90 text-sm md:text-base">Besucherempfang und Auskunftsdienste</span>
+            </div>
+            <div class="border border-accent/40 bg-white/[0.02] px-6 py-4 flex items-center gap-4">
+              <span class="text-accent text-lg">✦</span>
+              <span class="text-white/90 text-sm md:text-base">Zutrittskontrollen und Besucherregistrierung</span>
+            </div>
+            <div class="border border-accent/40 bg-white/[0.02] px-6 py-4 flex items-center gap-4">
+              <span class="text-accent text-lg">✦</span>
+              <span class="text-white/90 text-sm md:text-base">Koordination von Besuchern und Dienstleistern</span>
+            </div>
+            <div class="border border-accent/40 bg-white/[0.02] px-6 py-4 flex items-center gap-4">
+              <span class="text-accent text-lg">✦</span>
+              <span class="text-white/90 text-sm md:text-base">Repräsentative Präsenz im Eingangsbereich</span>
+            </div>
+          </div>
+          
+          <!-- CTA Button: Solid gold, sharp corners, black text -->
+          <a 
+            href="/leistungen#concierge"
+            class="inline-flex items-center justify-center px-10 py-4 bg-accent text-black font-bold text-sm tracking-[0.15em] uppercase hover:bg-accent-hover transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
+            aria-label="Mehr über Concierge-Dienste erfahren"
+          >
+            Mehr erfahren
+          </a>
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- Kooperation mit Baulogistik Section -->
+    <section class="py-24 md:py-40 bg-black/40" aria-labelledby="cooperation-title">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+          <!-- Shield Icon -->
+          <div class="w-20 h-20 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-8">
+            <span class="text-4xl">🤝</span>
+          </div>
+          
+          <h2 id="cooperation-title" class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-8">
+            Zusammenarbeit mit<br />METRA Baulogistik
+          </h2>
+          
+          <p class="text-secondary text-lg md:text-xl mb-12 max-w-3xl mx-auto">
+            Bei Bauprojekten arbeiten METRA Sicherheitsdienste und METRA Baulogistik eng zusammen. Während METRA Baulogistik die Organisation der Baustellenlogistik übernimmt, sorgt METRA Sicherheitsdienste für kontrollierte Zugänge, Sicherheitspräsenz und den Schutz von Materialien und Anlagen.
+          </p>
+          
+          <div class="grid md:grid-cols-3 gap-6 text-left">
+            <div class="flex items-start gap-3 bg-white/5 p-6 rounded-xl">
+              <span class="text-accent text-xl mt-0.5">✔</span>
+              <span class="text-white">Abgestimmte Logistik- und Sicherheitsabläufe</span>
+            </div>
+            <div class="flex items-start gap-3 bg-white/5 p-6 rounded-xl">
+              <span class="text-accent text-xl mt-0.5">✔</span>
+              <span class="text-white">Klare Zuständigkeiten auf der Baustelle</span>
+            </div>
+            <div class="flex items-start gap-3 bg-white/5 p-6 rounded-xl">
+              <span class="text-accent text-xl mt-0.5">✔</span>
+              <span class="text-white">Strukturierte Organisation von Lieferungen und Zugängen</span>
+            </div>
+          </div>
+          
+          <div class="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
+            <a 
+              href="https://www.metra-baulogistik.de"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center px-8 py-4 border-2 border-accent text-accent font-semibold text-base rounded hover:bg-accent hover:text-background transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-accent/50"
+            >
+              METRA Baulogistik besuchen
+              <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Warum METRA Section -->
+    <section class="py-24 md:py-40 bg-black/20" aria-labelledby="why-metra-title">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 id="why-metra-title" class="text-3xl md:text-4xl font-bold text-white mb-4">
+            Warum METRA Sicherheitsdienste
+          </h2>
+          <p class="text-accent text-lg">Sicherheit & Struktur – auf die Sie bauen können.</p>
+        </div>
+        
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          <div class="flex items-start gap-4 bg-white/5 p-6 rounded-xl">
+            <span class="text-accent text-2xl">✔</span>
+            <span class="text-white text-lg">Kombination aus Baustellensicherheit und Objektschutz</span>
+          </div>
+          <div class="flex items-start gap-4 bg-white/5 p-6 rounded-xl">
+            <span class="text-accent text-2xl">✔</span>
+            <span class="text-white text-lg">Exklusive Empfangs- & Concierge-Dienste</span>
+          </div>
+          <div class="flex items-start gap-4 bg-white/5 p-6 rounded-xl">
+            <span class="text-accent text-2xl">✔</span>
+            <span class="text-white text-lg">Klare Strukturen und feste Ansprechpartner</span>
+          </div>
+          <div class="flex items-start gap-4 bg-white/5 p-6 rounded-xl">
+            <span class="text-accent text-2xl">✔</span>
+            <span class="text-white text-lg">Professionelle Sicherheitskräfte mit Erfahrung</span>
+          </div>
+          <div class="flex items-start gap-4 bg-white/5 p-6 rounded-xl">
+            <span class="text-accent text-2xl">✔</span>
+            <span class="text-white text-lg">Integration in Bau- und Objektprozesse</span>
+          </div>
+          <div class="flex items-start gap-4 bg-white/5 p-6 rounded-xl">
+            <span class="text-accent text-2xl">✔</span>
+            <span class="text-white text-lg">24/7 Erreichbarkeit und schnelle Reaktionszeiten</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Qualifikationen Section -->
+    <section class="py-24 md:py-40" aria-labelledby="qualifikationen-title">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <p class="text-accent font-semibold tracking-wider text-sm mb-3">UNSERE QUALIFIKATION</p>
+            <h2 id="qualifikationen-title" class="text-3xl md:text-4xl font-bold text-white mb-6">
+              Zertifizierte Sicherheitsexperten
+            </h2>
+            <p class="text-secondary text-lg mb-8">
+              Unsere Sicherheitskräfte verfügen über umfassende Qualifikationen und regelmäßige Fortbildungen für höchste Sicherheitsstandards.
+            </p>
+            
+            <ul class="space-y-4">
+              <li class="flex items-start gap-3">
+                <svg class="w-6 h-6 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <span class="text-white">Sicherheitsdienst nach §34a GewO</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-6 h-6 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <span class="text-white">IHK geprüfte Sicherheitskräfte</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-6 h-6 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <span class="text-white">Bewacher ID Nummer und behördliche Freigabe</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-6 h-6 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <span class="text-white">Ausgebildete Brandschutzhelfer</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-6 h-6 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <span class="text-white">Strukturierte Einsatzplanung und Dokumentation</span>
+              </li>
+            </ul>
+          </div>
+          
+          {/* Image removed - only text/list */}
+        </div>
+      </div>
+    </section>
+
+  </main>
+  
+  <Footer />
+  <WhatsAppButton />
+</Layout>

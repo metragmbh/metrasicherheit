@@ -1,0 +1,156 @@
+---
+import '../styles/global.css';
+import CookieBanner from '../components/CookieBanner.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  canonical?: string;
+}
+
+const { 
+  title = 'METRA Sicherheitsdienste GmbH | Schutz · Präsenz · Verantwortung',
+  description = 'Professionelle Sicherheitslösungen für Baustellen, Immobilien und Unternehmen. 24/7 Sicherheitsdienste, Brandwachen, Objektschutz und exklusive Concierge-Dienste.',
+  ogImage = '/images/hero-sicherheit.webp',
+  canonical = Astro.url.pathname
+} = Astro.props;
+
+const siteUrl = 'https://www.metra-sicherheitsdienste.de';
+const fullCanonical = `${siteUrl}${canonical}`;
+
+// Schema.org JSON-LD
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'METRA Sicherheitsdienste GmbH',
+  url: siteUrl,
+  logo: `${siteUrl}/images/logo-sicherheit.webp`,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Im Mediapark 5',
+    addressLocality: 'Köln',
+    postalCode: '50670',
+    addressCountry: 'DE'
+  },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    telephone: '+491708888891',
+    contactType: 'customer service',
+    email: 'info@metra-sicherheitsdienste.de'
+  },
+  sameAs: []
+};
+
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: 'METRA Sicherheitsdienste GmbH',
+  image: `${siteUrl}${ogImage}`,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Im Mediapark 5',
+    addressLocality: 'Köln',
+    postalCode: '50670',
+    addressCountry: 'DE'
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: '50.9484',
+    longitude: '6.9525'
+  },
+  url: siteUrl,
+  telephone: '+491708888891',
+  priceRange: '€€',
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+    opens: '00:00',
+    closes: '23:59'
+  }
+};
+---
+
+<!DOCTYPE html>
+<html lang="de-DE" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="METRA Sicherheitsdienste GmbH" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href={fullCanonical} />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico" />
+    
+    <!-- Preconnect für Performance -->
+    <link rel="preconnect" href="https://api.web3forms.com" />
+    
+    <!-- Preload Fonts -->
+    <link rel="preload" href="/fonts/inter-regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/inter-600.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/inter-700.woff2" as="font" type="font/woff2" crossorigin />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={fullCanonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`${siteUrl}${ogImage}`} />
+    <meta property="og:locale" content="de_DE" />
+    <meta property="og:site_name" content="METRA Sicherheitsdienste" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={fullCanonical} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={`${siteUrl}${ogImage}`} />
+    
+    <!-- Schema.org -->
+    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#17181d" />
+    
+    <!-- Critical CSS Inline für Above-the-fold -->
+    <style is:inline>
+      /* Critical CSS */
+      body {
+        background-color: #17181d;
+        color: #ffffff;
+        margin: 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      }
+      
+      /* Font Display Swap */
+      @font-face {
+        font-family: 'Inter';
+        src: url('/fonts/inter-regular.woff2') format('woff2');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+    </style>
+  </head>
+  
+  <body class="min-h-screen flex flex-col">
+    <a 
+      href="#main-content" 
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-accent text-background px-4 py-2 rounded font-medium z-50"
+    >
+      Zum Hauptinhalt springen
+    </a>
+    
+    <slot />
+    
+    <CookieBanner />
+  </body>
+</html>
