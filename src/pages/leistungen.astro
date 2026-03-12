@@ -6,23 +6,9 @@ import WhatsAppButton from '../components/WhatsAppButton.astro';
 
 const services = [
   {
-    id: 'baustellensicherheit',
-    title: 'Baustellensicherheit',
-    description: 'Wir sichern Baustellen jeder Größe – von innerstädtischen Bauprojekten bis zu langfristigen Großbaustellen. Unsere Sicherheitskräfte sorgen für kontrollierte Zugänge, Schutz von Materialien und klare Abläufe auf der Baustelle.',
-    image: '/images/service-baustelle.webp',
-    features: [
-      'Baustellenbewachung und Objektschutz',
-      'Zutrittskontrolle und Personensteuerung',
-      'Kontrollgänge und Streifendienste',
-      'Schutz von Baumaterialien und Geräten',
-      'Koordination mit Bauleitung und Gewerken',
-    ],
-    icon: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4',
-  },
-  {
     id: 'objektschutz',
     title: 'Objektschutz',
-    description: 'Professioneller Objektschutz für Bürogebäude, Wohnanlagen, Gewerbeobjekte und Industrieanlagen. Unsere Sicherheitskräfte sorgen für Präsenz, Kontrolle und Schutz von Menschen, Gebäuden und Sachwerten.',
+    description: 'Professioneller Objektschutz für Bürogebäude, Wohnanlagen, Gewerbeobjekte und Industrieanlagen. Unsere Sicherheitskräfte sorgen für sichtbare Präsenz, Kontrolle und Schutz von Menschen, Gebäuden und Sachwerten.',
     image: '/images/service-objekt.webp',
     features: [
       'Bewachung von Büro- und Verwaltungsgebäuden',
@@ -34,33 +20,18 @@ const services = [
     icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6',
   },
   {
-    id: 'brandwachen',
-    title: 'Brandwachen',
-    description: 'Qualifizierte Brandwachen zur Absicherung gefährdeter Bereiche. Unsere Mitarbeiter überwachen Brandrisiken, sichern Arbeitsbereiche und reagieren schnell im Ereignisfall.',
-    image: '/images/service-brandwache.webp',
+    id: 'baustellensicherheit',
+    title: 'Baustellensicherheit',
+    description: 'Wir sichern Baustellen jeder Größe – von innerstädtischen Bauprojekten bis zu langfristigen Großbaustellen. Unsere Sicherheitskräfte sorgen für kontrollierte Zugänge, Schutz von Materialien und strukturierte Abläufe auf der Baustelle.',
+    image: '/images/service-baustelle.webp',
     features: [
-      'Überwachung feuergefährlicher Arbeiten',
-      'Absicherung bei Ausfall von Brandmeldeanlagen',
-      'Präventive Brandüberwachung auf Baustellen',
-      'Schutz sensibler Gebäudebereiche',
-      'Schnelle Reaktion und Meldung im Brandfall',
+      'Baustellenbewachung und Zugangskontrollen',
+      'Zutrittskontrolle und Personensteuerung',
+      'Kontrollgänge und mobile Streifendienste',
+      'Schutz von Baumaterialien und Geräten',
+      'Koordination mit Bauleitung und Gewerken',
     ],
-    icon: 'M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z',
-  },
-  {
-    id: 'concierge',
-    title: 'Exklusive Empfangs- & Concierge-Dienste',
-    description: 'Empfangs- und Concierge-Dienste verbinden Sicherheit mit professionellem Service und repräsentativer Präsenz. Unsere Mitarbeiter repräsentieren Ihr Unternehmen im Eingangsbereich und sorgen gleichzeitig für strukturierte Zutrittskontrollen.',
-    image: '/images/service-concierge.webp',
-    features: [
-      'Besucherempfang und Auskunftsdienste',
-      'Zutrittskontrollen und Besucherregistrierung',
-      'Koordination von Besuchern und Dienstleistern',
-      'Repräsentative Präsenz im Eingangsbereich',
-      'Unterstützung bei organisatorischen Abläufen',
-    ],
-    icon: 'M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z',
-    isPremium: true,
+    icon: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4',
   },
   {
     id: 'werkschutz',
@@ -75,6 +46,34 @@ const services = [
       'Schutz von Produktionsanlagen und Lagern',
     ],
     icon: 'M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z',
+  },
+  {
+    id: 'brandwachen',
+    title: 'Brandwachen',
+    description: 'Qualifizierte Brandwachen zur Absicherung gefährdeter Bereiche bei feuergefährlichen Arbeiten und technischen Ausfällen.',
+    image: '/images/service-brandwache.webp',
+    features: [
+      'Überwachung feuergefährlicher Arbeiten',
+      'Präventive Brandüberwachung auf Baustellen',
+      'Schutz sensibler Gebäudebereiche',
+      'Schnelle Reaktion und Alarmierung im Brandfall',
+    ],
+    icon: 'M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z',
+  },
+  {
+    id: 'concierge',
+    title: 'Exklusive Empfangs- & Concierge-Dienste',
+    description: 'Empfangs- und Concierge-Dienste verbinden Sicherheit mit professionellem Service und repräsentativer Präsenz im Eingangsbereich.',
+    image: '/images/service-concierge.webp',
+    features: [
+      'Besucherempfang und Auskunftsdienste',
+      'Zutrittskontrollen und Besucherregistrierung',
+      'Koordination von Besuchern und Dienstleistern',
+      'Repräsentative Präsenz im Eingangsbereich',
+      'Unterstützung bei organisatorischen Abläufen',
+    ],
+    icon: 'M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z',
+    isPremium: true,
   },
 ];
 
@@ -109,6 +108,14 @@ const benefits = [
     description: 'Anpassung an Projektgröße, Baufortschritt und individuelle Anforderungen.',
     icon: 'M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4',
   },
+];
+
+const trustBadges = [
+  { icon: '⚖️', text: '§34a GewO zugelassen' },
+  { icon: '🏆', text: 'IHK geprüfte Sicherheitskräfte' },
+  { icon: '📋', text: 'DSGVO konforme Dokumentation' },
+  { icon: '🕐', text: '24/7 Einsatzbereitschaft' },
+  { icon: '🛡️', text: 'Versicherungsschutz' },
 ];
 
 const schemaBreadcrumb = {
@@ -186,11 +193,31 @@ const schemaService = {
           
           <p class="text-accent font-semibold tracking-wider text-sm mb-4">UNSERE LEISTUNGEN</p>
           <h1 id="services-hero-title" class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-            Professionelle Sicherheitsdienste
+            Professionelle Sicherheitsdienste für Baustellen, Unternehmen und Industrie
           </h1>
           <p class="text-lg md:text-xl text-secondary leading-relaxed max-w-2xl">
-            Von der Baustellenbewachung bis zum exklusiven Concierge-Service – wir bieten maßgeschneiderte Sicherheitslösungen für jeden Bedarf.
+            METRA Sicherheitsdienste bietet professionelle Sicherheitslösungen für Baustellen, Unternehmen, Industrieanlagen und Immobilien. Von der Baustellenbewachung bis zum exklusiven Concierge-Service sorgen unsere Sicherheitskräfte für Schutz, Struktur und kontrollierte Abläufe.
           </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trust Badges Section -->
+    <section class="py-12 md:py-16 bg-black/30 border-y border-white/5" aria-labelledby="trust-title">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-8">
+          <h2 id="trust-title" class="text-xl md:text-2xl font-bold text-white mb-2">
+            Zertifizierter Sicherheitsdienst für Unternehmen und Bauprojekte
+          </h2>
+        </div>
+        
+        <div class="flex flex-wrap justify-center gap-4 md:gap-8">
+          {trustBadges.map((badge) => (
+            <div class="flex items-center gap-2 px-4 py-2 bg-white/5 rounded-lg">
+              <span class="text-xl" aria-hidden="true">{badge.icon}</span>
+              <span class="text-secondary text-sm font-medium">{badge.text}</span>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -206,10 +233,10 @@ const schemaService = {
               id={service.id}
               class={`grid lg:grid-cols-2 gap-8 lg:gap-16 items-center ${service.isPremium ? 'relative' : ''}`}
             >
-              {/* Premium Badge für Concierge */}
+              {/* Premium Badge für Concierge - kleiner und höher */}
               {service.isPremium && (
-                <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 lg:left-4 lg:transform-none z-10">
-                  <span class="inline-flex items-center gap-1 bg-accent text-background px-4 py-2 rounded-full text-sm font-bold">
+                <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 lg:left-8 lg:transform-none z-10">
+                  <span class="inline-flex items-center gap-1 bg-accent text-background px-3 py-1.5 rounded-full text-xs font-bold">
                     <span>⭐</span>
                     <span>PREMIUM SERVICE</span>
                   </span>

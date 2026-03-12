@@ -36,7 +36,7 @@ const steps = [
   {
     number: '01',
     title: 'Analyse',
-    description: 'Bedarfsanalyse des Objekts. Wir erfassen Risiken, Zugangspunkte und Schutzbedarf.',
+    description: 'Analyse der Sicherheitsanforderungen vor Ort.',
     icon: 'M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z',
   },
   {
@@ -48,7 +48,7 @@ const steps = [
   {
     number: '03',
     title: 'Einsatz',
-    description: 'Qualifiziertes METRA-Team vor Ort. Zuverlässig, diskret, professionell.',
+    description: 'Qualifiziertes METRA-Team vor Ort. Zuverlässig, diskret und professionell im täglichen Einsatz.',
     icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z',
   },
   {
@@ -61,16 +61,22 @@ const steps = [
 
 const services = [
   {
+    title: 'Objektschutz',
+    description: 'Professioneller Objektschutz für Bürogebäude, Wohnanlagen, Gewerbeobjekte und Industrieanlagen.',
+    image: '/images/service-objekt.webp',
+    icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6',
+  },
+  {
     title: 'Baustellensicherheit',
     description: 'Wir sichern Baustellen jeder Größe – von innerstädtischen Bauprojekten bis zu langfristigen Großbaustellen.',
     image: '/images/service-baustelle.webp',
     icon: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4',
   },
   {
-    title: 'Objektschutz',
-    description: 'Professioneller Objektschutz für Bürogebäude, Wohnanlagen, Gewerbeobjekte und Industrieanlagen.',
-    image: '/images/service-objekt.webp',
-    icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6',
+    title: 'Werkschutz / Industrieschutz',
+    description: 'Sicherheitslösungen für Industrieanlagen, Produktionsstandorte und Gewerbeparks.',
+    image: '/images/service-werk.webp',
+    icon: 'M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z',
   },
   {
     title: 'Brandwachen',
@@ -85,12 +91,14 @@ const services = [
     icon: 'M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z',
     isPremium: true,
   },
-  {
-    title: 'Werkschutz / Industrieschutz',
-    description: 'Sicherheitslösungen für Industrieanlagen, Produktionsstandorte und Gewerbeparks.',
-    image: '/images/service-werk.webp',
-    icon: 'M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z',
-  },
+];
+
+const trustBadges = [
+  { icon: '⚖️', text: '§34a GewO zugelassen' },
+  { icon: '🏆', text: 'IHK geprüfte Sicherheitskräfte' },
+  { icon: '📋', text: 'DSGVO konforme Dokumentation' },
+  { icon: '🕐', text: '24/7 Einsatzbereitschaft' },
+  { icon: '🛡️', text: 'Versicherungsschutz' },
 ];
 
 const schemaBreadcrumb = {
@@ -141,7 +149,7 @@ const schemaBreadcrumb = {
               id="hero-title" 
               class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 animate-fade-in-up"
             >
-              METRA Sicherheitsdienste
+              Sicherheitslösungen für Baustellen, Unternehmen und Industrie
             </h1>
             
             <!-- Subheadline -->
@@ -150,14 +158,14 @@ const schemaBreadcrumb = {
             </p>
             
             <p class="text-lg md:text-xl text-secondary leading-relaxed mb-4 animate-fade-in-up" style="animation-delay: 0.1s;">
-              Baustellensicherheit · Objektschutz · Empfangs- & Concierge-Dienste
+              Baustellensicherheit · Objektschutz · Werkschutz · Brandwachen · Empfangs- & Concierge-Dienste
             </p>
             
             <p class="text-secondary leading-relaxed mb-8 animate-fade-in-up" style="animation-delay: 0.15s;">
               METRA Sicherheitsdienste bietet professionelle Sicherheitslösungen für Baustellen, Immobilien, Industrieanlagen und Unternehmen. Unsere Sicherheitskräfte sorgen für Sicherheit, Präsenz und strukturierte Abläufe zuverlässig und rund um die Uhr.
             </p>
             
-            <!-- USP Tags -->
+            <!-- USP Tags - Vertrauensbadges -->
             <div class="flex flex-wrap gap-3 mb-10 animate-fade-in-up" style="animation-delay: 0.2s;">
               <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent/10 border border-accent/20 rounded-full text-accent text-sm font-medium">
                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
@@ -169,7 +177,13 @@ const schemaBreadcrumb = {
                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                   <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                 </svg>
-                § 34a GewO zertifiziert
+                §34a GewO zertifiziert
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent/10 border border-accent/20 rounded-full text-accent text-sm font-medium">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                  <path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                </svg>
+                IHK geprüfte Sicherheitskräfte
               </span>
             </div>
             
@@ -188,9 +202,9 @@ const schemaBreadcrumb = {
               <a 
                 href="/leistungen"
                 class="inline-flex items-center justify-center px-8 py-4 border-2 border-secondary/30 text-white font-semibold text-base rounded hover:border-accent hover:text-accent transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-accent/50"
-                aria-label="Unsere Leistungen ansehen"
+                aria-label="Unsere Sicherheitsleistungen ansehen"
               >
-                Unsere Leistungen
+                Unsere Sicherheitsleistungen
               </a>
             </div>
           </div>
@@ -212,23 +226,23 @@ const schemaBreadcrumb = {
                 fetchpriority="high"
               />
               
-              {/* Floating Stats Card */}
-              <div class="absolute -bottom-6 -left-6 bg-background border border-accent/20 rounded-xl p-4 shadow-xl">
-                <div class="flex items-center gap-3">
-                  <div class="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center">
-                    <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              {/* Floating Stats Card - höher positioniert, kleiner, mehr Abstand */}
+              <div class="absolute -top-4 -left-4 bg-background border border-accent/20 rounded-xl p-3 shadow-xl scale-90">
+                <div class="flex items-center gap-2">
+                  <div class="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center">
+                    <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                     </svg>
                   </div>
                   <div>
-                    <p class="text-white font-bold text-lg">100%</p>
+                    <p class="text-white font-bold">100%</p>
                     <p class="text-secondary text-xs">Zuverlässigkeit</p>
                   </div>
                 </div>
               </div>
               
               {/* Floating 24/7 Card */}
-              <div class="absolute -top-4 -right-4 bg-accent text-background rounded-xl p-4 shadow-xl">
+              <div class="absolute -bottom-4 -right-4 bg-accent text-background rounded-xl p-4 shadow-xl">
                 <div class="flex items-center gap-2">
                   <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
@@ -250,8 +264,28 @@ const schemaBreadcrumb = {
       </div>
     </section>
 
+    <!-- Trust Badges Section - NEU -->
+    <section class="py-12 md:py-16 bg-black/30 border-y border-white/5" aria-labelledby="trust-title">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-8">
+          <h2 id="trust-title" class="text-xl md:text-2xl font-bold text-white mb-2">
+            Zertifizierte Sicherheit für Unternehmen und Bauprojekte
+          </h2>
+        </div>
+        
+        <div class="flex flex-wrap justify-center gap-4 md:gap-8">
+          {trustBadges.map((badge) => (
+            <div class="flex items-center gap-2 px-4 py-2 bg-white/5 rounded-lg">
+              <span class="text-xl" aria-hidden="true">{badge.icon}</span>
+              <span class="text-secondary text-sm font-medium">{badge.text}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
     <!-- Problem / Solution Section -->
-    <section class="py-24 md:py-40 bg-black/20" aria-labelledby="problem-solution-title">
+    <section class="py-24 md:py-32 bg-black/20" aria-labelledby="problem-solution-title">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div>
@@ -261,10 +295,7 @@ const schemaBreadcrumb = {
               Sicherheitsrisiken auf Baustellen und in Objekten
             </h3>
             <p class="text-secondary text-lg mb-6">
-              Baustellen und Gewerbeobjekte sind besonders anfällig für Diebstahl, Vandalismus und unbefugten Zutritt. Ohne professionelle Sicherheit entstehen hohe Schäden und Verzögerungen.
-            </p>
-            <p class="text-secondary text-lg">
-              Professionelle Sicherheitsdienste schützen Ihre Werte, sorgen für reibungslose Abläufe und entlasten Ihre Bauleitung.
+              Baustellen und Gewerbeobjekte sind besonders anfällig für Diebstahl, Vandalismus und unbefugten Zutritt. Professionelle Sicherheitsdienste reduzieren Risiken und sorgen für kontrollierte Abläufe.
             </p>
           </div>
           
@@ -274,13 +305,13 @@ const schemaBreadcrumb = {
               Ein Partner. Eine Verantwortung. Eine Lösung.
             </h3>
             <p class="text-secondary text-lg mb-8">
-              METRA übernimmt die komplette Sicherheit für Ihr Projekt. Von der Baustellenbewachung bis zum Objektschutz – wir sorgen für professionellen Schutz rund um die Uhr.
+              METRA übernimmt die komplette Sicherheit für Ihr Projekt. Von der Baustellenbewachung bis zum professionellen Objektschutz sorgen wir für strukturierte Abläufe, Schutz von Werten und sichtbare Präsenz.
             </p>
             
-            <!-- Benefits Grid -->
+            <!-- Benefits Grid - mit gleicher Höhe -->
             <div class="grid sm:grid-cols-2 gap-4">
               {benefits.map((benefit, index) => (
-                <div class="flex items-start gap-3 p-4 bg-white/5 rounded-lg">
+                <div class="flex items-start gap-3 p-4 bg-white/5 rounded-lg h-full">
                   <div class="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center flex-shrink-0">
                     <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={benefit.icon}/>
@@ -299,7 +330,7 @@ const schemaBreadcrumb = {
     </section>
 
     <!-- 4-Step Process -->
-    <section class="py-24 md:py-40" aria-labelledby="process-title">
+    <section class="py-24 md:py-32" aria-labelledby="process-title">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-16">
           <p class="text-accent font-semibold tracking-wider text-sm mb-3">UNSER ANSATZ</p>
@@ -307,13 +338,13 @@ const schemaBreadcrumb = {
             Unser 4-Schritte-Ansatz
           </h2>
           <p class="text-secondary text-lg">
-            Systematisch und professionell zum Erfolg – von der ersten Analyse bis zur finalen Dokumentation.
+            Strukturiert und professionell – von der ersten Analyse bis zur vollständigen Dokumentation.
           </p>
         </div>
         
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {steps.map((step, index) => (
-            <article class="group relative bg-white/5 border border-white/5 rounded-xl p-6 hover:border-accent/30 transition-colors">
+            <article class="group relative bg-white/5 border border-white/5 rounded-xl p-6 hover:border-accent/30 transition-colors h-full flex flex-col">
               <span class="absolute -top-3 -right-3 w-12 h-12 bg-accent text-background font-bold text-lg rounded-full flex items-center justify-center">
                 {step.number}
               </span>
@@ -323,7 +354,7 @@ const schemaBreadcrumb = {
                 </svg>
               </div>
               <h3 class="text-xl font-bold text-white mb-2">{step.title}</h3>
-              <p class="text-secondary text-sm leading-relaxed">{step.description}</p>
+              <p class="text-secondary text-sm leading-relaxed flex-grow">{step.description}</p>
             </article>
           ))}
         </div>
@@ -331,7 +362,7 @@ const schemaBreadcrumb = {
     </section>
 
     <!-- Services Teaser WITH IMAGES -->
-    <section class="py-24 md:py-40 bg-black/20" aria-labelledby="services-title">
+    <section class="py-24 md:py-32 bg-black/20" aria-labelledby="services-title">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-16">
           <p class="text-accent font-semibold tracking-wider text-sm mb-3">UNSERE LEISTUNGEN</p>
@@ -339,7 +370,7 @@ const schemaBreadcrumb = {
             Professionelle Sicherheitsdienste aus einer Hand
           </h2>
           <p class="text-secondary text-lg">
-            Von der Baustellensicherheit bis zum exklusiven Concierge-Service – wir decken alle Bereiche des professionellen Sicherheitsdienstes ab.
+            Von Baustellensicherheit über Objektschutz bis zum exklusiven Concierge-Service – METRA bietet professionelle Sicherheitslösungen für Unternehmen, Immobilien und Bauprojekte.
           </p>
         </div>
         
@@ -347,7 +378,7 @@ const schemaBreadcrumb = {
           {services.map((service) => (
             <a 
               href="/leistungen"
-              class={`group block bg-background border rounded-xl overflow-hidden hover:border-accent/30 transition-all hover:-translate-y-1 focus:outline-none focus-visible:ring-4 focus-visible:ring-accent/50 ${
+              class={`group block bg-background border rounded-xl overflow-hidden hover:border-accent/30 transition-all hover:-translate-y-1 focus:outline-none focus-visible:ring-4 focus-visible:ring-accent/50 h-full flex flex-col ${
                 service.isPremium ? 'border-accent/30 ring-1 ring-accent/20' : 'border-white/5'
               }`}
             >
@@ -365,14 +396,14 @@ const schemaBreadcrumb = {
                 
                 <!-- Premium Badge -->
                 {service.isPremium && (
-                  <div class="absolute top-4 right-4 bg-accent text-background px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+                  <div class="absolute top-3 right-3 bg-accent text-background px-2 py-1 rounded-full text-xs font-bold flex items-center gap-1">
                     <span>⭐</span>
                     <span>PREMIUM</span>
                   </div>
                 )}
               </div>
               
-              <div class="p-6">
+              <div class="p-6 flex-grow flex flex-col">
                 <div class="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
                   <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={service.icon}/>
@@ -381,10 +412,10 @@ const schemaBreadcrumb = {
                 <h3 class={`text-lg font-bold mb-2 group-hover:text-accent transition-colors ${service.isPremium ? 'text-accent' : 'text-white'}`}>
                   {service.title}
                 </h3>
-                <p class="text-secondary text-sm leading-relaxed mb-4">
+                <p class="text-secondary text-sm leading-relaxed mb-4 flex-grow">
                   {service.description}
                 </p>
-                <span class="inline-flex items-center text-accent text-sm font-medium">
+                <span class="inline-flex items-center text-accent text-sm font-medium mt-auto">
                   Mehr erfahren
                   <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
@@ -441,7 +472,7 @@ const schemaBreadcrumb = {
           
           <!-- Paragraph: Light gray, max-width, relaxed line height -->
           <p class="text-secondary/90 text-base md:text-lg leading-relaxed max-w-2xl mb-12">
-            Empfangs- und Concierge-Dienste verbinden Sicherheit mit professionellem Service und repräsentativer Präsenz. Unsere Mitarbeiter repräsentieren Ihr Unternehmen im Eingangsbereich und sorgen gleichzeitig für strukturierte Zutrittskontrollen.
+            Empfangs- und Concierge-Dienste verbinden Sicherheit mit professionellem Service und repräsentativer Präsenz im Eingangsbereich.
           </p>
           
           <!-- Feature List: Boxes with gold border, ✦ symbol -->
@@ -478,7 +509,7 @@ const schemaBreadcrumb = {
     </section>
 
     <!-- Kooperation mit Baulogistik Section -->
-    <section class="py-24 md:py-40 bg-black/40" aria-labelledby="cooperation-title">
+    <section class="py-24 md:py-32 bg-black/40" aria-labelledby="cooperation-title">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-4xl mx-auto text-center">
           <!-- Shield Icon -->
@@ -527,7 +558,7 @@ const schemaBreadcrumb = {
     </section>
 
     <!-- Warum METRA Section -->
-    <section class="py-24 md:py-40 bg-black/20" aria-labelledby="why-metra-title">
+    <section class="py-24 md:py-32 bg-black/20" aria-labelledby="why-metra-title">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-16">
           <h2 id="why-metra-title" class="text-3xl md:text-4xl font-bold text-white mb-4">
@@ -566,7 +597,7 @@ const schemaBreadcrumb = {
     </section>
 
     <!-- Qualifikationen Section -->
-    <section class="py-24 md:py-40" aria-labelledby="qualifikationen-title">
+    <section class="py-24 md:py-32" aria-labelledby="qualifikationen-title">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid lg:grid-cols-2 gap-12 items-center">
           <div>
