@@ -31,40 +31,40 @@ const contactInfo = {
 ---
 
 <footer class="bg-black/30 border-t border-white/5 mt-auto">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 md:py-16">
+    <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-12">
       
       <!-- Company Info -->
-      <div class="lg:col-span-1">
-        <a href="/" class="flex items-center gap-2 mb-4" aria-label="METRA Sicherheitsdienste - Zur Startseite">
+      <div class="col-span-2 md:col-span-2 lg:col-span-1 mb-4 sm:mb-0">
+        <a href="/" class="flex items-center gap-2 mb-3 sm:mb-4" aria-label="METRA Sicherheitsdienste - Zur Startseite">
           <img 
             src="/images/logo-sicherheit.webp" 
             alt="METRA Sicherheitsdienste Logo" 
-            class="h-20 w-auto object-contain"
+            class="h-14 sm:h-20 w-auto object-contain"
             width="160"
             height="48"
           />
         </a>
-        <p class="text-secondary text-sm mb-4">
+        <p class="text-secondary text-xs sm:text-sm mb-2 sm:mb-4">
           Schutz · Präsenz · Verantwortung
         </p>
-        <p class="text-accent text-sm mb-4">
+        <p class="text-accent text-xs sm:text-sm mb-2 sm:mb-4">
           Sicherheit & Struktur – auf die Sie bauen können.
         </p>
-        <p class="text-secondary text-sm">
+        <p class="text-secondary text-xs sm:text-sm">
           {contactInfo.company}
         </p>
       </div>
 
       <!-- Services -->
       <div>
-        <h3 class="text-white font-semibold mb-4">Leistungen</h3>
-        <ul class="space-y-2">
+        <h3 class="text-white font-semibold mb-2 sm:mb-4 text-sm sm:text-base">Leistungen</h3>
+        <ul class="space-y-1.5 sm:space-y-2">
           {footerLinks.services.map((link) => (
             <li>
               <a 
                 href={link.href}
-                class="text-secondary text-sm hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
+                class="text-secondary text-xs sm:text-sm hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
               >
                 {link.label}
               </a>
@@ -75,13 +75,13 @@ const contactInfo = {
 
       <!-- Company Links -->
       <div>
-        <h3 class="text-white font-semibold mb-4">Unternehmen</h3>
-        <ul class="space-y-2">
+        <h3 class="text-white font-semibold mb-2 sm:mb-4 text-sm sm:text-base">Unternehmen</h3>
+        <ul class="space-y-1.5 sm:space-y-2">
           {footerLinks.company.map((link) => (
             <li>
               <a 
                 href={link.href}
-                class="text-secondary text-sm hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
+                class="text-secondary text-xs sm:text-sm hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
               >
                 {link.label}
               </a>
@@ -91,13 +91,13 @@ const contactInfo = {
       </div>
 
       <!-- Contact -->
-      <div>
-        <h3 class="text-white font-semibold mb-4">Kontakt</h3>
-        <ul class="space-y-3">
+      <div class="col-span-2 sm:col-span-1 mt-4 sm:mt-0">
+        <h3 class="text-white font-semibold mb-2 sm:mb-4 text-sm sm:text-base">Kontakt</h3>
+        <ul class="space-y-2 sm:space-y-3">
           <li>
             <a 
               href={`tel:${contactInfo.phone}`}
-              class="flex items-center gap-2 text-secondary text-sm hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
+              class="flex items-center gap-2 text-secondary text-xs sm:text-sm hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
               aria-label={`Telefon: ${contactInfo.phoneDisplay}`}
             >
               <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -109,13 +109,13 @@ const contactInfo = {
           <li>
             <a 
               href={`mailto:${contactInfo.email}`}
-              class="flex items-center gap-2 text-secondary text-sm hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
+              class="flex items-center gap-2 text-secondary text-xs sm:text-sm hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
               aria-label={`E-Mail: ${contactInfo.email}`}
             >
               <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
-              {contactInfo.email}
+              <span class="break-all">{contactInfo.email}</span>
             </a>
           </li>
         </ul>
@@ -137,25 +137,25 @@ const contactInfo = {
     </div>
 
     <!-- Disclaimer -->
-    <div class="mt-8 p-4 bg-white/5 border border-white/10 rounded-lg">
+    <div class="mt-6 sm:mt-8 p-3 sm:p-4 bg-white/5 border border-white/10 rounded-lg">
       <p class="text-secondary text-xs text-center">
         <span class="text-accent font-medium">Wichtiger Hinweis:</span> Sicherheitsdienstleistungen erfolgen im Rahmen der gesetzlichen Bestimmungen nach § 34a GewO.
       </p>
     </div>
 
     <!-- Bottom Bar -->
-    <div class="mt-8 pt-8 border-t border-white/5">
-      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-        <p class="text-secondary text-sm text-center md:text-left">
+    <div class="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-white/5">
+      <div class="flex flex-col-reverse md:flex-row items-center justify-between gap-4">
+        <p class="text-secondary text-xs sm:text-sm text-center md:text-left">
           © {currentYear} {contactInfo.company}. Alle Rechte vorbehalten.
         </p>
         <nav aria-label="Rechtliche Links">
-          <ul class="flex items-center gap-6">
+          <ul class="flex items-center gap-4 sm:gap-6">
             {footerLinks.legal.map((link) => (
               <li>
                 <a 
                   href={link.href}
-                  class="text-secondary text-sm hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
+                  class="text-secondary text-xs sm:text-sm hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
                 >
                   {link.label}
                 </a>
