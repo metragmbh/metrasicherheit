@@ -48,7 +48,8 @@ This is the corporate website for **METRA Sicherheitsdienste GmbH**, a security 
 │   │   ├── leistungen.astro      # Services page (5 detailed services)
 │   │   ├── kontakt.astro         # Contact page with Web3Forms form
 │   │   ├── datenschutz.astro     # Privacy policy (DSGVO compliant)
-│   │   └── impressum.astro       # Legal imprint (§ 5 TMG)
+│   │   ├── impressum.astro       # Legal imprint (§ 5 TMG)
+│   │   └── 404.astro             # Custom 404 error page
 │   └── styles/
 │       └── global.css            # Tailwind imports + custom styles + Inter font
 ├── public/                  # Static assets
@@ -56,7 +57,8 @@ This is the corporate website for **METRA Sicherheitsdienste GmbH**, a security 
 │   ├── images/              # WebP images (logo, hero, 5 service images)
 │   ├── favicon.ico/svg
 │   ├── robots.txt
-│   └── sitemap.xml
+│   ├── sitemap.xml
+│   └── manifest.json        # PWA manifest
 ├── astro.config.mjs         # Astro configuration (static output, Sharp images)
 ├── tailwind.config.js       # Tailwind customization (colors, animations)
 ├── postcss.config.js        # PostCSS plugins
@@ -128,6 +130,7 @@ sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 
   - X-Frame-Options: DENY
   - X-Content-Type-Options: nosniff
   - Referrer-Policy: strict-origin-when-cross-origin
+  - Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   - Content-Security-Policy (CSP) allowing connections to `https://api.web3forms.com`
 
 ## Key Components
@@ -153,33 +156,44 @@ Base layout providing:
 - Mobile hamburger menu with slide-out drawer
 - ARIA attributes: `aria-label`, `aria-expanded`, `aria-controls`, `aria-current`
 - ESC key closes mobile menu
+- Resize handler closes mobile menu on desktop breakpoint
 
 ### CookieBanner.astro
 
 - GDPR-compliant cookie consent
-- Fixed bottom banner with transform animation
+- Fixed bottom banner with transform animation (translate-y-full → 0)
 - Stores preference in localStorage (`metra_sicherheit_cookie_consent`)
 - Three options: Accept All, Decline, Essential Only
 - Dispatches custom event `cookieConsentAccepted` on acceptance
 - Links to `/datenschutz` page
+- 1-second delay before showing for better UX
 
 ### WhatsAppButton.astro
 
 - Fixed floating button (bottom-right, z-50)
 - Yellow accent color matching theme
-- Gentle pulse animation on hover
+- Gentle pulse animation on hover (CSS keyframes)
 - Phone number: `+491708888891`
-- Notification dot indicator
+- Notification dot indicator (white with border)
+
+### Footer.astro
+
+- Multi-column layout (company info, services, company links, contact)
+- WhatsApp CTA button in contact section
+- Legal disclaimer section (§ 34a GewO)
+- Bottom bar with copyright and legal links
+- Responsive grid (2 cols mobile, 4 cols desktop)
 
 ## Pages
 
 | Route | File | Purpose |
 |-------|------|---------|
-| `/` | `index.astro` | Homepage with hero, benefits, 4-step process, 5 services teaser, concierge highlight, cooperation section |
-| `/leistungen` | `leistungen.astro` | Detailed service descriptions (5 services), benefits grid, CTA section |
-| `/kontakt` | `kontakt.astro` | Contact form, contact info sidebar, WhatsApp link, quick response promise |
+| `/` | `index.astro` | Homepage with hero, trust badges, problem/solution section, 4-step process, 5 services teaser, concierge highlight, cooperation section, qualifications |
+| `/leistungen` | `leistungen.astro` | Detailed service descriptions (5 services), trust badges, benefits grid, process teaser, CTA section |
+| `/kontakt` | `kontakt.astro` | Contact form (Web3Forms), contact info sidebar, WhatsApp link, quick response promise |
 | `/impressum` | `impressum.astro` | Legal imprint (§ 5 TMG) - vatId and registration need completion |
 | `/datenschutz` | `datenschutz.astro` | Privacy policy (DSGVO) with all required sections |
+| `/404` | `404.astro` | Custom 404 error page with navigation options |
 
 ## Services (5 main offerings)
 
@@ -189,7 +203,7 @@ Base layout providing:
 4. **Empfangs- & Concierge-Dienste** - Premium reception & concierge (highlighted as premium)
 5. **Werkschutz / Industrieschutz** - Industrial security
 
-Each service has: title, description, image, icon (SVG path), features list
+Each service has: id, title, description, image (WebP), icon (SVG path), features list, isPremium flag (for Concierge)
 
 ## Contact Form Setup
 
@@ -213,6 +227,7 @@ const WEB3FORMS_ACCESS_KEY = 'YOUR_ACCESS_KEY'; // Replace this!
 - Loading states with spinner
 - Success/error message display
 - Reply-to email auto-populated from email field
+- Async form submission with fetch API
 
 ## Code Style Guidelines
 
@@ -222,6 +237,7 @@ const WEB3FORMS_ACCESS_KEY = 'YOUR_ACCESS_KEY'; // Replace this!
 - Use semantic HTML5 elements (`section`, `article`, `nav`, `main`, `address`)
 - Always include `aria-label` or `aria-labelledby` for interactive elements
 - Use `aria-hidden="true"` for decorative elements
+- Use fragment `<slot />` for children in Layout
 
 ### Styling Conventions
 - **Tailwind classes** for all styling
@@ -233,6 +249,8 @@ const WEB3FORMS_ACCESS_KEY = 'YOUR_ACCESS_KEY'; // Replace this!
   - `bg-accent` / `hover:bg-accent-hover` - buttons
 - Spacing scale: use `max-w-7xl mx-auto px-4 sm:px-6 lg:px-8` for container
 - Responsive breakpoints: `sm:`, `md:`, `lg:`
+- Use `sr-only` for screen-reader only content
+- Use `not-sr-only` for skip-link pattern
 
 ### Accessibility Requirements
 - All images must have descriptive `alt` text
@@ -240,11 +258,14 @@ const WEB3FORMS_ACCESS_KEY = 'YOUR_ACCESS_KEY'; // Replace this!
 - Focus states: use `focus-visible:ring-2 focus-visible:ring-accent`
 - Skip-to-content link must be first focusable element
 - Mobile menu: `aria-expanded`, `aria-controls`, ESC to close
+- Use `aria-current="page"` for active navigation items
+- Use `role="dialog"` and `aria-modal="true"` for modal components
 
 ### Icons
 - Use inline SVG with Heroicons-style paths
 - Set `aria-hidden="true"` on decorative icons
 - Current color inheritance via `fill="currentColor"` or `stroke="currentColor"`
+- Standard size: `w-5 h-5` or `w-6 h-6`
 
 ## Testing Checklist
 
@@ -270,6 +291,7 @@ Before deploying changes, verify:
    - `default-src 'self'`
    - `connect-src 'self' https://api.web3forms.com`
    - `script-src 'self' 'unsafe-inline'` (required for inline scripts)
+   - `form-action 'self' https://api.web3forms.com`
 
 2. **Form Security**: 
    - Honeypot field (`botcheck`) must remain empty
@@ -286,15 +308,16 @@ Before deploying changes, verify:
 - HTML compression enabled
 - Preconnect to Web3Forms API
 - Lazy loading for below-fold images (`loading="lazy"`)
-- Hero image uses `fetchpriority="high"`
+- Hero image uses `fetchpriority="high"` and `loading="eager"`
 - Long cache headers for static assets (1 year via Netlify)
+- Critical CSS inlined in Layout.astro
 
 ## Relation to METRA Baulogistik
 
 This website is the sister company to METRA Baulogistik. Both websites share:
 - Same design system (colors, fonts, layout patterns)
 - Same company address (Im Mediapark 5, 50670 Köln)
-- Same owner/contact person (Sascha Trajkovic)
+- Same owner/contact person (D. Mrkaja)
 - Cross-linking in cooperation section on homepage
 - Same claim: "Sicherheit & Struktur – auf die Sie bauen können."
 
@@ -337,11 +360,14 @@ Check `public/images/` contains:
 - `service-concierge.webp`
 - `service-werk.webp`
 
+### 4. Update Sitemap Dates
+In `public/sitemap.xml`, update `<lastmod>` dates to reflect actual changes.
+
 ## License & Legal
 
 - Website content: © METRA Sicherheitsdienste GmbH
 - Company address: Im Mediapark 5, 50670 Köln, Germany
-- Geschäftsführer: Sascha Trajkovic
+- Geschäftsführer: D. Mrkaja
 - This is proprietary code for the company's website
 
 ---

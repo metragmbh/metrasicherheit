@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
+import MobileMenu from '../components/MobileMenu.astro';
 import Footer from '../components/Footer.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
 
@@ -75,6 +76,7 @@ const schemaContactPage = {
   <script type="application/ld+json" set:html={JSON.stringify(schemaContactPage)} />
   
   <Header />
+  <MobileMenu />
   
   <main id="main-content">
     <!-- Hero Section -->
