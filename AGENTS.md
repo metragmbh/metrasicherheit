@@ -11,7 +11,7 @@ This is the corporate website for **METRA Sicherheitsdienste GmbH**, a security 
 ### Key Characteristics
 
 - **German-language** business website for the security industry
-- **Dark theme** design with yellow accent color (#fdf153)
+- **Dark theme** design with yellow accent color (#dab252)
 - **Mobile-first responsive** design
 - **WCAG accessibility** compliant (ARIA labels, semantic HTML, keyboard navigation, skip-to-content link, focus-visible states)
 - **SEO-optimized** with Schema.org structured data (Organization, LocalBusiness, Service, BreadcrumbList, ContactPage), meta tags, Open Graph, Twitter Cards
@@ -40,6 +40,7 @@ This is the corporate website for **METRA Sicherheitsdienste GmbH**, a security 
 │   │   ├── CookieBanner.astro    # GDPR cookie consent with localStorage
 │   │   ├── Footer.astro          # Site footer with contact info
 │   │   ├── Header.astro          # Navigation header with claim under logo
+│   │   ├── MobileMenu.astro      # Mobile navigation drawer
 │   │   └── WhatsAppButton.astro  # Floating WhatsApp CTA (bottom-right)
 │   ├── layouts/
 │   │   └── Layout.astro          # Base HTML layout with SEO, Schema.org
@@ -97,6 +98,8 @@ npm run astro -- --help
   image: {
     service: { entrypoint: 'astro/assets/services/sharp' },
   },
+  domains: [],
+  remotePatterns: [],
   compressHTML: true,                 // HTML compression enabled
   build: { format: 'directory' },     // Directory-based URLs
 }
@@ -108,10 +111,10 @@ Custom theme extensions:
 
 ```javascript
 // Colors
-background: '#17181d',      // Dark background
-accent: '#fdf153',          // Yellow accent
+background: '#00002e',      // Dark background
+accent: '#dab252',          // Yellow accent
 secondary: '#d2d1d9',       // Light gray text
-'accent-hover': '#e5d94a',  // Darker yellow on hover
+'accent-hover': '#c9a14a',  // Darker yellow on hover
 
 // Font Family
 sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif']
@@ -157,6 +160,15 @@ Base layout providing:
 - ARIA attributes: `aria-label`, `aria-expanded`, `aria-controls`, `aria-current`
 - ESC key closes mobile menu
 - Resize handler closes mobile menu on desktop breakpoint
+
+### MobileMenu.astro
+
+- Separate component for proper z-index stacking
+- Full-screen overlay on mobile (`fixed inset-0 top-[72px]`)
+- Links with active state styling
+- CTA button in mobile menu
+- Prevents body scroll when open
+- Close on link click, ESC key, or resize to desktop
 
 ### CookieBanner.astro
 
@@ -232,6 +244,7 @@ const WEB3FORMS_ACCESS_KEY = 'YOUR_ACCESS_KEY'; // Replace this!
 ## Code Style Guidelines
 
 ### Astro Components
+
 - Use TypeScript for component props interfaces
 - Prefix component-scoped variables with interface `Props`
 - Use semantic HTML5 elements (`section`, `article`, `nav`, `main`, `address`)
@@ -240,12 +253,13 @@ const WEB3FORMS_ACCESS_KEY = 'YOUR_ACCESS_KEY'; // Replace this!
 - Use fragment `<slot />` for children in Layout
 
 ### Styling Conventions
+
 - **Tailwind classes** for all styling
 - Color usage:
   - `text-white` - primary text
   - `text-secondary` - muted text (#d2d1d9)
-  - `text-accent` - yellow highlights (#fdf153)
-  - `bg-background` - dark background (#17181d)
+  - `text-accent` - yellow highlights (#dab252)
+  - `bg-background` - dark background (#00002e)
   - `bg-accent` / `hover:bg-accent-hover` - buttons
 - Spacing scale: use `max-w-7xl mx-auto px-4 sm:px-6 lg:px-8` for container
 - Responsive breakpoints: `sm:`, `md:`, `lg:`
@@ -253,6 +267,7 @@ const WEB3FORMS_ACCESS_KEY = 'YOUR_ACCESS_KEY'; // Replace this!
 - Use `not-sr-only` for skip-link pattern
 
 ### Accessibility Requirements
+
 - All images must have descriptive `alt` text
 - Form inputs must have associated `<label>` elements
 - Focus states: use `focus-visible:ring-2 focus-visible:ring-accent`
@@ -262,6 +277,7 @@ const WEB3FORMS_ACCESS_KEY = 'YOUR_ACCESS_KEY'; // Replace this!
 - Use `role="dialog"` and `aria-modal="true"` for modal components
 
 ### Icons
+
 - Use inline SVG with Heroicons-style paths
 - Set `aria-hidden="true"` on decorative icons
 - Current color inheritance via `fill="currentColor"` or `stroke="currentColor"`

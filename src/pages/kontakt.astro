@@ -18,7 +18,7 @@ const contactInfo = {
 
 // Web3Forms Configuration
 const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';
-const WEB3FORMS_ACCESS_KEY = 'YOUR_ACCESS_KEY'; // User needs to replace this
+const WEB3FORMS_ACCESS_KEY = import.meta.env.PUBLIC_WEB3FORMS_KEY || 'YOUR_ACCESS_KEY'; // Set PUBLIC_WEB3FORMS_KEY in .env file
 
 const schemaBreadcrumb = {
   '@context': 'https://schema.org',
@@ -85,7 +85,7 @@ const schemaContactPage = {
         <div class="absolute inset-0" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 40px 40px;"></div>
       </div>
       
-      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="relative max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         <div class="max-w-3xl">
           <nav aria-label="Breadcrumb">
             <ol class="flex items-center gap-2 text-sm text-secondary mb-6">
@@ -107,8 +107,8 @@ const schemaContactPage = {
     </section>
 
     <!-- Contact Section -->
-    <section class="py-16 md:py-24 bg-black/20" aria-labelledby="contact-form-title">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section class="py-16 md:py-24 bg-background/20" aria-labelledby="contact-form-title">
+      <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         <div class="grid lg:grid-cols-5 gap-12 lg:gap-16">
           
           <!-- Contact Info Sidebar -->
@@ -221,6 +221,15 @@ const schemaContactPage = {
               <p class="text-secondary mb-8">
                 Füllen Sie das Formular aus – wir melden uns umgehend bei Ihnen.
               </p>
+              
+              {WEB3FORMS_ACCESS_KEY === 'YOUR_ACCESS_KEY' && (
+                <div class="p-4 bg-yellow-500/10 border border-yellow-500/30 rounded-lg mb-6" role="alert">
+                  <p class="text-yellow-500 font-medium">⚠️ Formular nicht konfiguriert</p>
+                  <p class="text-secondary text-sm mt-1">
+                    Bitte setze die Umgebungsvariable <code class="bg-white/10 px-1 rounded">PUBLIC_WEB3FORMS_KEY</code> in der .env Datei.
+                  </p>
+                </div>
+              )}
               
               <form 
                 action={WEB3FORMS_ENDPOINT}

@@ -71,8 +71,8 @@ In `src/pages/impressum.astro`:
 
 ## 🎨 Design
 
-- **Hintergrund:** #17181d (Dunkel)
-- **Akzentfarbe:** #fdf153 (Gelb)
+- **Hintergrund:** #00002e (Dunkel)
+- **Akzentfarbe:** #dab252 (Gelb)
 - **Schriftart:** Inter (Self-hosted)
 - **Framework:** Astro 5.x + Tailwind CSS
 

@@ -14,7 +14,7 @@ const currentPath = Astro.url.pathname;
   class="md:hidden hidden fixed inset-0 top-[72px] sm:top-[88px] z-[100] bg-background"
   aria-label="Mobile Navigation"
 >
-  <nav class="px-4 py-4 pb-20 h-full overflow-y-auto">
+  <nav class="px-5 py-4 pb-20 h-full overflow-y-auto">
     <ul class="space-y-2">
       {navLinks.map((link) => {
         const isActive = currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href));

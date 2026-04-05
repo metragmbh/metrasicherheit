@@ -18,6 +18,7 @@ const {
 
 const siteUrl = 'https://www.metra-sicherheitsdienste.de';
 const fullCanonical = `${siteUrl}${canonical}`;
+const LOGO_PATH = '/images/logoneu.png';
 
 // Schema.org JSON-LD
 const organizationSchema = {
@@ -25,7 +26,7 @@ const organizationSchema = {
   '@type': 'Organization',
   name: 'METRA Sicherheitsdienste GmbH',
   url: siteUrl,
-  logo: `${siteUrl}/images/logo-sicherheit.webp`,
+  logo: `${siteUrl}${LOGO_PATH}`,
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'Im Mediapark 5',
@@ -119,13 +120,13 @@ const localBusinessSchema = {
     <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
     
     <!-- Theme Color -->
-    <meta name="theme-color" content="#17181d" />
+    <meta name="theme-color" content="#00002e" />
     
     <!-- Critical CSS Inline für Above-the-fold -->
     <style is:inline>
       /* Critical CSS */
       body {
-        background-color: #17181d;
+        background-color: #00002e;
         color: #ffffff;
         margin: 0;
         font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
