@@ -1,0 +1,86 @@
+---
+---
+
+<div 
+  id="cookie-banner" 
+  class="fixed bottom-0 left-0 right-0 z-[60] bg-background/95 backdrop-blur-sm border-t border-white/10 transform translate-y-full transition-transform duration-300"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Cookie-Einwilligung"
+  aria-hidden="true"
+>
+  <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-4">
+    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div class="flex-1">
+        <h3 class="text-white font-semibold text-sm mb-1">Datenschutzeinstellungen</h3>
+        <p class="text-white/80 text-sm">
+          Wir verwenden Cookies, um Ihnen die bestmögliche Erfahrung auf unserer Website zu bieten. 
+          Sie können selbst entscheiden, welche Cookies Sie zulassen möchten. 
+          <a href="/datenschutz" class="underline hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded">Mehr erfahren</a>
+        </p>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <button 
+          type="button"
+          id="cookie-essential"
+          class="px-4 py-2 text-sm font-medium text-white bg-white/20 hover:bg-white/30 rounded transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
+          aria-label="Nur essenzielle Cookies akzeptieren"
+        >
+          Nur Essenzielle
+        </button>
+        <button 
+          type="button"
+          id="cookie-decline"
+          class="px-4 py-2 text-sm font-medium text-white bg-white/20 hover:bg-white/30 rounded transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
+          aria-label="Cookies ablehnen"
+        >
+          Ablehnen
+        </button>
+        <button 
+          type="button"
+          id="cookie-accept"
+          class="px-4 py-2 text-sm font-medium text-background bg-accent hover:bg-accent-hover rounded transition-colors"
+          aria-label="Alle Cookies akzeptieren"
+        >
+          Zustimmen
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    const COOKIE_KEY = 'metra_sicherheit_cookie_consent';
+    const banner = document.getElementById('cookie-banner');
+    const acceptBtn = document.getElementById('cookie-accept');
+    const declineBtn = document.getElementById('cookie-decline');
+    const essentialBtn = document.getElementById('cookie-essential');
+
+    // Prüfen ob bereits entschieden wurde
+    const consent = localStorage.getItem(COOKIE_KEY);
+    
+    if (!consent) {
+      // Banner anzeigen mit kleiner Verzögerung für bessere UX
+      setTimeout(() => {
+        banner?.classList.remove('translate-y-full');
+        banner?.removeAttribute('aria-hidden');
+      }, 1000);
+    }
+
+    function setConsent(choice: string) {
+      localStorage.setItem(COOKIE_KEY, choice);
+      banner?.classList.add('translate-y-full');
+      banner?.setAttribute('aria-hidden', 'true');
+      
+      // Custom Event für Tracking (nur wenn zugestimmt wurde)
+      if (choice === 'accepted') {
+        window.dispatchEvent(new CustomEvent('cookieConsentAccepted'));
+      }
+    }
+
+    acceptBtn?.addEventListener('click', () => setConsent('accepted'));
+    declineBtn?.addEventListener('click', () => setConsent('declined'));
+    essentialBtn?.addEventListener('click', () => setConsent('essential'));
+  })();
+</script>

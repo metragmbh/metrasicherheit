@@ -1,0 +1,490 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import MobileMenu from '../components/MobileMenu.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
+
+const benefits = [
+  {
+    title: 'Fachqualifiziertes Personal',
+    description: 'Einsatz nach definierten Standards',
+    icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+  },
+  {
+    title: 'Planbare Verfügbarkeit',
+    description: 'Einsatzzeiten abgestimmt',
+    icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z',
+  },
+  {
+    title: 'Strukturierte Vorfallreaktion',
+    description: 'Definierte Maßnahmen',
+    icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z',
+  },
+  {
+    title: 'Transparente Verantwortung',
+    description: 'Klare Zuständigkeiten und Dokumentation',
+    icon: 'M13 10V3L4 14h7v7l9-11h-7z',
+  },
+];
+
+const steps = [
+  {
+    title: 'Analyse',
+    description: 'Objektbegehung und Risikoerhebung vor Ort.',
+    icon: 'M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z',
+  },
+  {
+    title: 'Konzept',
+    description: 'Individuelles Sicherheitskonzept mit klarer Einsatz- und Kommunikationsstruktur.',
+    icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01',
+  },
+  {
+    title: 'Einsatz',
+    description: 'Gesteuerter Einsatzbeginn mit eingewiesenem Fachpersonal.',
+    icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z',
+  },
+  {
+    title: 'Reporting',
+    description: 'Strukturierte Dokumentation und regelmäßige Abstimmung auf Wunsch in Echtzeit.',
+    icon: 'M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z',
+  },
+];
+
+const services = [
+  {
+    id: 'objektschutz',
+    title: 'Objektschutz',
+    description: 'Bewachung von Gebäuden mit klaren Kontrollprozessen.',
+    image: '/images/service-objekt.webp',
+    icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6',
+  },
+  {
+    id: 'baustellensicherheit',
+    title: 'Baustellensicherheit',
+    description: 'Absicherung aktiver Baustellen mit definierten Abläufen.',
+    image: '/images/service-baustelle.webp',
+    icon: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4',
+  },
+  {
+    id: 'werkschutz',
+    title: 'Werkschutz',
+    description: 'Sicherung von Produktions- und Logistikstandorten.',
+    image: '/images/service-werk.webp',
+    icon: 'M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z',
+  },
+  {
+    id: 'brandwachen',
+    title: 'Brandwachen',
+    description: 'Absicherung bei feuergefährlichen Arbeiten.',
+    image: '/images/service-brandwache.webp',
+    icon: 'M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z',
+  },
+  {
+    id: 'concierge',
+    title: 'Empfang & Concierge',
+    description: 'Kombination aus Zutrittskontrolle und Empfangsdienstleistungen.',
+    image: '/images/service-concierge.webp',
+    icon: 'M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z',
+    isPremium: false,
+  },
+];
+
+const schemaBreadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Startseite',
+      item: 'https://www.metra-sicherheitsdienste.de',
+    },
+  ],
+};
+---
+
+<Layout 
+  title="METRA Sicherheitsdienste GmbH | Operative Sicherheit für Baustellen, Objekte und Industrie"
+  description="Operative Sicherheit für Baustellen, Objekte und Industrie. Strukturiert geplant. Verbindlich umgesetzt. Revisionssicher dokumentiert."
+  canonical="/"
+>
+  <script type="application/ld+json" set:html={JSON.stringify(schemaBreadcrumb)} />
+  
+  <Header />
+  <MobileMenu />
+  
+  <main id="main-content">
+    <!-- Hero Section WITH IMAGE -->
+    <section 
+      class="relative min-h-[90vh] flex items-center overflow-hidden"
+      aria-labelledby="hero-title"
+    >
+      <!-- Background Pattern -->
+      <div class="absolute inset-0 opacity-5" aria-hidden="true">
+        <div class="absolute inset-0" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 40px 40px;"></div>
+      </div>
+      
+      <div class="relative max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-16 sm:py-24 md:py-40">
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <!-- Left: Text Content -->
+          <div class="max-w-2xl">
+            <!-- Main Headline -->
+            <h1 
+              id="hero-title" 
+              class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 animate-fade-in-up"
+            >
+              Operative Sicherheit für Baustellen, Objekte und Industrie
+            </h1>
+            
+            <!-- Subline -->
+            <p class="text-accent/80 text-lg md:text-xl mb-8 animate-fade-in-up" style="animation-delay: 0.1s;">
+              Strukturiert geplant. Verbindlich umgesetzt. Revisionssicher dokumentiert.
+            </p>
+            
+            <!-- Trust Badges -->
+            <div class="flex flex-wrap gap-2 sm:gap-3 mb-8 sm:mb-10 animate-fade-in-up" style="animation-delay: 0.2s;">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent/10 border border-accent/20 rounded-full text-accent text-sm font-medium">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                §34a GewO zugelassen
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent/10 border border-accent/20 rounded-full text-accent text-sm font-medium">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                  <path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                </svg>
+                IHK-geprüftes Personal
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent/10 border border-accent/20 rounded-full text-accent text-sm font-medium">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"/>
+                </svg>
+                Revisionssichere Dokumentation
+              </span>
+            </div>
+            
+            <!-- CTA Button -->
+            <div class="animate-fade-in-up" style="animation-delay: 0.3s;">
+              <a 
+                href="/kontakt"
+                class="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-accent text-background font-bold text-sm sm:text-base rounded hover:bg-accent-hover transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-accent/50"
+                aria-label="Sicherheitskonzept anfragen"
+              >
+                Sicherheitskonzept anfragen →
+              </a>
+            </div>
+          </div>
+          
+          <!-- Right: Hero Image -->
+          <div class="relative lg:h-[600px] flex items-center justify-center animate-fade-in-up" style="animation-delay: 0.2s;">
+            {/* Decorative Glow */}
+            <div class="absolute inset-0 bg-accent/5 rounded-full blur-3xl" aria-hidden="true"></div>
+            
+            {/* Hero Image */}
+            <div class="relative w-full">
+              <img 
+                src="/images/hero-sicherheit.webp" 
+                alt="METRA Sicherheitsdienste"
+                class="w-full aspect-[16/9] object-cover rounded-2xl shadow-2xl"
+                width="700"
+                height="394"
+                loading="eager"
+                fetchpriority="high"
+              />
+              
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      {/* Scroll Indicator */}
+      <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 hidden md:block" aria-hidden="true">
+        <div class="w-6 h-10 border-2 border-secondary/30 rounded-full flex justify-center pt-2">
+          <div class="w-1.5 h-3 bg-accent rounded-full animate-bounce"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Problem / Solution Section -->
+    <section class="py-24 md:py-32 bg-background/20" aria-labelledby="problem-solution-title">
+      <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 gap-12 lg:gap-20 items-start">
+          <!-- Herausforderung -->
+          <div>
+            <h2 id="problem-solution-title" class="sr-only">Herausforderung und Lösung</h2>
+            <p class="text-accent font-semibold tracking-wider text-sm mb-3">DIE HERAUSFORDERUNG</p>
+            <h3 class="text-3xl md:text-4xl font-bold text-white mb-6">
+              Reale Risiken. Messbare Schäden.
+            </h3>
+            <p class="text-secondary text-lg leading-relaxed mb-6">
+              Baustellen und Gewerbeobjekte sind täglich konkreten Risiken ausgesetzt: Materialdiebstahl, unkontrollierter Zutritt und fehlende Ablaufkontrolle führen zu Verzögerungen, Haftungsrisiken und wirtschaftlichen Schäden.
+            </p>
+            <p class="text-secondary text-lg leading-relaxed">
+              Diese Risiken entstehen nicht durch Einzelfälle – sie entstehen durch fehlende Struktur. Ein ungeplanter Vorfall kann wirtschaftliche Auswirkungen haben, die den Einsatz strukturierter Sicherheitsmaßnahmen deutlich übersteigen.
+            </p>
+          </div>
+          
+          <!-- Lösung -->
+          <div class="bg-background border border-accent/20 rounded-2xl p-8 md:p-10">
+            <p class="text-accent font-semibold tracking-wider text-sm mb-3">UNSERE LÖSUNG</p>
+            <h3 class="text-3xl md:text-4xl font-bold text-white mb-6">
+              Ein Ansprechpartner. Vollständige Verantwortung.
+            </h3>
+            <p class="text-secondary text-lg leading-relaxed mb-8">
+              METRA übernimmt die operative Sicherheitsverantwortung für Ihr Objekt – strukturiert, nachvollziehbar und verbindlich. Die Kommunikation erfolgt zentral über einen festen Ansprechpartner mit klar definierter Zuständigkeit.
+            </p>
+            
+            <!-- Benefits Grid -->
+            <div class="grid sm:grid-cols-2 gap-4">
+              {benefits.map((benefit) => (
+                <div class="flex items-start gap-3 p-4 bg-white/5 rounded-lg">
+                  <div class="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={benefit.icon}/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 class="text-white font-semibold text-sm mb-1">{benefit.title}</h4>
+                    <p class="text-secondary text-xs leading-relaxed">{benefit.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4-Step Process -->
+    <section class="py-24 md:py-32" aria-labelledby="process-title">
+      <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <p class="text-accent font-semibold tracking-wider text-sm mb-3">PROZESS</p>
+          <h2 id="process-title" class="text-3xl md:text-4xl font-bold text-white mb-4">
+            Von der Analyse zum laufenden Betrieb
+          </h2>
+        </div>
+        
+        <!-- Timeline -->
+        <div class="relative max-w-4xl mx-auto">
+          <!-- Vertical line for mobile -->
+          <div class="absolute left-7 top-0 bottom-0 w-px bg-accent/20 md:hidden" aria-hidden="true"></div>
+          <!-- Horizontal line for desktop -->
+          <div class="absolute left-0 right-0 top-7 h-px bg-accent/20 hidden md:block" aria-hidden="true"></div>
+          
+          <div class="space-y-8 md:space-y-0 md:grid md:grid-cols-4 md:gap-8">
+            {steps.map((step, index) => (
+              <article class="relative flex md:flex-col items-start md:items-center gap-4 md:text-center">
+                <!-- Icon -->
+                <div class="relative z-10 w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center flex-shrink-0 border border-accent/20">
+                  <svg class="w-7 h-7 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={step.icon}/>
+                  </svg>
+                </div>
+                <!-- Content -->
+                <div class="pt-1 md:pt-4">
+                  <h3 class="text-lg font-bold text-white mb-1">{step.title}</h3>
+                  <p class="text-secondary text-sm leading-relaxed">{step.description}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Teaser WITH IMAGES -->
+    <section class="py-24 md:py-32 bg-background/20" aria-labelledby="services-title">
+      <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <p class="text-accent font-semibold tracking-wider text-sm mb-3">LEISTUNGEN</p>
+          <h2 id="services-title" class="text-3xl md:text-4xl font-bold text-white mb-4">
+            Sicherheitsleistungen für definierte Einsatzbereiche
+          </h2>
+        </div>
+        
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          {services.map((service) => (
+            <a 
+              href={`/leistungen#${service.id}`}
+              class={`group block bg-background border rounded-xl overflow-hidden hover:border-accent/30 transition-all hover:-translate-y-1 focus:outline-none focus-visible:ring-4 focus-visible:ring-accent/50 h-full flex flex-col ${
+                service.isPremium ? 'border-accent/30 ring-1 ring-accent/20' : 'border-white/5'
+              }`}
+            >
+              <!-- Service Image -->
+              <div class="relative aspect-[16/9] overflow-hidden">
+                <img 
+                  src={service.image} 
+                  alt={service.title}
+                  class="w-full h-full aspect-[16/9] object-cover group-hover:scale-105 motion-safe:transition-transform motion-safe:duration-500"
+                  loading="lazy"
+                  decoding="async"
+                  width="400"
+                  height="225"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-60"></div>
+                
+                <!-- Premium Badge -->
+                {service.isPremium && (
+                  <div class="absolute top-3 right-3 bg-accent text-background px-2 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+                    <span>⭐</span>
+                    <span>PREMIUM</span>
+                  </div>
+                )}
+              </div>
+              
+              <div class="p-6 flex-grow flex flex-col">
+                <div class="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
+                  <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={service.icon}/>
+                  </svg>
+                </div>
+                <h3 class={`text-lg font-bold mb-2 group-hover:text-accent transition-colors ${service.isPremium ? 'text-accent' : 'text-white'}`}>
+                  {service.title}
+                </h3>
+                <p class="text-secondary text-sm leading-relaxed mb-4 flex-grow">
+                  {service.description}
+                </p>
+                <span class="inline-flex items-center text-accent text-sm font-medium mt-auto">
+                  Mehr erfahren
+                  <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                  </svg>
+                </span>
+              </div>
+            </a>
+          ))}
+        </div>
+        
+        <div class="text-center mt-12">
+          <a 
+            href="/leistungen"
+            class="inline-flex items-center justify-center px-8 py-4 border-2 border-accent text-accent font-semibold text-base rounded hover:bg-accent hover:text-background transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-accent/50"
+            aria-label="Alle Leistungen im Detail ansehen"
+          >
+            Alle Leistungen ansehen
+            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Differenzierung Section -->
+    <section class="py-24 md:py-32 bg-background/20" aria-labelledby="differenzierung-title">
+      <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <p class="text-accent font-semibold tracking-wider text-sm mb-3">DIFFERENZIERUNG</p>
+          <h2 id="differenzierung-title" class="text-3xl md:text-4xl font-bold text-white mb-4">
+            Struktur und Verantwortung im Einsatz
+          </h2>
+        </div>
+        
+        <div class="grid sm:grid-cols-2 gap-4 sm:gap-6 max-w-4xl mx-auto">
+          <div class="flex items-start gap-3 sm:gap-4 bg-white/5 p-4 sm:p-6 rounded-xl">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-accent flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span class="text-white text-base sm:text-lg">Ein Ansprechpartner</span>
+          </div>
+          <div class="flex items-start gap-3 sm:gap-4 bg-white/5 p-4 sm:p-6 rounded-xl">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-accent flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span class="text-white text-base sm:text-lg">Klare Zuständigkeiten</span>
+          </div>
+          <div class="flex items-start gap-3 sm:gap-4 bg-white/5 p-4 sm:p-6 rounded-xl">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-accent flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span class="text-white text-base sm:text-lg">Reaktionszeiten</span>
+          </div>
+          <div class="flex items-start gap-3 sm:gap-4 bg-white/5 p-4 sm:p-6 rounded-xl">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-accent flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span class="text-white text-base sm:text-lg">Dokumentation</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Warum METRA Section -->
+    <section class="py-24 md:py-32 bg-background/20" aria-labelledby="why-metra-title">
+      <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 id="why-metra-title" class="text-3xl md:text-4xl font-bold text-white mb-4">
+            Warum METRA Sicherheitsdienste
+          </h2>
+          <p class="text-accent text-lg">Sicherheit & Struktur – auf die Sie bauen können.</p>
+        </div>
+        
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto">
+          <div class="flex items-start gap-3 sm:gap-4 bg-white/5 p-4 sm:p-6 rounded-xl">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span class="text-white text-base sm:text-lg">Kombination aus Baustellensicherheit und Objektschutz</span>
+          </div>
+          <div class="flex items-start gap-3 sm:gap-4 bg-white/5 p-4 sm:p-6 rounded-xl">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span class="text-white text-base sm:text-lg">Exklusive Empfangs- & Concierge-Dienste</span>
+          </div>
+          <div class="flex items-start gap-3 sm:gap-4 bg-white/5 p-4 sm:p-6 rounded-xl">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span class="text-white text-base sm:text-lg">Klare Strukturen und feste Ansprechpartner</span>
+          </div>
+          <div class="flex items-start gap-3 sm:gap-4 bg-white/5 p-4 sm:p-6 rounded-xl">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span class="text-white text-base sm:text-lg">Professionelle Sicherheitskräfte mit Erfahrung</span>
+          </div>
+          <div class="flex items-start gap-3 sm:gap-4 bg-white/5 p-4 sm:p-6 rounded-xl">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span class="text-white text-base sm:text-lg">Integration in Bau- und Objektprozesse</span>
+          </div>
+          <div class="flex items-start gap-3 sm:gap-4 bg-white/5 p-4 sm:p-6 rounded-xl">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span class="text-white text-base sm:text-lg">24/7 Erreichbarkeit und schnelle Reaktionszeiten</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 md:py-32 bg-background/20" aria-labelledby="cta-title">
+      <div class="max-w-4xl mx-auto px-5 sm:px-6 lg:px-8 text-center">
+        <h2 id="cta-title" class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+          Lassen Sie uns Ihr Projekt absichern.
+        </h2>
+        <p class="text-secondary text-lg md:text-xl leading-relaxed mb-10 max-w-2xl mx-auto">
+          Beschreiben Sie Ihr Projekt. Auf dieser Grundlage erfolgt eine strukturierte Bewertung und Abstimmung der weiteren Schritte.
+        </p>
+        <a 
+          href="/kontakt"
+          class="inline-flex items-center justify-center px-8 py-4 bg-accent text-background font-bold text-base rounded hover:bg-accent-hover transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-accent/50"
+          aria-label="Sicherheitskonzept anfragen"
+        >
+          Sicherheitskonzept anfragen →
+        </a>
+      </div>
+    </section>
+
+  </main>
+  
+  <Footer />
+  <WhatsAppButton />
+</Layout>

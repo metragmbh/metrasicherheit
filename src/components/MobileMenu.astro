@@ -1,0 +1,151 @@
+---
+const navLinks = [
+  { href: '/', label: 'Startseite', ariaLabel: 'Zur Startseite' },
+  { href: '/leistungen', label: 'Leistungen', ariaLabel: 'Unsere Leistungen ansehen' },
+  { href: '/kontakt', label: 'Kontakt', ariaLabel: 'Kontakt aufnehmen' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<!-- Mobile Navigation - Separate from Header for proper z-index stacking -->
+<div 
+  id="mobile-menu" 
+  class="md:hidden hidden fixed inset-0 top-24 md:top-28 z-[100] bg-background"
+  aria-label="Mobile Navigation"
+>
+  <nav class="px-5 py-4 pb-20 h-full overflow-y-auto">
+    <ul class="space-y-2">
+      {navLinks.map((link) => {
+        const isActive = currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href));
+        return (
+          <li>
+            <a 
+              href={link.href}
+              class={`block py-3 px-4 rounded font-medium transition-colors ${
+                isActive 
+                  ? 'bg-accent/10 text-accent' 
+                  : 'text-white hover:bg-white/5 hover:text-accent'
+              }`}
+              aria-label={link.ariaLabel}
+              aria-current={isActive ? 'page' : undefined}
+            >
+              {link.label}
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+    <div class="mt-4 pt-4 border-t border-white/5">
+      <a 
+        href="/kontakt"
+        class="block w-full text-center py-3 bg-accent text-background font-semibold rounded hover:bg-accent-hover transition-colors"
+        aria-label="Sicherheitslösung anfragen"
+      >
+        Angebot anfordern
+      </a>
+    </div>
+  </nav>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const iconOpen = document.getElementById('menu-icon-open');
+    const iconClose = document.getElementById('menu-icon-close');
+    let isOpen = false;
+
+    function toggleMenu() {
+      isOpen = !isOpen;
+      
+      if (isOpen) {
+        mobileMenu?.classList.remove('hidden');
+        iconOpen?.classList.add('hidden');
+        iconClose?.classList.remove('hidden');
+        menuBtn?.setAttribute('aria-expanded', 'true');
+        menuBtn?.setAttribute('aria-label', 'Menü schließen');
+        document.body.style.overflow = 'hidden';
+        mobileMenu?.querySelector('a')?.focus();
+      } else {
+        mobileMenu?.classList.add('hidden');
+        iconOpen?.classList.remove('hidden');
+        iconClose?.classList.add('hidden');
+        menuBtn?.setAttribute('aria-expanded', 'false');
+        menuBtn?.setAttribute('aria-label', 'Menü öffnen');
+        document.body.style.overflow = '';
+      }
+    }
+
+    menuBtn?.addEventListener('click', toggleMenu);
+
+    // Close menu when clicking on a link
+    mobileMenu?.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (isOpen) toggleMenu();
+      });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen) {
+        toggleMenu();
+        return;
+      }
+      if (e.key === 'Tab' && isOpen && mobileMenu) {
+        const focusable = mobileMenu.querySelectorAll('a[href], button');
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 768 && isOpen) {
+        toggleMenu();
+      }
+    });
+  });
+</script>
+
+<noscript>
+  <div class="md:hidden bg-background border-t border-white/10 px-5 py-4">
+    <nav aria-label="Mobile Navigation (ohne JavaScript)">
+      <ul class="space-y-2">
+        {navLinks.map((link) => {
+          const isActive = currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href));
+          return (
+            <li>
+              <a 
+                href={link.href}
+                class={`block py-3 px-4 rounded font-medium transition-colors ${
+                  isActive 
+                    ? 'bg-accent/10 text-accent' 
+                    : 'text-white hover:bg-white/5 hover:text-accent'
+                }`}
+              >
+                {link.label}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+      <div class="mt-4 pt-4 border-t border-white/5">
+        <a 
+          href="/kontakt"
+          class="block w-full text-center py-3 bg-accent text-background font-semibold rounded hover:bg-accent-hover transition-colors"
+        >
+          Angebot anfordern
+        </a>
+      </div>
+    </nav>
+  </div>
+  <style>
+    #mobile-menu-btn { display: none !important; }
+  </style>
+</noscript>

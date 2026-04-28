@@ -1,0 +1,22 @@
+{
+  "name": "METRA Sicherheitsdienste",
+  "short_name": "METRA",
+  "description": "Professionelle Sicherheitslösungen für Baustellen, Unternehmen und Industrie",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#00002e",
+  "theme_color": "#00002e",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.metra-sicherheitsdienste.de/sitemap.xml
