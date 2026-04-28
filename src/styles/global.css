@@ -29,6 +29,7 @@
 /* Global Styles */
 html {
   scroll-behavior: smooth;
+  color-scheme: dark;
 }
 
 body {
@@ -81,4 +82,10 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #dab252;
+}
+
+/* Tactile feedback for touch devices */
+a:active, button:active {
+  transform: scale(0.98);
+  transition: transform 0.1s ease;
 }

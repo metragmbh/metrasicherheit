@@ -3,11 +3,11 @@ const currentYear = new Date().getFullYear();
 
 const footerLinks = {
   services: [
-    { label: 'Baustellensicherheit', href: '/leistungen' },
-    { label: 'Objektschutz', href: '/leistungen' },
-    { label: 'Brandwachen', href: '/leistungen' },
-    { label: 'Empfangs- & Concierge-Dienste', href: '/leistungen' },
-    { label: 'Werkschutz', href: '/leistungen' },
+    { label: 'Baustellensicherheit', href: '/leistungen#baustellensicherheit' },
+    { label: 'Objektschutz', href: '/leistungen#objektschutz' },
+    { label: 'Brandwachen', href: '/leistungen#brandwachen' },
+    { label: 'Empfangs- & Concierge-Dienste', href: '/leistungen#concierge' },
+    { label: 'Werkschutz', href: '/leistungen#werkschutz' },
   ],
   company: [
     { label: 'Über uns', href: '/' },
@@ -24,8 +24,8 @@ const contactInfo = {
   company: 'METRA Sicherheitsdienste GmbH',
   address: 'Im Mediapark 5',
   city: '50670 Köln',
-  phone: '01708888891',
-  phoneDisplay: '0170 888 88 91',
+  phone: '08008888369',
+  phoneDisplay: '0800 8888 369',
   email: 'info@metra-sicherheitsdienste.de',
 };
 ---
@@ -39,7 +39,7 @@ const contactInfo = {
         <a href="/" class="flex items-center gap-2 mb-3 sm:mb-4" aria-label="METRA Sicherheitsdienste - Zur Startseite">
           <img 
             src="/images/logoneu.png" 
-            alt="METRA Sicherheitsdienste Logo" 
+            alt="" 
             class="h-12 sm:h-16 w-auto object-contain"
             width="180"
             height="60"
@@ -64,7 +64,7 @@ const contactInfo = {
             <li>
               <a 
                 href={link.href}
-                class="text-secondary text-xs sm:text-sm hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
+                class="text-secondary text-xs sm:text-sm hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded py-1.5 inline-flex items-center"
               >
                 {link.label}
               </a>
@@ -81,7 +81,7 @@ const contactInfo = {
             <li>
               <a 
                 href={link.href}
-                class="text-secondary text-xs sm:text-sm hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
+                class="text-secondary text-xs sm:text-sm hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded py-1.5 inline-flex items-center"
               >
                 {link.label}
               </a>
@@ -97,7 +97,7 @@ const contactInfo = {
           <li>
             <a 
               href={`tel:${contactInfo.phone}`}
-              class="flex items-center gap-2 text-secondary text-xs sm:text-sm hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
+              class="flex items-center gap-2 text-secondary text-xs sm:text-sm hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded py-1.5"
               aria-label={`Telefon: ${contactInfo.phoneDisplay}`}
             >
               <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -109,7 +109,7 @@ const contactInfo = {
           <li>
             <a 
               href={`mailto:${contactInfo.email}`}
-              class="flex items-center gap-2 text-secondary text-xs sm:text-sm hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
+              class="flex items-center gap-2 text-secondary text-xs sm:text-sm hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded py-1.5"
               aria-label={`E-Mail: ${contactInfo.email}`}
             >
               <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -122,10 +122,10 @@ const contactInfo = {
         
         <!-- WhatsApp CTA - BRAND COLOR -->
         <a 
-          href={`https://wa.me/49${contactInfo.phone}`}
+          href="https://wa.me/491738888378"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-accent text-background text-sm font-semibold rounded hover:bg-accent-hover transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          class="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-accent text-background text-sm font-semibold rounded hover:bg-accent-hover transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent min-h-[44px]"
           aria-label="Über WhatsApp kontaktieren"
         >
           <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -155,7 +155,7 @@ const contactInfo = {
               <li>
                 <a 
                   href={link.href}
-                  class="text-secondary text-xs sm:text-sm hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
+                  class="text-secondary text-xs sm:text-sm hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded py-1.5 inline-flex items-center"
                 >
                   {link.label}
                 </a>

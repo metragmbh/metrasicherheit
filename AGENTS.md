@@ -1,374 +1,426 @@
-# METRA Sicherheitsdienste Website - Agent Documentation
+# METRA Sicherheitsdienste GmbH – Website Agent-Dokumentation
 
-> **Language**: German (website content), English (code comments mixed with German)
-> **Framework**: Astro 5.x with Static Site Generation
+> **Sprache**: Deutsch (Website-Inhalte), Englisch (Code-Kommentare gemischt mit Deutsch)
+> **Framework**: Astro 5.x mit Static Site Generation
 > **Styling**: Tailwind CSS 3.x
 
-## Project Overview
+---
 
-This is the corporate website for **METRA Sicherheitsdienste GmbH**, a security services company based in Cologne, Germany. The website is a static, SEO-optimized, accessible single-page application (SPA) feel with multiple routes.
+## Projektübersicht
 
-### Key Characteristics
+Dies ist die statische Corporate-Website der **METRA Sicherheitsdienste GmbH**, ein Sicherheitsdienstleister mit Sitz in Köln. Die Website ist SEO-optimiert, barrierefrei und mobil-first. Alle Inhalte sind auf Deutsch.
 
-- **German-language** business website for the security industry
-- **Dark theme** design with yellow accent color (#dab252)
-- **Mobile-first responsive** design
-- **WCAG accessibility** compliant (ARIA labels, semantic HTML, keyboard navigation, skip-to-content link, focus-visible states)
-- **SEO-optimized** with Schema.org structured data (Organization, LocalBusiness, Service, BreadcrumbList, ContactPage), meta tags, Open Graph, Twitter Cards
-- **Cookie consent** banner implemented (localStorage-based, 3 options: Accept All, Decline, Essential Only)
-- **Contact form** via Web3Forms (requires access key configuration)
-- **WhatsApp integration** for direct messaging (floating button + footer link)
+**Kerneigenschaften:**
+- Deutsche Business-Website für die Sicherheitsbranche
+- Dark-Theme Design mit gelber Akzentfarbe (`#dab252`)
+- Mobile-first responsives Design
+- WCAG-konform (ARIA-Labels, semantisches HTML, Tastaturnavigation, Skip-to-Content-Link, Focus-Visible-States)
+- Umfangreiche Schema.org-Structured-Data (Organization, LocalBusiness, Service, BreadcrumbList, ContactPage)
+- Cookie-Consent-Banner (localStorage-basiert, 3 Optionen: Alle akzeptieren, Ablehnen, Nur Essenzielle)
+- Kontaktformular via Web3Forms
+- WhatsApp-Integration (Floating-Button + Footer-Link)
 
-## Technology Stack
+---
 
-| Category | Technology | Version |
-|----------|------------|---------|
+## Technologie-Stack
+
+| Kategorie | Technologie | Version |
+|-----------|------------|---------|
 | Framework | Astro | ^5.17.1 |
 | Styling | Tailwind CSS | ^3.4.19 |
 | PostCSS | autoprefixer | ^10.4.27 |
-| Type System | TypeScript (via Astro) | strict config |
-| Deployment | Netlify | static hosting |
-| Form Handling | Web3Forms | external API |
-| Font | Inter | self-hosted woff2 |
+| TypeScript | Astro-Strict-Config | – |
+| Bildoptimierung | Sharp | ^0.34.5 |
+| Deployment | Netlify | Static Hosting |
+| Formular-Handling | Web3Forms | Externe API |
+| Schriftart | Inter | Self-hosted woff2 |
 
-## Project Structure
+---
+
+## Projektstruktur
 
 ```
 /
 ├── src/
-│   ├── components/          # Reusable Astro components
-│   │   ├── CookieBanner.astro    # GDPR cookie consent with localStorage
-│   │   ├── Footer.astro          # Site footer with contact info
-│   │   ├── Header.astro          # Navigation header with claim under logo
-│   │   ├── MobileMenu.astro      # Mobile navigation drawer
+│   ├── components/
+│   │   ├── CookieBanner.astro    # GDPR Cookie-Consent (localStorage)
+│   │   ├── Footer.astro          # Footer mit Kontaktdaten, Leistungen, Rechtliches
+│   │   ├── Header.astro          # Fixe Navigation mit Logo + Claim
+│   │   ├── MobileMenu.astro      # Mobile Navigation mit JS + Noscript-Fallback
 │   │   └── WhatsAppButton.astro  # Floating WhatsApp CTA (bottom-right)
 │   ├── layouts/
-│   │   └── Layout.astro          # Base HTML layout with SEO, Schema.org
-│   ├── pages/               # File-based routing
-│   │   ├── index.astro           # Homepage (hero, 5 services teaser, process, cooperation)
-│   │   ├── leistungen.astro      # Services page (5 detailed services)
-│   │   ├── kontakt.astro         # Contact page with Web3Forms form
-│   │   ├── datenschutz.astro     # Privacy policy (DSGVO compliant)
-│   │   ├── impressum.astro       # Legal imprint (§ 5 TMG)
-│   │   └── 404.astro             # Custom 404 error page
-│   └── styles/
-│       └── global.css            # Tailwind imports + custom styles + Inter font
-├── public/                  # Static assets
-│   ├── fonts/               # Self-hosted Inter font files (regular, 600, 700)
-│   ├── images/              # WebP images (logo, hero, 5 service images)
-│   ├── favicon.ico/svg
+│   │   └── Layout.astro          # Basis-Layout mit SEO, Schema.org, Critical CSS
+│   ├── pages/                    # Dateibasiertes Routing
+│   │   ├── index.astro           # Homepage (Hero, Trust Badges, Problem/Lösung, 4-Schritte-Prozess, 5 Leistungen, Concierge-Highlight, Kooperation, Qualifikationen)
+│   │   ├── leistungen.astro      # Detaillierte Leistungsbeschreibungen (5 Services)
+│   │   ├── kontakt.astro         # Kontaktformular (Web3Forms) + Kontaktdaten
+│   │   ├── datenschutz.astro     # DSGVO-konforme Datenschutzerklärung
+│   │   ├── impressum.astro       # Impressum (§ 5 TMG) – vatId & registration müssen ergänzt werden
+│   │   └── 404.astro             # Custom 404-Fehlerseite
+│   ├── styles/
+│   │   └── global.css            # Tailwind-Direktiven + Custom Styles + Inter-Font
+│   └── env.d.ts                  # Astro-Client-Typen + ImportMetaEnv (PUBLIC_WEB3FORMS_KEY)
+├── public/
+│   ├── fonts/
+│   │   ├── inter-regular.woff2
+│   │   ├── inter-600.woff2
+│   │   └── inter-700.woff2
+│   ├── images/
+│   │   ├── logoneu.png           # Aktuelles Logo (PNG!)
+│   │   ├── hero-sicherheit.webp
+│   │   ├── service-baustelle.webp
+│   │   ├── service-objekt.webp
+│   │   ├── service-brandwache.webp
+│   │   ├── service-concierge.webp
+│   │   └── service-werk.webp
+│   ├── favicon.ico
+│   ├── favicon.svg
+│   ├── manifest.json             # PWA-Manifest
 │   ├── robots.txt
-│   ├── sitemap.xml
-│   └── manifest.json        # PWA manifest
-├── astro.config.mjs         # Astro configuration (static output, Sharp images)
-├── tailwind.config.js       # Tailwind customization (colors, animations)
-├── postcss.config.js        # PostCSS plugins
-├── tsconfig.json            # TypeScript strict config
-├── netlify.toml             # Netlify deployment & security headers
-└── package.json
+│   └── sitemap.xml
+├── astro.config.mjs
+├── tailwind.config.js
+├── postcss.config.js
+├── tsconfig.json                 # extends "astro/tsconfigs/strict"
+├── netlify.toml                  # Build-Config + Security Headers
+├── package.json                  # type: "module"
+├── .env.example                  # PUBLIC_WEB3FORMS_KEY
+└── .gitignore
 ```
 
-## Build Commands
+---
+
+## Build-Befehle
 
 ```bash
-# Install dependencies
+# Abhängigkeiten installieren
 npm install
 
-# Development server (localhost:4321)
+# Entwicklungsserver (localhost:4321)
 npm run dev
 
-# Production build
+# Produktions-Build
 npm run build
 
-# Preview production build locally
+# Build lokal previewen
 npm run preview
 
-# Astro CLI commands
+# Astro CLI
 npm run astro -- --help
 ```
 
-## Configuration Details
+---
 
-### Astro Config (`astro.config.mjs`)
+## Konfiguration
 
-```javascript
-{
-  devToolbar: { enabled: false },     // Dev Toolbar disabled
-  output: 'static',                   // Static Site Generation
-  image: {
-    service: { entrypoint: 'astro/assets/services/sharp' },
-  },
-  domains: [],
-  remotePatterns: [],
-  compressHTML: true,                 // HTML compression enabled
-  build: { format: 'directory' },     // Directory-based URLs
-}
+### `astro.config.mjs`
+
+- `output: 'static'` – Static Site Generation
+- `devToolbar: { enabled: false }`
+- `compressHTML: true`
+- `build.format: 'directory'` – Verzeichnis-basierte URLs
+- `image.service: { entrypoint: 'astro/assets/services/sharp' }` – Bildoptimierung via Sharp
+
+### `tailwind.config.js`
+
+**Erweiterte Farben:**
+- `background: '#00002e'` – Dunkler Hintergrund
+- `accent: '#dab252'` – Gelbe Akzentfarbe
+- `secondary: '#a0a3b8'` – Gedämpfter Grauton für Text
+- `accent-hover: '#c9a14a'` – Dunkleres Gelb für Hover
+
+**Erweiterte Animationen:**
+- `fade-in` – Opacity 0 → 1 (0.6s)
+- `fade-in-up` – Opacity 0 + translateY(20px) → Opacity 1 + translateY(0) (0.6s)
+
+**Font-Family:** `sans: ['Inter', 'system-ui', ...]`
+
+### `netlify.toml`
+
+- Build-Command: `npm run build`
+- Publish-Dir: `dist`
+- Cache-Control für statische Assets (images, fonts, js, css): 1 Jahr
+- Security Headers:
+  - `X-Frame-Options: DENY`
+  - `X-Content-Type-Options: nosniff`
+  - `Referrer-Policy: strict-origin-when-cross-origin`
+  - `Strict-Transport-Security: max-age=31536000; includeSubDomains; preload`
+  - `Permissions-Policy` (Camera, Microphone, Geolocation deaktiviert)
+  - `Content-Security-Policy` mit `connect-src 'self' https://api.web3forms.com`
+
+### `tsconfig.json`
+
+- Extends: `astro/tsconfigs/strict`
+- Include: `.astro/types.d.ts`, `**/*`
+- Exclude: `dist`
+
+---
+
+## Komponenten im Detail
+
+### `Layout.astro`
+
+- Basis-HTML mit `lang="de-DE"`
+- Meta-Tags (SEO, Open Graph, Twitter Cards)
+- Schema.org JSON-LD: Organization + LocalBusiness (mit GeoCoordinates)
+- Preconnect zu `https://api.web3forms.com`
+- Preload der self-hosted Inter-Fonts (regular, 600, 700)
+- Critical CSS inline für Above-the-fold
+- Skip-to-Content-Link als erstes fokussierbares Element
+- `<slot />` für Seiteninhalt
+- Bindet `CookieBanner` am Ende des Body ein
+
+**Wichtige Konstanten im Layout:**
+- `siteUrl = 'https://www.metra-sicherheitsdienste.de'`
+- `LOGO_PATH = '/images/logoneu.png'` (nicht `logo-sicherheit.webp`!)
+
+### `Header.astro`
+
+- Fixe Position mit Backdrop-Blur (`bg-background/95 backdrop-blur-sm`)
+- Logo-Bild (`/images/logoneu.png`) mit Claim darunter: *„Sicherheit & Struktur – auf die Sie bauen können."*
+- Desktop-Navigation mit Active-Link-Unterstreichung (`aria-current="page"`)
+- CTA-Button „Angebot anfordern" (Desktop)
+- Mobile Hamburger-Button mit `aria-expanded`, `aria-controls`
+- Spacer-Element (`h-24 md:h-28`) für fixen Header
+
+### `MobileMenu.astro`
+
+- Separates Overlay (`fixed inset-0 top-24 md:top-28 z-[100] bg-background`)
+- Öffnen/Schließen via JS (DOMContentLoaded)
+- ESC-Taste schließt Menü
+- Resize auf Desktop schließt Menü
+- Body-Scroll wird bei geöffnetem Menü blockiert
+- Links schließen Menü bei Klick
+- **Noscript-Fallback:** Statische Mobile-Navigation ohne JS, Hamburger-Button wird versteckt
+
+### `CookieBanner.astro`
+
+- Fixed bottom Banner mit `transform translate-y-full` → Slide-in Animation
+- `role="dialog"`, `aria-modal="true"`, `aria-label="Cookie-Einwilligung"`
+- localStorage-Key: `metra_sicherheit_cookie_consent`
+- 3 Buttons: „Zustimmen" (accepted), „Ablehnen" (declined), „Nur Essenzielle" (essential)
+- 1-Sekunde Verzögerung vor Anzeige
+- Custom Event `cookieConsentAccepted` bei Zustimmung
+- Link zu `/datenschutz`
+
+### `WhatsAppButton.astro`
+
+- Fixed Button (bottom-8 right-8, z-50)
+- Telefonnummer: `491708888891` → `https://wa.me/491708888891`
+- Gelbe Akzentfarbe, Notification-Dot (weiß mit Border)
+- CSS Hover-Animation: `@keyframes gentle-pulse` (Scale 1 → 1.05)
+
+### `Footer.astro`
+
+- 4-Spalten-Grid (2 Spalten mobil)
+- Spalten: Unternehmensinfo, Leistungen, Unternehmen, Kontakt
+- WhatsApp-CTA im Kontakt-Bereich
+- Rechtlicher Hinweis: § 34a GewO (Disclaimer-Box)
+- Bottom Bar: Copyright + Links zu Impressum/Datenschutz
+
+---
+
+## Seiten im Detail
+
+| Route | Datei | Beschreibung |
+|-------|-------|--------------|
+| `/` | `index.astro` | Hero mit Bild, Trust Badges, Problem/Lösung, 4-Schritte-Prozess, 5 Service-Teaser (mit Bildern), Concierge-Highlight (Premium-Sektion), „Warum METRA", Qualifikationen |
+| `/leistungen` | `leistungen.astro` | Detaillierte Service-Beschreibungen (5 Services, abwechselnd Bild/Text), Trust Badges, Benefits-Grid, Prozess-Teaser, CTA-Sektion |
+| `/kontakt` | `kontakt.astro` | Kontaktformular (Web3Forms), Kontakt-Sidebar (Adresse, Telefon, E-Mail, WhatsApp), Schema.org ContactPage |
+| `/impressum` | `impressum.astro` | Impressum (§ 5 TMG) – **vatId & registration müssen noch ergänzt werden** |
+| `/datenschutz` | `datenschutz.astro` | DSGVO-konforme Datenschutzerklärung (7 Abschnitte) |
+| `/404` | `404.astro` | Custom 404 mit Navigation |
+
+### Gemeinsame Muster in allen Seiten
+
+Alle Seiten (außer 404) folgen diesem Muster:
+```astro
+<Layout title="..." description="..." canonical="/route">
+  <script type="application/ld+json" set:html={JSON.stringify(schemaBreadcrumb)} />
+  <Header />
+  <MobileMenu />
+  <main id="main-content">...</main>
+  <Footer />
+  <WhatsAppButton />
+</Layout>
 ```
 
-### Tailwind Config (`tailwind.config.js`)
+Jede Seite hat eine **Breadcrumb-Navigation** (visuell + Schema.org JSON-LD).
 
-Custom theme extensions:
+---
 
-```javascript
-// Colors
-background: '#00002e',      // Dark background
-accent: '#dab252',          // Yellow accent
-secondary: '#d2d1d9',       // Light gray text
-'accent-hover': '#c9a14a',  // Darker yellow on hover
+## Services (5 Hauptleistungen)
 
-// Font Family
-sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif']
+1. **Objektschutz** – Bürogebäude, Wohnanlagen, Gewerbeobjekte
+2. **Baustellensicherheit** – Baustellenbewachung jeder Größe
+3. **Werkschutz / Industrieschutz** – Industrieanlagen, Produktionsstandorte
+4. **Brandwachen** – Feuergefährliche Arbeiten, Präventivüberwachung
+5. **Empfangs- & Concierge-Dienste** – Premium-Service (markiert mit `isPremium: true`)
 
-// Animations
-'fade-in': fadeIn 0.6s ease-out
-'fade-in-up': fadeInUp 0.6s ease-out (translateY 20px → 0)
-```
+Jeder Service hat: `id`, `title`, `description`, `image` (WebP), `icon` (SVG-Path), `features` (Array), optional `isPremium`.
 
-### Netlify Config (`netlify.toml`)
+---
 
-- **Build command**: `npm run build`
-- **Publish directory**: `dist`
-- **Security headers**: 
-  - Cache-Control for static assets (1 year)
-  - X-Frame-Options: DENY
-  - X-Content-Type-Options: nosniff
-  - Referrer-Policy: strict-origin-when-cross-origin
-  - Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
-  - Content-Security-Policy (CSP) allowing connections to `https://api.web3forms.com`
+## Kontaktformular (Web3Forms)
 
-## Key Components
-
-### Layout.astro
-
-Base layout providing:
-- HTML5 boilerplate with German lang attribute (`de-DE`)
-- Meta tags (SEO, Open Graph, Twitter Cards)
-- Schema.org JSON-LD (Organization + LocalBusiness with GeoCoordinates)
-- Preconnect to Web3Forms API
-- Preload self-hosted Inter fonts (regular, 600, 700)
-- Critical CSS inline for above-the-fold
-- Skip-to-content link for accessibility
-- Cookie banner inclusion
-
-### Header.astro
-
-- Fixed position navigation with backdrop blur (`bg-background/95 backdrop-blur-sm`)
-- Logo with claim underneath: "Sicherheit & Struktur – auf die Sie bauen können."
-- Desktop navigation with active link highlighting (underline indicator)
-- CTA button "Angebot anfordern"
-- Mobile hamburger menu with slide-out drawer
-- ARIA attributes: `aria-label`, `aria-expanded`, `aria-controls`, `aria-current`
-- ESC key closes mobile menu
-- Resize handler closes mobile menu on desktop breakpoint
-
-### MobileMenu.astro
-
-- Separate component for proper z-index stacking
-- Full-screen overlay on mobile (`fixed inset-0 top-[72px]`)
-- Links with active state styling
-- CTA button in mobile menu
-- Prevents body scroll when open
-- Close on link click, ESC key, or resize to desktop
-
-### CookieBanner.astro
-
-- GDPR-compliant cookie consent
-- Fixed bottom banner with transform animation (translate-y-full → 0)
-- Stores preference in localStorage (`metra_sicherheit_cookie_consent`)
-- Three options: Accept All, Decline, Essential Only
-- Dispatches custom event `cookieConsentAccepted` on acceptance
-- Links to `/datenschutz` page
-- 1-second delay before showing for better UX
-
-### WhatsAppButton.astro
-
-- Fixed floating button (bottom-right, z-50)
-- Yellow accent color matching theme
-- Gentle pulse animation on hover (CSS keyframes)
-- Phone number: `+491708888891`
-- Notification dot indicator (white with border)
-
-### Footer.astro
-
-- Multi-column layout (company info, services, company links, contact)
-- WhatsApp CTA button in contact section
-- Legal disclaimer section (§ 34a GewO)
-- Bottom bar with copyright and legal links
-- Responsive grid (2 cols mobile, 4 cols desktop)
-
-## Pages
-
-| Route | File | Purpose |
-|-------|------|---------|
-| `/` | `index.astro` | Homepage with hero, trust badges, problem/solution section, 4-step process, 5 services teaser, concierge highlight, cooperation section, qualifications |
-| `/leistungen` | `leistungen.astro` | Detailed service descriptions (5 services), trust badges, benefits grid, process teaser, CTA section |
-| `/kontakt` | `kontakt.astro` | Contact form (Web3Forms), contact info sidebar, WhatsApp link, quick response promise |
-| `/impressum` | `impressum.astro` | Legal imprint (§ 5 TMG) - vatId and registration need completion |
-| `/datenschutz` | `datenschutz.astro` | Privacy policy (DSGVO) with all required sections |
-| `/404` | `404.astro` | Custom 404 error page with navigation options |
-
-## Services (5 main offerings)
-
-1. **Baustellensicherheit** - Construction site security
-2. **Objektschutz** - Property protection
-3. **Brandwachen** - Fire watch services
-4. **Empfangs- & Concierge-Dienste** - Premium reception & concierge (highlighted as premium)
-5. **Werkschutz / Industrieschutz** - Industrial security
-
-Each service has: id, title, description, image (WebP), icon (SVG path), features list, isPremium flag (for Concierge)
-
-## Contact Form Setup
-
-The contact form uses **Web3Forms** (configured in `src/pages/kontakt.astro`):
-
-```typescript
+**Konfiguration in `src/pages/kontakt.astro`:**
+```astro
 const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';
-const WEB3FORMS_ACCESS_KEY = 'YOUR_ACCESS_KEY'; // Replace this!
+const WEB3FORMS_ACCESS_KEY = import.meta.env.PUBLIC_WEB3FORMS_KEY || 'YOUR_ACCESS_KEY';
 ```
 
-**To configure:**
-1. Sign up at https://web3forms.com/
-2. Get your access key
-3. Replace `YOUR_ACCESS_KEY` in `src/pages/kontakt.astro`
+**Umgebungsvariable:** `PUBLIC_WEB3FORMS_KEY` (siehe `.env.example`)
 
-**Form features:**
-- Honeypot field (`botcheck`) for bot protection - must remain empty
-- Client-side validation (required fields marked with *)
-- Service selection dropdown
-- Privacy checkbox (required, links to datenschutz)
-- Loading states with spinner
-- Success/error message display
-- Reply-to email auto-populated from email field
-- Async form submission with fetch API
+**Formular-Features:**
+- Honeypot-Feld (`botcheck`) – muss leer bleiben
+- Client-seitige Validierung (Pflichtfelder mit `*`)
+- Service-Auswahl-Dropdown
+- Privacy-Checkbox (Pflicht, Link zu `/datenschutz`)
+- Loading-State mit Spinner
+- Success/Error-Messages mit `aria-live="polite"`
+- Reply-To wird automatisch aus E-Mail-Feld gesetzt
+- Async Submission via `fetch` API
 
-## Code Style Guidelines
+**Wichtig:** Wenn `WEB3FORMS_ACCESS_KEY === 'YOUR_ACCESS_KEY'` wird eine Warnung im UI angezeigt.
 
-### Astro Components
+---
 
-- Use TypeScript for component props interfaces
-- Prefix component-scoped variables with interface `Props`
-- Use semantic HTML5 elements (`section`, `article`, `nav`, `main`, `address`)
-- Always include `aria-label` or `aria-labelledby` for interactive elements
-- Use `aria-hidden="true"` for decorative elements
-- Use fragment `<slot />` for children in Layout
+## Code-Style-Richtlinien
 
-### Styling Conventions
+### Astro-Komponenten
 
-- **Tailwind classes** for all styling
-- Color usage:
-  - `text-white` - primary text
-  - `text-secondary` - muted text (#d2d1d9)
-  - `text-accent` - yellow highlights (#dab252)
-  - `bg-background` - dark background (#00002e)
-  - `bg-accent` / `hover:bg-accent-hover` - buttons
-- Spacing scale: use `max-w-7xl mx-auto px-4 sm:px-6 lg:px-8` for container
-- Responsive breakpoints: `sm:`, `md:`, `lg:`
-- Use `sr-only` for screen-reader only content
-- Use `not-sr-only` for skip-link pattern
+- TypeScript für Props-Interfaces (immer `interface Props`)
+- Semantisches HTML5 (`section`, `article`, `nav`, `main`, `address`)
+- `aria-label` oder `aria-labelledby` für interaktive Elemente
+- `aria-hidden="true"` für dekorative Elemente
+- `<slot />` in Layout für Children
 
-### Accessibility Requirements
+### Styling-Konventionen
 
-- All images must have descriptive `alt` text
-- Form inputs must have associated `<label>` elements
-- Focus states: use `focus-visible:ring-2 focus-visible:ring-accent`
-- Skip-to-content link must be first focusable element
-- Mobile menu: `aria-expanded`, `aria-controls`, ESC to close
-- Use `aria-current="page"` for active navigation items
-- Use `role="dialog"` and `aria-modal="true"` for modal components
+- **Tailwind-Klassen** für alles Styling
+- Farb-Schema:
+  - `text-white` – Primärer Text
+  - `text-secondary` – Gedämpfter Text
+  - `text-accent` – Gelbe Highlights
+  - `bg-background` – Dunkler Hintergrund
+  - `bg-accent` / `hover:bg-accent-hover` – Buttons
+- Container: `max-w-7xl mx-auto px-5 sm:px-6 lg:px-8`
+- Responsive Breakpoints: `sm:`, `md:`, `lg:`
+- `sr-only` / `focus:not-sr-only` für Skip-Link
+- `focus-visible:ring-2 focus-visible:ring-accent` für Fokus-Indikatoren
+
+### Accessibility (WCAG)
+
+- Alle Bilder haben beschreibenden `alt`-Text
+- Formular-Inputs haben assoziierte `<label>`-Elemente
+- Focus-States sichtbar (gelber Ring)
+- Skip-to-Content-Link als erstes fokussierbares Element
+- Mobile Menu: `aria-expanded`, `aria-controls`, ESC zum Schließen
+- `aria-current="page"` für aktive Navigationseinträge
+- `role="dialog"` und `aria-modal="true"` für Modal-Komponenten (Cookie-Banner)
+- `prefers-reduced-motion` wird in `global.css` berücksichtigt
 
 ### Icons
 
-- Use inline SVG with Heroicons-style paths
-- Set `aria-hidden="true"` on decorative icons
-- Current color inheritance via `fill="currentColor"` or `stroke="currentColor"`
-- Standard size: `w-5 h-5` or `w-6 h-6`
+- Inline-SVGs im Heroicons-Stil
+- `aria-hidden="true"` auf dekorativen Icons
+- `fill="currentColor"` oder `stroke="currentColor"`
+- Standard-Größen: `w-5 h-5` oder `w-6 h-6`
 
-## Testing Checklist
+---
 
-Before deploying changes, verify:
+## Testing-Checkliste
 
-- [ ] All pages render without errors (`npm run build`)
-- [ ] Responsive design works on mobile, tablet, desktop
-- [ ] Navigation works (including mobile menu toggle)
-- [ ] Contact form submits correctly (test with Web3Forms)
-- [ ] Cookie banner appears for new users (clear localStorage to test)
-- [ ] WhatsApp button opens correct chat
-- [ ] No console errors
-- [ ] Accessibility: keyboard navigation works (Tab, Shift+Tab)
-- [ ] Accessibility: skip link works (focus then Enter)
-- [ ] Accessibility: focus indicators visible (yellow ring)
-- [ ] SEO: meta tags present on all pages (title, description, canonical)
-- [ ] SEO: Schema.org data validates (use Google's Rich Results Test)
-- [ ] Images load correctly (check WebP format, lazy loading)
+Vor jedem Deploy:
 
-## Security Considerations
+- [ ] `npm run build` läuft fehlerfrei durch
+- [ ] Responsive Design funktioniert (Mobil, Tablet, Desktop)
+- [ ] Navigation funktioniert (inkl. Mobile-Menu-Toggle)
+- [ ] Kontaktformular lässt sich absenden (mit Web3Forms testen)
+- [ ] Cookie-Banner erscheint für neue Nutzer (localStorage löschen zum Testen)
+- [ ] WhatsApp-Button öffnet korrekten Chat
+- [ ] Keine Console-Fehler
+- [ ] Tastaturnavigation funktioniert (Tab, Shift+Tab)
+- [ ] Skip-Link funktioniert (Focus dann Enter)
+- [ ] Focus-Indikatoren sichtbar (gelber Ring)
+- [ ] Meta-Tags auf allen Seiten vorhanden (title, description, canonical)
+- [ ] Bilder laden korrekt (WebP-Format, Lazy Loading)
+- [ ] Schema.org-Daten validieren (Google Rich Results Test)
 
-1. **CSP Headers**: Configured in `netlify.toml`
+---
+
+## Sicherheitsaspekte
+
+1. **CSP-Header** in `netlify.toml`:
    - `default-src 'self'`
    - `connect-src 'self' https://api.web3forms.com`
-   - `script-src 'self' 'unsafe-inline'` (required for inline scripts)
+   - `script-src 'self' 'unsafe-inline'` (für Inline-Scripts nötig)
    - `form-action 'self' https://api.web3forms.com`
 
-2. **Form Security**: 
-   - Honeypot field (`botcheck`) must remain empty
-   - Client-side validation before submission
-   - Privacy checkbox required
+2. **Formular-Sicherheit:**
+   - Honeypot-Feld (`botcheck`) muss leer bleiben
+   - Client-seitige Validierung vor Absenden
+   - Privacy-Checkbox ist Pflicht
 
-3. **No sensitive data** in repository (no API keys, credentials in code)
+3. **Keine sensiblen Daten** im Repository (keine API-Keys im Code, `.env.example` als Vorlage)
 
-## Performance Optimizations
+---
 
-- Static site generation (no server runtime)
-- Self-hosted fonts with `font-display: swap`
-- Image optimization via Sharp (Astro's built-in service)
-- HTML compression enabled
-- Preconnect to Web3Forms API
-- Lazy loading for below-fold images (`loading="lazy"`)
-- Hero image uses `fetchpriority="high"` and `loading="eager"`
-- Long cache headers for static assets (1 year via Netlify)
-- Critical CSS inlined in Layout.astro
+## Performance-Optimierungen
 
-## Relation to METRA Baulogistik
+- Static Site Generation (kein Server-Runtime)
+- Self-hosted Fonts mit `font-display: swap`
+- Bildoptimierung via Sharp (Astro integriert)
+- HTML-Komprimierung aktiviert
+- Preconnect zu Web3Forms API
+- Lazy Loading für Below-the-fold Bilder (`loading="lazy"`)
+- Hero-Bild: `fetchpriority="high"` + `loading="eager"`
+- Lange Cache-Header für statische Assets (1 Jahr via Netlify)
+- Critical CSS inline in `Layout.astro`
 
-This website is the sister company to METRA Baulogistik. Both websites share:
-- Same design system (colors, fonts, layout patterns)
-- Same company address (Im Mediapark 5, 50670 Köln)
-- Same owner/contact person (D. Mrkaja)
-- Cross-linking in cooperation section on homepage
-- Same claim: "Sicherheit & Struktur – auf die Sie bauen können."
+---
 
-## External Dependencies
+## Unternehmensdaten
 
-| Service | Purpose | URL |
-|---------|---------|-----|
-| Web3Forms | Contact form handling | https://api.web3forms.com |
-| WhatsApp | Direct messaging | https://wa.me/491708888891 |
+- Adresse: Im Mediapark 5, 50670 Köln
+- Geschäftsführer: D. Mrkaja
+- Claim: *„Sicherheit & Struktur – auf die Sie bauen können."*
+
+---
+
+## Externe Abhängigkeiten
+
+| Service | Zweck | URL |
+|---------|-------|-----|
+| Web3Forms | Kontaktformular-Handling | https://api.web3forms.com |
+| WhatsApp | Direktnachricht | https://wa.me/491708888891 |
 | Netlify | Hosting & CDN | https://www.netlify.com |
+
+---
 
 ## Deployment
 
-**Platform**: Netlify
+**Plattform:** Netlify
 
-**Automatic deployment triggers:**
-- Push to `master` branch deploys to production
-- Build command: `npm run build`
-- Output directory: `dist`
+- Push auf `master` deployed automatisch in Production
+- Build-Command: `npm run build`
+- Output-Verzeichnis: `dist`
 
-**Environment variables:** None currently required (Web3Forms key is in code - replace before launch)
+---
 
-## ⚠️ IMPORTANT: Before Launch
+## ⚠️ WICHTIG: Vor dem Launch
 
-### 1. Configure Web3Forms
-Replace `YOUR_ACCESS_KEY` in `src/pages/kontakt.astro` with actual Web3Forms access key.
+### 1. Web3Forms konfigurieren
+Setze `PUBLIC_WEB3FORMS_KEY` in einer `.env`-Datei oder passe `src/pages/kontakt.astro` an.
 
-### 2. Update Legal Information
+### 2. Rechtliche Daten ergänzen
 In `src/pages/impressum.astro`:
-- `vatId`: Add actual VAT ID (USt-IdNr.)
-- `registration`: Add commercial register number (Handelsregisternummer)
+- `vatId`: Tatsächliche USt-IdNr. eintragen
+- `registration`: Handelsregisternummer eintragen
 
-### 3. Verify All Images Present
-Check `public/images/` contains:
-- `logo-sicherheit.webp`
+### 3. Bilder prüfen
+`public/images/` muss enthalten:
+- `logoneu.png` (Logo – aktuell PNG, nicht WebP!)
 - `hero-sicherheit.webp`
 - `service-baustelle.webp`
 - `service-objekt.webp`
@@ -376,16 +428,18 @@ Check `public/images/` contains:
 - `service-concierge.webp`
 - `service-werk.webp`
 
-### 4. Update Sitemap Dates
-In `public/sitemap.xml`, update `<lastmod>` dates to reflect actual changes.
-
-## License & Legal
-
-- Website content: © METRA Sicherheitsdienste GmbH
-- Company address: Im Mediapark 5, 50670 Köln, Germany
-- Geschäftsführer: D. Mrkaja
-- This is proprietary code for the company's website
+### 4. Sitemap-Daten aktualisieren
+In `public/sitemap.xml` die `<lastmod>`-Daten bei größeren Änderungen anpassen.
 
 ---
 
-Last updated: March 2026
+## Lizenz & Rechtliches
+
+- Website-Inhalt: © METRA Sicherheitsdienste GmbH
+- Adresse: Im Mediapark 5, 50670 Köln, Deutschland
+- Geschäftsführer: D. Mrkaja
+- Proprietärer Code für die Unternehmenswebsite
+
+---
+
+*Letzte Aktualisierung: 28. April 2026*
