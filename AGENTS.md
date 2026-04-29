@@ -1,8 +1,9 @@
-# METRA Sicherheitsdienste GmbH – Website Agent-Dokumentation
+<!-- AGENTS.md – METRA Sicherheitsdienste GmbH Website -->
 
-> **Sprache**: Deutsch (Website-Inhalte), Englisch (Code-Kommentare gemischt mit Deutsch)
+> **Sprache**: Deutsch (Website-Inhalte und Dokumentation), Englisch (Code-Kommentare gemischt mit Deutsch)
 > **Framework**: Astro 5.x mit Static Site Generation
 > **Styling**: Tailwind CSS 3.x
+> **Letzte Aktualisierung**: 29. April 2026
 
 ---
 
@@ -51,11 +52,11 @@ Dies ist die statische Corporate-Website der **METRA Sicherheitsdienste GmbH**, 
 │   ├── layouts/
 │   │   └── Layout.astro          # Basis-Layout mit SEO, Schema.org, Critical CSS
 │   ├── pages/                    # Dateibasiertes Routing
-│   │   ├── index.astro           # Homepage (Hero, Trust Badges, Problem/Lösung, 4-Schritte-Prozess, 5 Leistungen, Concierge-Highlight, Kooperation, Qualifikationen)
+│   │   ├── index.astro           # Homepage (Hero, Trust Badges, Problem/Lösung, 4-Schritte-Prozess, 5 Leistungen, Differenzierung, Warum METRA, CTA)
 │   │   ├── leistungen.astro      # Detaillierte Leistungsbeschreibungen (5 Services)
 │   │   ├── kontakt.astro         # Kontaktformular (Web3Forms) + Kontaktdaten
 │   │   ├── datenschutz.astro     # DSGVO-konforme Datenschutzerklärung
-│   │   ├── impressum.astro       # Impressum (§ 5 TMG) – vatId & registration müssen ergänzt werden
+│   │   ├── impressum.astro       # Impressum (§ 5 TMG) – vatId & registration sind Platzhalter
 │   │   └── 404.astro             # Custom 404-Fehlerseite
 │   ├── styles/
 │   │   └── global.css            # Tailwind-Direktiven + Custom Styles + Inter-Font
@@ -133,7 +134,7 @@ npm run astro -- --help
 - `fade-in` – Opacity 0 → 1 (0.6s)
 - `fade-in-up` – Opacity 0 + translateY(20px) → Opacity 1 + translateY(0) (0.6s)
 
-**Font-Family:** `sans: ['Inter', 'system-ui', ...]`
+**Font-Family:** `sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif']`
 
 ### `netlify.toml`
 
@@ -165,14 +166,14 @@ npm run astro -- --help
 - Schema.org JSON-LD: Organization + LocalBusiness (mit GeoCoordinates)
 - Preconnect zu `https://api.web3forms.com`
 - Preload der self-hosted Inter-Fonts (regular, 600, 700)
-- Critical CSS inline für Above-the-fold
+- Critical CSS inline für Above-the-fold (body-Hintergrund, Inter-Regular @font-face)
 - Skip-to-Content-Link als erstes fokussierbares Element
 - `<slot />` für Seiteninhalt
 - Bindet `CookieBanner` am Ende des Body ein
 
 **Wichtige Konstanten im Layout:**
 - `siteUrl = 'https://www.metra-sicherheitsdienste.de'`
-- `LOGO_PATH = '/images/logoneu.png'` (nicht `logo-sicherheit.webp`!)
+- `LOGO_PATH = '/images/logoneu.png'`
 
 ### `Header.astro`
 
@@ -188,10 +189,11 @@ npm run astro -- --help
 - Separates Overlay (`fixed inset-0 top-24 md:top-28 z-[100] bg-background`)
 - Öffnen/Schließen via JS (DOMContentLoaded)
 - ESC-Taste schließt Menü
+- Tab-Trap innerhalb des geöffneten Menüs
 - Resize auf Desktop schließt Menü
 - Body-Scroll wird bei geöffnetem Menü blockiert
 - Links schließen Menü bei Klick
-- **Noscript-Fallback:** Statische Mobile-Navigation ohne JS, Hamburger-Button wird versteckt
+- **Noscript-Fallback:** Statische Mobile-Navigation ohne JS, Hamburger-Button wird versteckt (`#mobile-menu-btn { display: none !important; }`)
 
 ### `CookieBanner.astro`
 
@@ -206,15 +208,16 @@ npm run astro -- --help
 ### `WhatsAppButton.astro`
 
 - Fixed Button (bottom-8 right-8, z-50)
-- Telefonnummer: `491708888891` → `https://wa.me/491708888891`
-- Gelbe Akzentfarbe, Notification-Dot (weiß mit Border)
+- Telefonnummer: `491738888378` → `https://wa.me/491738888378`
+- Gelbe Akzentfarbe
 - CSS Hover-Animation: `@keyframes gentle-pulse` (Scale 1 → 1.05)
 
 ### `Footer.astro`
 
 - 4-Spalten-Grid (2 Spalten mobil)
 - Spalten: Unternehmensinfo, Leistungen, Unternehmen, Kontakt
-- WhatsApp-CTA im Kontakt-Bereich
+- WhatsApp-CTA im Kontakt-Bereich (Link zu `https://wa.me/491738888378`)
+- Telefon: `0800 8888 369` (Link zu `tel:08008888369`)
 - Rechtlicher Hinweis: § 34a GewO (Disclaimer-Box)
 - Bottom Bar: Copyright + Links zu Impressum/Datenschutz
 
@@ -224,14 +227,14 @@ npm run astro -- --help
 
 | Route | Datei | Beschreibung |
 |-------|-------|--------------|
-| `/` | `index.astro` | Hero mit Bild, Trust Badges, Problem/Lösung, 4-Schritte-Prozess, 5 Service-Teaser (mit Bildern), Concierge-Highlight (Premium-Sektion), „Warum METRA", Qualifikationen |
+| `/` | `index.astro` | Hero mit Bild, Trust Badges, Problem/Lösung, 4-Schritte-Prozess (Analyse → Konzept → Einsatz → Reporting), 5 Service-Teaser (mit Bildern), Differenzierungs-Sektion, „Warum METRA", CTA-Sektion |
 | `/leistungen` | `leistungen.astro` | Detaillierte Service-Beschreibungen (5 Services, abwechselnd Bild/Text), Trust Badges, Benefits-Grid, Prozess-Teaser, CTA-Sektion |
 | `/kontakt` | `kontakt.astro` | Kontaktformular (Web3Forms), Kontakt-Sidebar (Adresse, Telefon, E-Mail, WhatsApp), Schema.org ContactPage |
-| `/impressum` | `impressum.astro` | Impressum (§ 5 TMG) – **vatId & registration müssen noch ergänzt werden** |
-| `/datenschutz` | `datenschutz.astro` | DSGVO-konforme Datenschutzerklärung (7 Abschnitte) |
+| `/impressum` | `impressum.astro` | Impressum (§ 5 TMG) – **vatId & registration sind Platzhalter und müssen ergänzt werden** |
+| `/datenschutz` | `datenschutz.astro` | DSGVO-konforme Datenschutzerklärung (7 Abschnitte: Übersicht, Hosting, Allgemeine Hinweise, Datenerfassung, Plugins & Tools, Rechte, Cookies) |
 | `/404` | `404.astro` | Custom 404 mit Navigation |
 
-### Gemeinsame Muster in allen Seiten
+### Gemeinsames Muster in allen Seiten
 
 Alle Seiten (außer 404) folgen diesem Muster:
 ```astro
@@ -315,7 +318,7 @@ const WEB3FORMS_ACCESS_KEY = import.meta.env.PUBLIC_WEB3FORMS_KEY || 'YOUR_ACCES
 - Formular-Inputs haben assoziierte `<label>`-Elemente
 - Focus-States sichtbar (gelber Ring)
 - Skip-to-Content-Link als erstes fokussierbares Element
-- Mobile Menu: `aria-expanded`, `aria-controls`, ESC zum Schließen
+- Mobile Menu: `aria-expanded`, `aria-controls`, ESC zum Schließen, Tab-Trap
 - `aria-current="page"` für aktive Navigationseinträge
 - `role="dialog"` und `aria-modal="true"` für Modal-Komponenten (Cookie-Banner)
 - `prefers-reduced-motion` wird in `global.css` berücksichtigt
@@ -329,9 +332,9 @@ const WEB3FORMS_ACCESS_KEY = import.meta.env.PUBLIC_WEB3FORMS_KEY || 'YOUR_ACCES
 
 ---
 
-## Testing-Checkliste
+## Testing-Strategie
 
-Vor jedem Deploy:
+Das Projekt hat **keine automatisierten Tests** (kein Test-Framework konfiguriert). Vor jedem Deploy muss manuell getestet werden:
 
 - [ ] `npm run build` läuft fehlerfrei durch
 - [ ] Responsive Design funktioniert (Mobil, Tablet, Desktop)
@@ -384,6 +387,9 @@ Vor jedem Deploy:
 
 - Adresse: Im Mediapark 5, 50670 Köln
 - Geschäftsführer: D. Mrkaja
+- Telefon: 0800 8888 369
+- E-Mail: info@metra-sicherheitsdienste.de
+- WhatsApp: +49 173 8888 378
 - Claim: *„Sicherheit & Struktur – auf die Sie bauen können."*
 
 ---
@@ -393,7 +399,7 @@ Vor jedem Deploy:
 | Service | Zweck | URL |
 |---------|-------|-----|
 | Web3Forms | Kontaktformular-Handling | https://api.web3forms.com |
-| WhatsApp | Direktnachricht | https://wa.me/491708888891 |
+| WhatsApp | Direktnachricht | https://wa.me/491738888378 |
 | Netlify | Hosting & CDN | https://www.netlify.com |
 
 ---
@@ -416,7 +422,7 @@ Setze `PUBLIC_WEB3FORMS_KEY` in einer `.env`-Datei oder passe `src/pages/kontakt
 ### 2. Rechtliche Daten ergänzen
 In `src/pages/impressum.astro`:
 - `vatId`: Tatsächliche USt-IdNr. eintragen
-- `registration`: Handelsregisternummer eintragen
+- `registration`: HRB 127543 (eingetragen)
 
 ### 3. Bilder prüfen
 `public/images/` muss enthalten:
@@ -439,7 +445,3 @@ In `public/sitemap.xml` die `<lastmod>`-Daten bei größeren Änderungen anpasse
 - Adresse: Im Mediapark 5, 50670 Köln, Deutschland
 - Geschäftsführer: D. Mrkaja
 - Proprietärer Code für die Unternehmenswebsite
-
----
-
-*Letzte Aktualisierung: 28. April 2026*
