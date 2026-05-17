@@ -3,7 +3,7 @@
 > **Sprache**: Deutsch (Website-Inhalte und Dokumentation), Englisch (Code-Kommentare gemischt mit Deutsch)
 > **Framework**: Astro 5.x mit Static Site Generation
 > **Styling**: Tailwind CSS 3.x
-> **Letzte Aktualisierung**: 29. April 2026
+> **Letzte Aktualisierung**: 17. Mai 2026
 
 ---
 
@@ -56,7 +56,7 @@ Dies ist die statische Corporate-Website der **METRA Sicherheitsdienste GmbH**, 
 │   │   ├── leistungen.astro      # Detaillierte Leistungsbeschreibungen (5 Services)
 │   │   ├── kontakt.astro         # Kontaktformular (Web3Forms) + Kontaktdaten
 │   │   ├── datenschutz.astro     # DSGVO-konforme Datenschutzerklärung
-│   │   ├── impressum.astro       # Impressum (§ 5 TMG) – vatId & registration sind Platzhalter
+│   │   ├── impressum.astro       # Impressum (§ 5 TMG)
 │   │   └── 404.astro             # Custom 404-Fehlerseite
 │   ├── styles/
 │   │   └── global.css            # Tailwind-Direktiven + Custom Styles + Inter-Font
@@ -67,7 +67,7 @@ Dies ist die statische Corporate-Website der **METRA Sicherheitsdienste GmbH**, 
 │   │   ├── inter-600.woff2
 │   │   └── inter-700.woff2
 │   ├── images/
-│   │   ├── logoneu.png           # Aktuelles Logo (PNG!)
+│   │   ├── logoneu.png           # Aktuelles Logo (PNG)
 │   │   ├── hero-sicherheit.webp
 │   │   ├── service-baustelle.webp
 │   │   ├── service-objekt.webp
@@ -91,7 +91,7 @@ Dies ist die statische Corporate-Website der **METRA Sicherheitsdienste GmbH**, 
 
 ---
 
-## Build-Befehle
+## Build- und Test-Befehle
 
 ```bash
 # Abhängigkeiten installieren
@@ -109,6 +109,8 @@ npm run preview
 # Astro CLI
 npm run astro -- --help
 ```
+
+**Hinweis:** Das Projekt hat keine automatisierten Tests konfiguriert (kein Test-Framework). Vor jedem Deploy muss manuell getestet werden.
 
 ---
 
@@ -230,7 +232,7 @@ npm run astro -- --help
 | `/` | `index.astro` | Hero mit Bild, Trust Badges, Problem/Lösung, 4-Schritte-Prozess (Analyse → Konzept → Einsatz → Reporting), 5 Service-Teaser (mit Bildern), Differenzierungs-Sektion, „Warum METRA", CTA-Sektion |
 | `/leistungen` | `leistungen.astro` | Detaillierte Service-Beschreibungen (5 Services, abwechselnd Bild/Text), Trust Badges, Benefits-Grid, Prozess-Teaser, CTA-Sektion |
 | `/kontakt` | `kontakt.astro` | Kontaktformular (Web3Forms), Kontakt-Sidebar (Adresse, Telefon, E-Mail, WhatsApp), Schema.org ContactPage |
-| `/impressum` | `impressum.astro` | Impressum (§ 5 TMG) – **vatId & registration sind Platzhalter und müssen ergänzt werden** |
+| `/impressum` | `impressum.astro` | Impressum (§ 5 TMG) – vatId & registration sind Platzhalter und müssen ergänzt werden |
 | `/datenschutz` | `datenschutz.astro` | DSGVO-konforme Datenschutzerklärung (7 Abschnitte: Übersicht, Hosting, Allgemeine Hinweise, Datenerfassung, Plugins & Tools, Rechte, Cookies) |
 | `/404` | `404.astro` | Custom 404 mit Navigation |
 
@@ -258,9 +260,9 @@ Jede Seite hat eine **Breadcrumb-Navigation** (visuell + Schema.org JSON-LD).
 2. **Baustellensicherheit** – Baustellenbewachung jeder Größe
 3. **Werkschutz / Industrieschutz** – Industrieanlagen, Produktionsstandorte
 4. **Brandwachen** – Feuergefährliche Arbeiten, Präventivüberwachung
-5. **Empfangs- & Concierge-Dienste** – Premium-Service (markiert mit `isPremium: true`)
+5. **Empfangs- & Concierge-Dienste** – Premium-Service
 
-Jeder Service hat: `id`, `title`, `description`, `image` (WebP), `icon` (SVG-Path), `features` (Array), optional `isPremium`.
+Jeder Service hat: `id`, `title`, `description`, `image` (WebP), `icon` (SVG-Path), `features` (Array).
 
 ---
 

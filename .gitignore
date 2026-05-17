@@ -6,7 +6,7 @@ dist/
 .astro/
 
 # Environment variables
-.env
+# .env is intentionally tracked for PUBLIC_WEB3FORMS_KEY
 .env.local
 .env.production
 
