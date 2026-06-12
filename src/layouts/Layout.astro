@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import CookieBanner from '../components/CookieBanner.astro';
+import settings from '../data/cms/settings.json';
 
 interface Props {
   title?: string;
@@ -11,14 +12,14 @@ interface Props {
 }
 
 const { 
-  title = 'METRA Sicherheitsdienste GmbH | Schutz · Präsenz · Verantwortung',
-  description = 'Professionelle Sicherheitslösungen für Baustellen, Immobilien und Unternehmen. 24/7 Sicherheitsdienste, Brandwachen, Objektschutz und exklusive Concierge-Dienste.',
-  ogImage = '/images/hero-sicherheit.webp',
+  title = settings.seo.default_title,
+  description = settings.seo.default_description,
+  ogImage = settings.seo.og_image,
   canonical = Astro.url.pathname,
   noindex = false
 } = Astro.props;
 
-const siteUrl = 'https://www.metra-sicherheitsdienste.de';
+const siteUrl = settings.seo.site_url;
 const fullCanonical = `${siteUrl}${canonical}`;
 const LOGO_PATH = '/images/logoneu.png';
 
@@ -26,21 +27,21 @@ const LOGO_PATH = '/images/logoneu.png';
 const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'METRA Sicherheitsdienste GmbH',
+  name: settings.company.name,
   url: siteUrl,
   logo: `${siteUrl}${LOGO_PATH}`,
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'Im Mediapark 5',
-    addressLocality: 'Köln',
-    postalCode: '50670',
+    streetAddress: settings.company.street,
+    addressLocality: settings.company.city,
+    postalCode: settings.company.zip,
     addressCountry: 'DE'
   },
   contactPoint: {
     '@type': 'ContactPoint',
-    telephone: '+498008888369',
+    telephone: `+49${settings.company.phone_raw}`,
     contactType: 'customer service',
-    email: 'info@metra-sicherheitsdienste.de'
+    email: settings.company.email
   },
   sameAs: []
 };
@@ -48,13 +49,13 @@ const organizationSchema = {
 const localBusinessSchema = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
-  name: 'METRA Sicherheitsdienste GmbH',
+  name: settings.company.name,
   image: `${siteUrl}${ogImage}`,
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'Im Mediapark 5',
-    addressLocality: 'Köln',
-    postalCode: '50670',
+    streetAddress: settings.company.street,
+    addressLocality: settings.company.city,
+    postalCode: settings.company.zip,
     addressCountry: 'DE'
   },
   geo: {
@@ -63,7 +64,7 @@ const localBusinessSchema = {
     longitude: '6.9525'
   },
   url: siteUrl,
-  telephone: '+491708888891',
+  telephone: `+49${settings.company.phone_raw}`,
   priceRange: '€€',
   openingHoursSpecification: {
     '@type': 'OpeningHoursSpecification',
@@ -84,7 +85,7 @@ const localBusinessSchema = {
     <!-- Primary Meta Tags -->
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="author" content="METRA Sicherheitsdienste GmbH" />
+    <meta name="author" content={settings.company.name} />
     <meta name="robots" content={noindex ? "noindex, follow" : "index, follow, max-image-preview:large"} />
     <link rel="canonical" href={fullCanonical} />
     

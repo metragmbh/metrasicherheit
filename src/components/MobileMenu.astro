@@ -1,9 +1,9 @@
 ---
-const navLinks = [
-  { href: '/', label: 'Startseite', ariaLabel: 'Zur Startseite' },
-  { href: '/leistungen', label: 'Leistungen', ariaLabel: 'Unsere Leistungen ansehen' },
-  { href: '/kontakt', label: 'Kontakt', ariaLabel: 'Kontakt aufnehmen' },
-];
+import settings from '../data/cms/settings.json';
+
+const navLinks = settings.header.nav_links;
+const ctaText = settings.header.cta_text;
+const ctaAriaLabel = settings.header.cta_aria_label;
 
 const currentPath = Astro.url.pathname;
 ---
@@ -27,7 +27,7 @@ const currentPath = Astro.url.pathname;
                   ? 'bg-accent/10 text-accent' 
                   : 'text-white hover:bg-white/5 hover:text-accent'
               }`}
-              aria-label={link.ariaLabel}
+              aria-label={link.aria_label || link.label}
               aria-current={isActive ? 'page' : undefined}
             >
               {link.label}
@@ -40,9 +40,9 @@ const currentPath = Astro.url.pathname;
       <a 
         href="/kontakt"
         class="block w-full text-center py-3 bg-accent text-background font-semibold rounded hover:bg-accent-hover transition-colors"
-        aria-label="Sicherheitslösung anfragen"
+        aria-label={ctaAriaLabel}
       >
-        Angebot anfordern
+        {ctaText}
       </a>
     </div>
   </nav>
@@ -140,7 +140,7 @@ const currentPath = Astro.url.pathname;
           href="/kontakt"
           class="block w-full text-center py-3 bg-accent text-background font-semibold rounded hover:bg-accent-hover transition-colors"
         >
-          Angebot anfordern
+          {ctaText}
         </a>
       </div>
     </nav>

@@ -4,21 +4,14 @@ import Header from '../components/Header.astro';
 import MobileMenu from '../components/MobileMenu.astro';
 import Footer from '../components/Footer.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
+import settings from '../data/cms/settings.json';
+import kontakt from '../data/cms/kontakt.json';
 
-const contactInfo = {
-  company: 'METRA Sicherheitsdienste GmbH',
-  owner: 'D. Mrkaja',
-  address: 'Im Mediapark 5',
-  city: '50670 Köln',
-  phone: '08008888369',
-  phoneDisplay: '0800 8888 369',
-  email: 'info@metra-sicherheitsdienste.de',
-  web: 'www.metra-sicherheitsdienste.de',
-};
+const company = settings.company;
 
 // Web3Forms Configuration
 const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';
-const WEB3FORMS_ACCESS_KEY = import.meta.env.PUBLIC_WEB3FORMS_KEY || 'YOUR_ACCESS_KEY'; // Set PUBLIC_WEB3FORMS_KEY in .env file
+const WEB3FORMS_ACCESS_KEY = import.meta.env.PUBLIC_WEB3FORMS_KEY || 'YOUR_ACCESS_KEY';
 
 const schemaBreadcrumb = {
   '@context': 'https://schema.org',
@@ -28,13 +21,13 @@ const schemaBreadcrumb = {
       '@type': 'ListItem',
       position: 1,
       name: 'Startseite',
-      item: 'https://www.metra-sicherheitsdienste.de',
+      item: settings.seo.site_url,
     },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'Kontakt',
-      item: 'https://www.metra-sicherheitsdienste.de/kontakt',
+      item: `${settings.seo.site_url}/kontakt`,
     },
   ],
 };
@@ -46,20 +39,20 @@ const schemaContactPage = {
   description: 'Kontaktieren Sie METRA Sicherheitsdienste für Ihr Sicherheitsprojekt.',
   mainEntity: {
     '@type': 'Organization',
-    name: contactInfo.company,
+    name: company.name,
     address: {
       '@type': 'PostalAddress',
-      streetAddress: contactInfo.address,
+      streetAddress: company.street,
       addressLocality: 'Köln',
       postalCode: '50670',
       addressCountry: 'DE',
     },
-    telephone: `+49${contactInfo.phone}`,
-    email: contactInfo.email,
-    url: `https://${contactInfo.web}`,
+    telephone: `+49${company.phone_raw}`,
+    email: company.email,
+    url: `https://${company.web}`,
     contactPoint: {
       '@type': 'ContactPoint',
-      telephone: `+49${contactInfo.phone}`,
+      telephone: `+49${company.phone_raw}`,
       contactType: 'customer service',
       availableLanguage: ['German'],
     },
@@ -68,8 +61,8 @@ const schemaContactPage = {
 ---
 
 <Layout 
-  title="Kontakt | METRA Sicherheitsdienste GmbH"
-  description="Kontaktieren Sie METRA Sicherheitsdienste. Telefon: 0800 8888 369 | E-Mail: info@metra-sicherheitsdienste.de | Adresse: Im Mediapark 5, 50670 Köln."
+  title={kontakt.seo.title}
+  description={kontakt.seo.description}
   canonical="/kontakt"
 >
   <script type="application/ld+json" set:html={JSON.stringify(schemaBreadcrumb)} />
@@ -95,12 +88,12 @@ const schemaContactPage = {
             </ol>
           </nav>
           
-          <p class="text-accent font-semibold tracking-wider text-sm mb-4">KONTAKT</p>
+          <p class="text-accent font-semibold tracking-wider text-sm mb-4">{kontakt.hero.label}</p>
           <h1 id="contact-hero-title" class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-            Projektanfrage & Sicherheitskonzept
+            {kontakt.hero.title}
           </h1>
           <p class="text-lg md:text-xl text-secondary leading-relaxed max-w-2xl">
-            Beschreiben Sie Ihr Objekt oder Projekt. Auf dieser Grundlage erfolgt eine strukturierte Bewertung und Abstimmung der weiteren Schritte.
+            {kontakt.hero.description}
           </p>
         </div>
       </div>
@@ -113,35 +106,35 @@ const schemaContactPage = {
         <div class="max-w-4xl mx-auto mb-16">
           <div class="grid sm:grid-cols-3 gap-8 text-center">
             <div>
-              <h3 class="text-white font-semibold mb-2">Telefon</h3>
+              <h3 class="text-white font-semibold mb-2">{kontakt.contact_info.phone_label}</h3>
               <a 
-                href={`tel:${contactInfo.phone}`}
+                href={`tel:${company.phone_raw}`}
                 class="text-accent font-semibold hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
-                aria-label={`Anrufen: ${contactInfo.phoneDisplay}`}
+                aria-label={`Anrufen: ${company.phone_display}`}
               >
-                {contactInfo.phoneDisplay}
+                {company.phone_display}
               </a>
             </div>
             <div>
-              <h3 class="text-white font-semibold mb-2">E-Mail</h3>
+              <h3 class="text-white font-semibold mb-2">{kontakt.contact_info.email_label}</h3>
               <a 
-                href={`mailto:${contactInfo.email}`}
+                href={`mailto:${company.email}`}
                 class="text-accent font-semibold hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded break-all"
-                aria-label={`E-Mail: ${contactInfo.email}`}
+                aria-label={`E-Mail: ${company.email}`}
               >
-                {contactInfo.email}
+                {company.email}
               </a>
             </div>
             <div>
-              <h3 class="text-white font-semibold mb-2">WhatsApp</h3>
+              <h3 class="text-white font-semibold mb-2">{kontakt.contact_info.whatsapp_label}</h3>
               <a 
-                href="https://wa.me/491738888378"
+                href={`https://wa.me/${company.whatsapp_number}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 class="text-accent font-semibold hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
                 aria-label="Über WhatsApp kontaktieren"
               >
-                Direkte Anfrage möglich
+                {kontakt.contact_info.whatsapp_text}
               </a>
             </div>
           </div>
@@ -150,9 +143,9 @@ const schemaContactPage = {
         <!-- Contact Form -->
         <div class="max-w-2xl mx-auto">
           <div class="bg-background border border-white/5 rounded-2xl p-8 md:p-10">
-            <h2 id="contact-form-title" class="text-2xl font-bold text-white mb-2">Anfrage übermitteln</h2>
+            <h2 id="contact-form-title" class="text-2xl font-bold text-white mb-2">{kontakt.form.title}</h2>
             <p class="text-secondary mb-8">
-              Übermitteln Sie die wichtigsten Projektdaten.
+              {kontakt.form.subtitle}
             </p>
             
             <form 
@@ -189,7 +182,7 @@ const schemaContactPage = {
               <!-- Name Field -->
               <div>
                 <label for="name" class="block text-white font-medium mb-2">
-                  Name <span class="text-accent">*</span>
+                  {kontakt.form.label_name} <span class="text-accent">*</span>
                 </label>
                 <input 
                   type="text"
@@ -198,7 +191,7 @@ const schemaContactPage = {
                   required
                   autocomplete="name"
                   class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/60 focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-colors"
-                  placeholder="Ihr vollständiger Name"
+                  placeholder={kontakt.form.placeholder_name}
                   aria-required="true"
                 />
               </div>
@@ -206,7 +199,7 @@ const schemaContactPage = {
               <!-- Email Field -->
               <div>
                 <label for="email" class="block text-white font-medium mb-2">
-                  E-Mail <span class="text-accent">*</span>
+                  {kontakt.form.label_email} <span class="text-accent">*</span>
                 </label>
                 <input 
                   type="email"
@@ -215,7 +208,7 @@ const schemaContactPage = {
                   required
                   autocomplete="email"
                   class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/60 focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-colors"
-                  placeholder="Kontaktadresse"
+                  placeholder={kontakt.form.placeholder_email}
                   aria-required="true"
                 />
               </div>
@@ -223,7 +216,7 @@ const schemaContactPage = {
               <!-- Phone Field -->
               <div>
                 <label for="phone" class="block text-white font-medium mb-2">
-                  Telefon
+                  {kontakt.form.label_phone}
                 </label>
                 <input 
                   type="tel"
@@ -231,14 +224,14 @@ const schemaContactPage = {
                   name="phone"
                   autocomplete="tel"
                   class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/60 focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-colors"
-                  placeholder="für Rückfragen"
+                  placeholder={kontakt.form.placeholder_phone}
                 />
               </div>
 
               <!-- Service Interest -->
               <div>
                 <label for="service" class="block text-white font-medium mb-2">
-                  Leistungsbereich
+                  {kontakt.form.label_service}
                 </label>
                 <select 
                   id="service"
@@ -257,14 +250,14 @@ const schemaContactPage = {
               <!-- Message Field -->
               <div>
                 <label for="message" class="block text-white font-medium mb-2">
-                  Nachricht
+                  {kontakt.form.label_message}
                 </label>
                 <textarea 
                   id="message"
                   name="message"
                   rows="5"
                   class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/60 focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-colors resize-none"
-                  placeholder="Beschreiben Sie Ihr Projekt, Einsatzort und Anforderungen."
+                  placeholder={kontakt.form.placeholder_message}
                 ></textarea>
               </div>
               
@@ -279,7 +272,7 @@ const schemaContactPage = {
                   aria-required="true"
                 />
                 <label for="privacy" class="text-secondary text-sm">
-                  Ich habe die <a href="/datenschutz" class="text-accent hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zu. <span class="text-accent">*</span>
+                  {kontakt.form.privacy_text.split('Datenschutzerklärung')[0]}<a href="/datenschutz" class="text-accent hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded">Datenschutzerklärung</a>{kontakt.form.privacy_text.split('Datenschutzerklärung')[1]} <span class="text-accent">*</span>
                 </label>
               </div>
               
@@ -288,9 +281,9 @@ const schemaContactPage = {
                 type="submit"
                 id="submit-btn"
                 class="w-full inline-flex items-center justify-center px-8 py-4 bg-accent text-background font-bold text-base rounded hover:bg-accent-hover transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-accent/50 disabled:opacity-50 disabled:cursor-not-allowed"
-                aria-label="Anfrage übermitteln"
+                aria-label={kontakt.form.submit_text}
               >
-                <span id="btn-text">Anfrage übermitteln</span>
+                <span id="btn-text">{kontakt.form.submit_text}</span>
                 <svg id="btn-icon" class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
                 </svg>
@@ -312,8 +305,8 @@ const schemaContactPage = {
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                   </svg>
                   <div>
-                    <p class="text-white font-medium">Ihre Anfrage wurde übermittelt.</p>
-                    <p class="text-secondary text-sm mt-1">Wir prüfen die Angaben und melden uns zur weiteren Abstimmung.</p>
+                    <p class="text-white font-medium">{kontakt.form.success_title}</p>
+                    <p class="text-secondary text-sm mt-1">{kontakt.form.success_text}</p>
                   </div>
                 </div>
               </div>
@@ -330,8 +323,8 @@ const schemaContactPage = {
                     <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
                   </svg>
                   <div>
-                    <p class="text-white font-medium">Es ist ein Fehler aufgetreten.</p>
-                    <p class="text-secondary text-sm mt-1">Bitte versuchen Sie es später erneut oder kontaktieren Sie uns telefonisch.</p>
+                    <p class="text-white font-medium">{kontakt.form.error_title}</p>
+                    <p class="text-secondary text-sm mt-1">{kontakt.form.error_text}</p>
                   </div>
                 </div>
               </div>
@@ -340,7 +333,7 @@ const schemaContactPage = {
             <!-- Trust Block -->
             <div class="mt-8 p-6 bg-white/5 border border-white/5 rounded-xl">
               <p class="text-secondary text-sm leading-relaxed">
-                Alle Anfragen werden strukturiert erfasst und vertraulich behandelt. Die weitere Abstimmung erfolgt auf Grundlage Ihrer Angaben und der projektspezifischen Anforderungen.
+                {kontakt.form.trust_text}
               </p>
             </div>
           </div>

@@ -3,7 +3,7 @@
 > **Sprache**: Deutsch (Website-Inhalte und Dokumentation), Englisch (Code-Kommentare gemischt mit Deutsch)
 > **Framework**: Astro 5.x mit Static Site Generation
 > **Styling**: Tailwind CSS 3.x
-> **Letzte Aktualisierung**: 17. Mai 2026
+> **Letzte Aktualisierung**: 7. Juni 2026
 
 ---
 
@@ -29,6 +29,7 @@ Dies ist die statische Corporate-Website der **METRA Sicherheitsdienste GmbH**, 
 |-----------|------------|---------|
 | Framework | Astro | ^5.17.1 |
 | Styling | Tailwind CSS | ^3.4.19 |
+| PostCSS | postcss | ^8.5.8 |
 | PostCSS | autoprefixer | ^10.4.27 |
 | TypeScript | Astro-Strict-Config | – |
 | Bildoptimierung | Sharp | ^0.34.5 |
@@ -110,7 +111,7 @@ npm run preview
 npm run astro -- --help
 ```
 
-**Hinweis:** Das Projekt hat keine automatisierten Tests konfiguriert (kein Test-Framework). Vor jedem Deploy muss manuell getestet werden.
+**Hinweis:** Das Projekt hat **keine automatisierten Tests** konfiguriert (kein Test-Framework). Vor jedem Deploy muss manuell getestet werden.
 
 ---
 
@@ -232,7 +233,7 @@ npm run astro -- --help
 | `/` | `index.astro` | Hero mit Bild, Trust Badges, Problem/Lösung, 4-Schritte-Prozess (Analyse → Konzept → Einsatz → Reporting), 5 Service-Teaser (mit Bildern), Differenzierungs-Sektion, „Warum METRA", CTA-Sektion |
 | `/leistungen` | `leistungen.astro` | Detaillierte Service-Beschreibungen (5 Services, abwechselnd Bild/Text), Trust Badges, Benefits-Grid, Prozess-Teaser, CTA-Sektion |
 | `/kontakt` | `kontakt.astro` | Kontaktformular (Web3Forms), Kontakt-Sidebar (Adresse, Telefon, E-Mail, WhatsApp), Schema.org ContactPage |
-| `/impressum` | `impressum.astro` | Impressum (§ 5 TMG) – vatId & registration sind Platzhalter und müssen ergänzt werden |
+| `/impressum` | `impressum.astro` | Impressum (§ 5 TMG) – vatId ist Platzhalter und muss ergänzt werden |
 | `/datenschutz` | `datenschutz.astro` | DSGVO-konforme Datenschutzerklärung (7 Abschnitte: Übersicht, Hosting, Allgemeine Hinweise, Datenerfassung, Plugins & Tools, Rechte, Cookies) |
 | `/404` | `404.astro` | Custom 404 mit Navigation |
 
@@ -393,6 +394,63 @@ Das Projekt hat **keine automatisierten Tests** (kein Test-Framework konfigurier
 - E-Mail: info@metra-sicherheitsdienste.de
 - WhatsApp: +49 173 8888 378
 - Claim: *„Sicherheit & Struktur – auf die Sie bauen können."*
+
+> **Hinweis:** Alle Unternehmensdaten werden zentral in `src/data/cms/settings.json` gepflegt und in Layout, Header, Footer und Kontaktseite referenziert.
+
+## Decap CMS (Content Management)
+
+Die Website verwendet **Decap CMS** (ehemals Netlify CMS) für die contentliche Pflege durch den Kunden.
+
+### CMS-Zugang
+- **URL:** `https://www.metra-sicherheitsdienste.de/admin/`
+- **Auth:** Netlify Identity (Email/Password)
+- **Backend:** Git Gateway → schreibt direkt in dieses Git-Repo
+
+### CMS-Struktur
+
+| Collection | Datei | Bearbeitbare Inhalte |
+|-----------|-------|---------------------|
+| ⚙️ Globale Einstellungen | `src/data/cms/settings.json` | SEO-Defaults, Unternehmensdaten, Header (Nav, Claim, CTA), Footer (Links, Disclaimer) |
+| 🏠 Startseite | `src/data/cms/homepage.json` | Hero, Problem/Lösung, 4-Schritte-Prozess, 5 Services, Differenzierung, Warum METRA, CTA |
+| 🛠️ Leistungen | `src/data/cms/leistungen.json` | Hero, Trust Badges, 5 Services Detail, Benefits, Prozess-Teaser, CTA |
+| 📞 Kontakt | `src/data/cms/kontakt.json` | Hero, Kontakt-Daten Labels, Formular-Labels/Texte, Success/Error Messages |
+| ⚖️ Impressum | `src/data/cms/impressum.json` | Alle rechtlichen Textabschnitte, Labels |
+| 🔒 Datenschutz | `src/data/cms/datenschutz.json` | Alle 7 Abschnitte + Rechte-Liste |
+| ❌ 404 | `src/data/cms/error.json` | Titel, Text, Button-Labels |
+
+### Bilder im CMS
+- **Upload-Ordner:** `public/images/uploads/`
+- **Public Path:** `/images/uploads/`
+- Bestehende Bilder (Hero, Services, Logo) liegen weiterhin in `public/images/`
+
+### Wichtige Regel
+Die Astro-Seiten importieren die JSON-Dateien zur **Build-Zeit** (SSG). Änderungen im CMS werden erst nach einem neuen Build auf der Website sichtbar. Bei Netlify erfolgt der Rebuild automatisch nach jedem CMS-Commit.
+
+---
+
+## Netlify Dashboard Checkliste (Einmalig einrichten)
+
+1. **Identity aktivieren**
+   - Netlify Dashboard → Site → Identity → Enable Identity
+   - Registration: "Invite only" (empfohlen) oder "Open"
+
+2. **Git Gateway aktivieren**
+   - Identity → Services → Git Gateway → Enable Git Gateway
+   - Damit kann Decap CMS Commits in das Repo schreiben
+
+3. **Benutzer einladen**
+   - Identity → Users → Invite users → E-Mail des Kunden eingeben
+   - Der Kunde erhält eine Einladungsmail mit Passwort-Setzen-Link
+
+4. **Externe Domains (optional)**
+   - Falls der Kunde vom CMS aus zugreift: Site settings → Domain management → Add custom domain
+
+5. **Build-Settings prüfen**
+   - Build command: `npm run build`
+   - Publish directory: `dist`
+   - Sollte bereits korrekt sein
+
+---
 
 ---
 

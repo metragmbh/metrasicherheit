@@ -1,0 +1,91 @@
+{
+  "hero": {
+    "label": "DATENSCHUTZ",
+    "title": "Datenschutzerklärung"
+  },
+  "section_1": {
+    "title": "1. Datenschutz auf einen Blick",
+    "general_title": "Allgemeine Hinweise",
+    "general_text": "Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können. Ausführliche Informationen zum Thema Datenschutz entnehmen Sie unserer unter diesem Text aufgeführten Datenschutzerklärung.",
+    "collection_title": "Datenerfassung auf dieser Website",
+    "responsible_question": "Wer ist verantwortlich für die Datenerfassung auf dieser Website?",
+    "responsible_answer": "Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten können Sie dem Abschnitt \"Hinweis zur Verantwortlichen Stelle\" in dieser Datenschutzerklärung entnehmen.",
+    "how_question": "Wie erfassen wir Ihre Daten?",
+    "how_answer_1": "Ihre Daten werden zum einen dadurch erhoben, dass Sie uns diese mitteilen. Hierbei kann es sich z. B. um Daten handeln, die Sie in ein Kontaktformular eingeben.",
+    "how_answer_2": "Andere Daten werden automatisch oder nach Ihrer Einwilligung beim Besuch der Website durch unsere IT-Systeme erfasst. Das sind vor allem technische Daten (z. B. Internetbrowser, Betriebssystem oder Uhrzeit des Seitenaufrufs). Die Erfassung dieser Daten erfolgt automatisch, sobald Sie diese Website betreten.",
+    "why_question": "Wofür nutzen wir Ihre Daten?",
+    "why_answer": "Ein Teil der Daten wird erhoben, um eine fehlerfreie Bereitstellung der Website zu gewährleisten. Andere Daten können zur Analyse Ihres Nutzerverhaltens verwendet werden.",
+    "rights_question": "Welche Rechte haben Sie bezüglich Ihrer Daten?",
+    "rights_answer": "Sie haben jederzeit das Recht, unentgeltlich Auskunft über Herkunft, Empfänger und Zweck Ihrer gespeicherten personenbezogenen Daten zu erhalten. Sie haben außerdem ein Recht, die Berichtigung oder Löschung dieser Daten zu verlangen. Wenn Sie eine Einwilligung zur Datenverarbeitung erteilt haben, können Sie diese Einwilligung jederzeit für die Zukunft widerrufen. Außerdem haben Sie das Recht, unter bestimmten Umständen die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen. Des Weiteren steht Ihnen ein Beschwerderecht bei der zuständigen Aufsichtsbehörde zu."
+  },
+  "section_2": {
+    "title": "2. Hosting",
+    "intro": "Wir hosten die Inhalte unserer Website bei folgendem Anbieter:",
+    "provider_title": "Netlify",
+    "provider_text": "Anbieter ist die Netlify Inc., 512 2nd Street, Suite 200, San Francisco, CA 94107, USA. Details entnehmen Sie der Datenschutzerklärung von Netlify:",
+    "privacy_link": "https://www.netlify.com/privacy/",
+    "legal_text": "Die Verwendung von Netlify erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Wir haben ein berechtigtes Interesse an einer möglichst zuverlässigen Darstellung unserer Website."
+  },
+  "section_3": {
+    "title": "3. Allgemeine Hinweise und Pflichtinformationen",
+    "privacy_title": "Datenschutz",
+    "privacy_text_1": "Die Betreiber dieser Seiten nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend den gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.",
+    "privacy_text_2": "Wenn Sie diese Website benutzen, werden verschiedene personenbezogene Daten erhoben. Personenbezogene Daten sind Daten, mit denen Sie persönlich identifiziert werden können. Die vorliegende Datenschutzerklärung erläutert, welche Daten wir erheben und wofür wir sie nutzen. Sie erläutert auch, wie und zu welchem Zweck das geschieht.",
+    "privacy_text_3": "Wir weisen darauf hin, dass die Datenübertragung im Internet (z. B. bei der Kommunikation per E-Mail) Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich.",
+    "controller_title": "Hinweis zur verantwortlichen Stelle",
+    "controller_explanation": "Verantwortliche Stelle ist die natürliche oder juristische Person, die allein oder gemeinsam mit anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten (z. B. Namen, E-Mail-Adressen o. Ä.) entscheidet.",
+    "storage_title": "Speicherdauer",
+    "storage_text": "Soweit innerhalb dieser Datenschutzerklärung keine speziellere Speicherdauer genannt wurde, verbleiben Ihre personenbezogenen Daten bei uns, bis der Zweck für die Datenverarbeitung entfällt. Wenn Sie ein berechtigtes Löschersuchen geltend machen oder eine Einwilligung zur Datenverarbeitung widerrufen, werden Ihre Daten gelöscht, sofern wir keine anderen rechtlich zulässigen Gründe für die Speicherung Ihrer personenbezogenen Daten haben (z. B. steuer- oder handelsrechtliche Aufbewahrungsfristen); im letztgenannten Fall erfolgt die Löschung nach Fortfall dieser Gründe.",
+    "legal_basis_title": "Allgemeine Hinweise zu den Rechtsgrundlagen der Datenverarbeitung auf dieser Website",
+    "legal_basis_text": "Sofern Sie in die Datenverarbeitung eingewilligt haben, verarbeiten wir Ihre personenbezogenen Daten auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO bzw. Art. 9 Abs. 2 lit. a DSGVO, sofern besondere Datenkategorien nach Art. 9 Abs. 1 DSGVO verarbeitet werden. Im Falle einer ausdrücklichen Einwilligung in die Übertragung personenbezogener Daten in Drittstaaten erfolgt die Datenverarbeitung außerdem auf Grundlage von Art. 49 Abs. 1 lit. a DSGVO. Sofern Sie in die Speicherung von Cookies oder in den Zugriff auf Informationen in Ihr Endgerät (z. B. via Device-Fingerprinting) eingewilligt haben, erfolgt die Datenverarbeitung zusätzlich auf Grundlage von § 25 Abs. 1 TTDSG. Die Einwilligung ist jederzeit widerrufbar. Sind Ihre Daten zur Vertragserfüllung oder zur Durchführung vorvertraglicher Maßnahmen erforderlich, verarbeiten wir Ihre Daten auf Grundlage des Art. 6 Abs. 1 lit. b DSGVO. Des Weiteren verarbeiten wir Ihre Daten, sofern diese zur Erfüllung einer rechtlichen Verpflichtung erforderlich sind auf Grundlage von Art. 6 Abs. 1 lit. c DSGVO. Die Datenverarbeitung kann ferner auf Grundlage unseres berechtigten Interesses nach Art. 6 Abs. 1 lit. f DSGVO erfolgen. Über die jeweils im Einzelfall einschlägigen Rechtsgrundlagen wird in den folgenden Absätzen dieser Datenschutzerklärung informiert."
+  },
+  "section_4": {
+    "title": "4. Datenerfassung auf dieser Website",
+    "form_title": "Kontaktformular",
+    "form_text_1": "Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.",
+    "form_text_2": "Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage mit der Erfüllung eines Vertrags zusammenhängt oder zur Durchführung vorvertraglicher Maßnahmen erforderlich ist. In allen übrigen Fällen beruht die Verarbeitung auf unserem berechtigten Interesse an der effektiven Bearbeitung der an uns gerichteten Anfragen (Art. 6 Abs. 1 lit. f DSGVO) oder auf Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO) sofern diese abgefragt wurde.",
+    "form_text_3": "Die von Ihnen im Kontaktformular eingegebenen Daten verbleiben bei uns, bis Sie uns zur Löschung auffordern, Ihre Einwilligung zur Speicherung widerrufen oder der Zweck für die Datenspeicherung entfällt (z. B. nach abgeschlossener Bearbeitung Ihrer Anfrage). Zwingende gesetzliche Bestimmungen – insbesondere Aufbewahrungsfristen – bleiben unberührt.",
+    "email_request_title": "Anfrage per E-Mail, Telefon oder Telefax",
+    "email_request_text_1": "Wenn Sie uns per E-Mail, Telefon oder Telefax kontaktieren, wird Ihre Anfrage inklusive aller daraus hervorgehenden personenbezogenen Daten (Name, Anfrage) zum Zwecke der Bearbeitung Ihres Anliegens bei uns gespeichert und verarbeitet. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.",
+    "email_request_text_2": "Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage mit der Erfüllung eines Vertrags zusammenhängt oder zur Durchführung vorvertraglicher Maßnahmen erforderlich ist. In allen übrigen Fällen beruht die Verarbeitung auf unserem berechtigten Interesse an der effektiven Bearbeitung der an uns gerichteten Anfragen (Art. 6 Abs. 1 lit. f DSGVO) oder auf Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO) sofern diese abgefragt wurde."
+  },
+  "section_5": {
+    "title": "5. Plugins und Tools",
+    "web3forms_title": "Web3Forms",
+    "web3forms_text_1": "Für unser Kontaktformular nutzen wir den Dienst Web3Forms. Anbieter ist Web3Forms, eine Dienstleistung zur Verarbeitung von Formularübermittlungen.",
+    "web3forms_text_2": "Web3Forms ermöglicht es uns, Kontaktanfragen über unsere Website zu empfangen, ohne eigene Server-Infrastruktur für Formularverarbeitung betreiben zu müssen. Die über das Formular übermittelten Daten werden direkt an unsere E-Mail-Adresse weitergeleitet. Details zum Datenschutz bei Web3Forms finden Sie unter:",
+    "web3forms_privacy_link": "https://web3forms.com/privacy",
+    "web3forms_legal": "Die Verwendung von Web3Forms erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Wir haben ein berechtigtes Interesse an einer funktionierenden Kontaktmöglichkeit auf unserer Website."
+  },
+  "section_6": {
+    "title": "6. Ihre Rechte",
+    "intro": "Ihnen stehen folgende Rechte zu:",
+    "rights": [
+      { "title": "Auskunftsrecht (Art. 15 DSGVO):", "description": "Sie haben das Recht, jederzeit Auskunft über Ihre bei uns gespeicherten personenbezogenen Daten zu erhalten." },
+      { "title": "Recht auf Berichtigung (Art. 16 DSGVO):", "description": "Sie haben das Recht, die Berichtigung unrichtiger personenbezogener Daten zu verlangen." },
+      { "title": "Recht auf Löschung (Art. 17 DSGVO):", "description": "Sie haben das Recht, die Löschung Ihrer bei uns gespeicherten personenbezogenen Daten zu verlangen." },
+      { "title": "Recht auf Einschränkung der Verarbeitung (Art. 18 DSGVO):", "description": "Sie haben das Recht, die Einschränkung der Verarbeitung Ihrer Daten zu verlangen." },
+      { "title": "Recht auf Datenübertragbarkeit (Art. 20 DSGVO):", "description": "Sie haben das Recht, Ihre Daten in einem strukturierten, gängigen Format zu erhalten." },
+      { "title": "Widerspruchsrecht (Art. 21 DSGVO):", "description": "Sie können der Verarbeitung Ihrer Daten widersprechen." }
+    ],
+    "complaint_title": "Beschwerderecht bei der zuständigen Aufsichtsbehörde",
+    "complaint_text_1": "Im Falle von Verstößen gegen die DSGVO steht den Betroffenen ein Beschwerderecht bei einer Aufsichtsbehörde, insbesondere in dem Mitgliedstaat ihres gewöhnlichen Aufenthalts, ihres Arbeitsplatzes oder des Orts des mutmaßlichen Verstoßes zu.",
+    "complaint_text_2": "Die zuständige Aufsichtsbehörde für Datenschutzfragen ist die Landesdatenschutzbehörde des Bundeslandes, in dem unser Unternehmen seinen Sitz hat. Eine Liste der Datenschutzbeauftragten sowie deren Kontaktdaten können folgendem Link entnommen werden:",
+    "bfdi_link": "https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html"
+  },
+  "section_7": {
+    "title": "7. Cookies",
+    "text_1": "Unsere Website verwendet Cookies. Cookies sind kleine Textdateien, die auf Ihrem Endgerät gespeichert werden.",
+    "text_2": "Einige Cookies sind technisch notwendig, um die Funktionalität unserer Website zu gewährleisten (z. B. die Speicherung Ihrer Cookie-Einstellungen). Andere Cookies dienen der Analyse des Nutzerverhaltens oder Marketingzwecken.",
+    "text_3": "Sie haben die Möglichkeit, Ihre Cookie-Einstellungen beim ersten Besuch unserer Website zu konfigurieren und diese Entscheidung jederzeit zu ändern. Essenzielle Cookies können nicht deaktiviert werden, da sie für den Betrieb der Website erforderlich sind.",
+    "text_4": "Die Rechtsgrundlage für die Verwendung von Cookies ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse) für technisch notwendige Cookies und Art. 6 Abs. 1 lit. a DSGVO (Einwilligung) für alle anderen Cookies."
+  },
+  "last_updated": {
+    "title": "Stand der Datenschutzerklärung",
+    "text": "Diese Datenschutzerklärung hat den Stand März 2026. Aufgrund von Änderungen an unseren Leistungen oder aufgrund geänderter gesetzlicher bzw. behördlicher Vorgaben kann es notwendig sein, diese Datenschutzerklärung zu ändern."
+  },
+  "seo": {
+    "title": "Datenschutzerklärung | METRA Sicherheitsdienste GmbH",
+    "description": "Datenschutzerklärung der METRA Sicherheitsdienste GmbH. Informationen zur Verarbeitung Ihrer personenbezogenen Daten."
+  }
+}

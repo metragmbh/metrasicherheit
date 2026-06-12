@@ -1,0 +1,796 @@
+backend:
+  name: git-gateway
+  branch: master
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+site_url: https://www.metra-sicherheitsdienste.de
+display_url: https://www.metra-sicherheitsdienste.de
+logo_url: /images/logoneu.png
+locale: de
+
+# Für lokale Entwicklung (optional)
+# local_backend: true
+
+#######################################
+# HILFSFELDER
+#######################################
+
+icon_field: &icon_field
+  label: "Icon (SVG Path)"
+  name: "icon"
+  widget: "string"
+  required: false
+
+#######################################
+# COLLECTIONS
+#######################################
+
+collections:
+
+  #-----------------------------------#
+  # 1. GLOBALE EINSTELLUNGEN
+  #-----------------------------------#
+  - name: "settings"
+    label: "⚙️ Globale Einstellungen"
+    editor:
+      preview: false
+    files:
+      - file: "src/data/cms/settings.json"
+        label: "SEO, Header, Footer & Kontakt"
+        name: "settings"
+        fields:
+          # SEO Defaults
+          - label: "🌐 SEO & Meta"
+            name: "seo"
+            widget: "object"
+            collapsed: false
+            fields:
+              - { label: "Default Seiten-Titel", name: "default_title", widget: "string", default: "METRA Sicherheitsdienste GmbH | Schutz · Präsenz · Verantwortung" }
+              - { label: "Default Meta-Beschreibung", name: "default_description", widget: "text", default: "Professionelle Sicherheitslösungen für Baustellen, Immobilien und Unternehmen. 24/7 Sicherheitsdienste, Brandwachen, Objektschutz und exklusive Concierge-Dienste." }
+              - { label: "OG-Bild", name: "og_image", widget: "image", default: "/images/hero-sicherheit.webp", required: false }
+              - { label: "Site URL", name: "site_url", widget: "string", default: "https://www.metra-sicherheitsdienste.de" }
+
+          # Unternehmensdaten
+          - label: "🏢 Unternehmensdaten"
+            name: "company"
+            widget: "object"
+            collapsed: false
+            fields:
+              - { label: "Firmenname", name: "name", widget: "string", default: "METRA Sicherheitsdienste GmbH" }
+              - { label: "Rechtsform", name: "legal_form", widget: "string", default: "GmbH" }
+              - { label: "Geschäftsführer", name: "owner", widget: "string", default: "D. Mrkaja" }
+              - { label: "Straße", name: "street", widget: "string", default: "Im Mediapark 5" }
+              - { label: "PLZ", name: "zip", widget: "string", default: "50670" }
+              - { label: "Stadt", name: "city", widget: "string", default: "Köln" }
+              - { label: "Land", name: "country", widget: "string", default: "Deutschland" }
+              - { label: "Telefon (Anzeige)", name: "phone_display", widget: "string", default: "0800 8888 369" }
+              - { label: "Telefon (Raw für Links)", name: "phone_raw", widget: "string", default: "08008888369" }
+              - { label: "E-Mail", name: "email", widget: "string", default: "info@metra-sicherheitsdienste.de" }
+              - { label: "Webseite", name: "web", widget: "string", default: "www.metra-sicherheitsdienste.de" }
+              - { label: "USt-IdNr.", name: "vat_id", widget: "string", default: "[USt-IdNr. wird ergänzt]" }
+              - { label: "Handelsregister", name: "registration", widget: "string", default: "HRB 127543" }
+              - { label: "Registergericht", name: "registry_court", widget: "string", default: "Amtsgericht Köln" }
+              - { label: "Datenschutzbeauftragter", name: "dsb", widget: "string", default: "D. Mrkaja" }
+              - { label: "DSB E-Mail", name: "dsb_email", widget: "string", default: "info@metra-sicherheitsdienste.de" }
+              - { label: "WhatsApp-Nummer (für wa.me/ Link)", name: "whatsapp_number", widget: "string", default: "491738888378" }
+
+          # Header
+          - label: "📍 Header & Navigation"
+            name: "header"
+            widget: "object"
+            collapsed: false
+            fields:
+              - { label: "Claim unter Logo", name: "claim", widget: "string", default: "Sicherheit & Struktur – auf die Sie bauen können." }
+              - label: "Navigation"
+                name: "nav_links"
+                widget: "list"
+                collapsed: false
+                fields:
+                  - { label: "Label", name: "label", widget: "string" }
+                  - { label: "URL", name: "href", widget: "string" }
+                  - { label: "ARIA-Label", name: "aria_label", widget: "string", required: false }
+              - { label: "CTA-Button Text", name: "cta_text", widget: "string", default: "Angebot anfordern" }
+              - { label: "CTA-Button ARIA-Label", name: "cta_aria_label", widget: "string", default: "Sicherheitslösung anfragen", required: false }
+
+          # Footer
+          - label: "🦶 Footer"
+            name: "footer"
+            widget: "object"
+            collapsed: false
+            fields:
+              - { label: "Claim unter Logo", name: "claim", widget: "string", default: "Schutz · Präsenz · Verantwortung" }
+              - label: "Service-Links"
+                name: "service_links"
+                widget: "list"
+                collapsed: true
+                fields:
+                  - { label: "Label", name: "label", widget: "string" }
+                  - { label: "URL", name: "href", widget: "string" }
+              - label: "Unternehmen-Links"
+                name: "company_links"
+                widget: "list"
+                collapsed: true
+                fields:
+                  - { label: "Label", name: "label", widget: "string" }
+                  - { label: "URL", name: "href", widget: "string" }
+              - label: "Rechtliche Links"
+                name: "legal_links"
+                widget: "list"
+                collapsed: true
+                fields:
+                  - { label: "Label", name: "label", widget: "string" }
+                  - { label: "URL", name: "href", widget: "string" }
+              - { label: "Disclaimer-Text", name: "disclaimer", widget: "text", default: "Sicherheitsdienstleistungen erfolgen im Rahmen der gesetzlichen Bestimmungen nach § 34a GewO." }
+
+  #-----------------------------------#
+  # 2. STARTSEITE
+  #-----------------------------------#
+  - name: "homepage"
+    label: "🏠 Startseite"
+    editor:
+      preview: false
+    files:
+      - file: "src/data/cms/homepage.json"
+        label: "Alle Inhalte"
+        name: "homepage"
+        fields:
+          # Hero
+          - label: "🦸 Hero-Bereich"
+            name: "hero"
+            widget: "object"
+            collapsed: false
+            fields:
+              - { label: "Headline", name: "title", widget: "string", default: "Operative Sicherheit für Baustellen, Objekte und Industrie" }
+              - { label: "Subline", name: "subtitle", widget: "text", default: "Strukturiert geplant. Verbindlich umgesetzt. Revisionssicher dokumentiert." }
+              - { label: "CTA-Text", name: "cta_text", widget: "string", default: "Sicherheitskonzept anfragen →" }
+              - { label: "CTA-ARIA-Label", name: "cta_aria_label", widget: "string", default: "Sicherheitskonzept anfragen", required: false }
+              - { label: "Hero-Bild", name: "image", widget: "image", default: "/images/hero-sicherheit.webp" }
+              - label: "Trust Badges"
+                name: "trust_badges"
+                widget: "list"
+                collapsed: true
+                fields:
+                  - { label: "Badge-Text", name: "text", widget: "string" }
+
+          # Problem / Lösung
+          - label: "⚠️ Problem & Lösung"
+            name: "problem_solution"
+            widget: "object"
+            collapsed: true
+            fields:
+              - label: "Herausforderung"
+                name: "problem"
+                widget: "object"
+                fields:
+                  - { label: "Label", name: "label", widget: "string", default: "DIE HERAUSFORDERUNG" }
+                  - { label: "Titel", name: "title", widget: "string", default: "Reale Risiken. Messbare Schäden." }
+                  - { label: "Text Absatz 1", name: "text_1", widget: "text" }
+                  - { label: "Text Absatz 2", name: "text_2", widget: "text" }
+              - label: "Lösung"
+                name: "solution"
+                widget: "object"
+                fields:
+                  - { label: "Label", name: "label", widget: "string", default: "UNSERE LÖSUNG" }
+                  - { label: "Titel", name: "title", widget: "string", default: "Ein Ansprechpartner. Vollständige Verantwortung." }
+                  - { label: "Text", name: "text", widget: "text" }
+              - label: "Benefits (4 Stück)"
+                name: "benefits"
+                widget: "list"
+                collapsed: false
+                fields:
+                  - { label: "Titel", name: "title", widget: "string" }
+                  - { label: "Beschreibung", name: "description", widget: "string" }
+                  - <<: *icon_field
+
+          # Prozess
+          - label: "🔄 4-Schritte-Prozess"
+            name: "process"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Label", name: "label", widget: "string", default: "PROZESS" }
+              - { label: "Titel", name: "title", widget: "string", default: "Von der Analyse zum laufenden Betrieb" }
+              - label: "Schritte"
+                name: "steps"
+                widget: "list"
+                fields:
+                  - { label: "Titel", name: "title", widget: "string" }
+                  - { label: "Beschreibung", name: "description", widget: "text" }
+                  - <<: *icon_field
+
+          # Services (5 feste, nicht wiederholbar)
+          - label: "🛡️ Services (5 Stück)"
+            name: "services"
+            widget: "object"
+            collapsed: true
+            fields:
+              - label: "Service 1 – Objektschutz"
+                name: "service_1"
+                widget: "object"
+                collapsed: true
+                fields:
+                  - { label: "Titel", name: "title", widget: "string", default: "Objektschutz" }
+                  - { label: "Kurzbeschreibung (Home)", name: "description_short", widget: "text", default: "Bewachung von Gebäuden mit klaren Kontrollprozessen." }
+                  - { label: "Bild", name: "image", widget: "image", default: "/images/service-objekt.webp" }
+                  - <<: *icon_field
+                  - { label: "Premium?", name: "is_premium", widget: "boolean", default: false }
+              - label: "Service 2 – Baustellensicherheit"
+                name: "service_2"
+                widget: "object"
+                collapsed: true
+                fields:
+                  - { label: "Titel", name: "title", widget: "string", default: "Baustellensicherheit" }
+                  - { label: "Kurzbeschreibung (Home)", name: "description_short", widget: "text", default: "Absicherung aktiver Baustellen mit definierten Abläufen." }
+                  - { label: "Bild", name: "image", widget: "image", default: "/images/service-baustelle.webp" }
+                  - <<: *icon_field
+                  - { label: "Premium?", name: "is_premium", widget: "boolean", default: false }
+              - label: "Service 3 – Werkschutz"
+                name: "service_3"
+                widget: "object"
+                collapsed: true
+                fields:
+                  - { label: "Titel", name: "title", widget: "string", default: "Werkschutz" }
+                  - { label: "Kurzbeschreibung (Home)", name: "description_short", widget: "text", default: "Sicherung von Produktions- und Logistikstandorten." }
+                  - { label: "Bild", name: "image", widget: "image", default: "/images/service-werk.webp" }
+                  - <<: *icon_field
+                  - { label: "Premium?", name: "is_premium", widget: "boolean", default: false }
+              - label: "Service 4 – Brandwachen"
+                name: "service_4"
+                widget: "object"
+                collapsed: true
+                fields:
+                  - { label: "Titel", name: "title", widget: "string", default: "Brandwachen" }
+                  - { label: "Kurzbeschreibung (Home)", name: "description_short", widget: "text", default: "Absicherung bei feuergefährlichen Arbeiten." }
+                  - { label: "Bild", name: "image", widget: "image", default: "/images/service-brandwache.webp" }
+                  - <<: *icon_field
+                  - { label: "Premium?", name: "is_premium", widget: "boolean", default: false }
+              - label: "Service 5 – Empfang & Concierge"
+                name: "service_5"
+                widget: "object"
+                collapsed: true
+                fields:
+                  - { label: "Titel", name: "title", widget: "string", default: "Empfang & Concierge" }
+                  - { label: "Kurzbeschreibung (Home)", name: "description_short", widget: "text", default: "Kombination aus Zutrittskontrolle und Empfangsdienstleistungen." }
+                  - { label: "Bild", name: "image", widget: "image", default: "/images/service-concierge.webp" }
+                  - <<: *icon_field
+                  - { label: "Premium?", name: "is_premium", widget: "boolean", default: false }
+
+          # Differenzierung
+          - label: "✅ Differenzierung"
+            name: "differentiation"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Label", name: "label", widget: "string", default: "DIFFERENZIERUNG" }
+              - { label: "Titel", name: "title", widget: "string", default: "Struktur und Verantwortung im Einsatz" }
+              - label: "Punkte"
+                name: "points"
+                widget: "list"
+                fields:
+                  - { label: "Text", name: "text", widget: "string" }
+
+          # Warum METRA
+          - label: "⭐ Warum METRA"
+            name: "why_metra"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Titel", name: "title", widget: "string", default: "Warum METRA Sicherheitsdienste" }
+              - { label: "Untertitel", name: "subtitle", widget: "string", default: "Sicherheit & Struktur – auf die Sie bauen können." }
+              - label: "Punkte"
+                name: "points"
+                widget: "list"
+                fields:
+                  - { label: "Text", name: "text", widget: "string" }
+
+          # CTA
+          - label: "📢 Call-to-Action"
+            name: "cta"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Titel", name: "title", widget: "string", default: "Lassen Sie uns Ihr Projekt absichern." }
+              - { label: "Text", name: "text", widget: "text" }
+              - { label: "Button-Text", name: "button_text", widget: "string", default: "Sicherheitskonzept anfragen →" }
+              - { label: "Button-ARIA-Label", name: "button_aria_label", widget: "string", default: "Sicherheitskonzept anfragen", required: false }
+
+          # SEO
+          - label: "🔍 SEO"
+            name: "seo"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Seiten-Titel", name: "title", widget: "string", default: "METRA Sicherheitsdienste GmbH | Operative Sicherheit für Baustellen, Objekte und Industrie" }
+              - { label: "Meta-Beschreibung", name: "description", widget: "text", default: "Operative Sicherheit für Baustellen, Objekte und Industrie. Strukturiert geplant. Verbindlich umgesetzt. Revisionssicher dokumentiert." }
+
+
+
+  #-----------------------------------#
+  # 3. LEISTUNGEN
+  #-----------------------------------#
+  - name: "leistungen"
+    label: "🛠️ Leistungen"
+    editor:
+      preview: false
+    files:
+      - file: "src/data/cms/leistungen.json"
+        label: "Alle Inhalte"
+        name: "leistungen"
+        fields:
+          # Hero
+          - label: "🦸 Hero"
+            name: "hero"
+            widget: "object"
+            collapsed: false
+            fields:
+              - { label: "Label", name: "label", widget: "string", default: "LEISTUNGEN" }
+              - { label: "Titel", name: "title", widget: "string", default: "Sicherheitsleistungen für definierte Einsatzbereiche" }
+              - { label: "Beschreibung", name: "description", widget: "text", default: "Strukturiert geplant und verbindlich umgesetzt – für Baustellen, Objekte und Industrie." }
+
+          # Trust Badges
+          - label: "🏅 Trust Badges"
+            name: "trust_badges"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Titel", name: "title", widget: "string", default: "Zertifiziert für professionelle Einsatzbereiche" }
+              - label: "Badges"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "Text", name: "text", widget: "string" }
+
+          # Services Detail (5 feste)
+          - label: "📋 Services Detail"
+            name: "services_detail"
+            widget: "object"
+            collapsed: true
+            fields:
+              - label: "Service 1 – Objektschutz"
+                name: "service_1"
+                widget: "object"
+                collapsed: true
+                fields:
+                  - { label: "Titel", name: "title", widget: "string", default: "Objektschutz" }
+                  - { label: "Beschreibung (lang)", name: "description", widget: "text" }
+                  - { label: "Bild", name: "image", widget: "image", default: "/images/service-objekt.webp" }
+                  - <<: *icon_field
+                  - label: "Features"
+                    name: "features"
+                    widget: "list"
+                    fields:
+                      - { label: "Feature", name: "text", widget: "string" }
+              - label: "Service 2 – Baustellensicherheit"
+                name: "service_2"
+                widget: "object"
+                collapsed: true
+                fields:
+                  - { label: "Titel", name: "title", widget: "string", default: "Baustellensicherheit" }
+                  - { label: "Beschreibung (lang)", name: "description", widget: "text" }
+                  - { label: "Bild", name: "image", widget: "image", default: "/images/service-baustelle.webp" }
+                  - <<: *icon_field
+                  - label: "Features"
+                    name: "features"
+                    widget: "list"
+                    fields:
+                      - { label: "Feature", name: "text", widget: "string" }
+              - label: "Service 3 – Werkschutz"
+                name: "service_3"
+                widget: "object"
+                collapsed: true
+                fields:
+                  - { label: "Titel", name: "title", widget: "string", default: "Werkschutz" }
+                  - { label: "Beschreibung (lang)", name: "description", widget: "text" }
+                  - { label: "Bild", name: "image", widget: "image", default: "/images/service-werk.webp" }
+                  - <<: *icon_field
+                  - label: "Features"
+                    name: "features"
+                    widget: "list"
+                    fields:
+                      - { label: "Feature", name: "text", widget: "string" }
+              - label: "Service 4 – Brandwachen"
+                name: "service_4"
+                widget: "object"
+                collapsed: true
+                fields:
+                  - { label: "Titel", name: "title", widget: "string", default: "Brandwachen – rechtssicher und einsatzbereit" }
+                  - { label: "Beschreibung (lang)", name: "description", widget: "text" }
+                  - { label: "Bild", name: "image", widget: "image", default: "/images/service-brandwache.webp" }
+                  - <<: *icon_field
+                  - label: "Features"
+                    name: "features"
+                    widget: "list"
+                    fields:
+                      - { label: "Feature", name: "text", widget: "string" }
+              - label: "Service 5 – Empfang & Concierge"
+                name: "service_5"
+                widget: "object"
+                collapsed: true
+                fields:
+                  - { label: "Titel", name: "title", widget: "string", default: "Empfang & Concierge" }
+                  - { label: "Beschreibung (lang)", name: "description", widget: "text" }
+                  - { label: "Bild", name: "image", widget: "image", default: "/images/service-concierge.webp" }
+                  - <<: *icon_field
+                  - label: "Features"
+                    name: "features"
+                    widget: "list"
+                    fields:
+                      - { label: "Feature", name: "text", widget: "string" }
+
+          # Benefits
+          - label: "✨ Benefits"
+            name: "benefits"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Label", name: "label", widget: "string", default: "DIFFERENZIERUNG" }
+              - { label: "Titel", name: "title", widget: "string", default: "Struktur und Verantwortung im Einsatz" }
+              - label: "Benefits (6 Stück)"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "Titel", name: "title", widget: "string" }
+                  - { label: "Beschreibung", name: "description", widget: "string" }
+                  - <<: *icon_field
+
+          # Prozess Teaser
+          - label: "🔗 Prozess-Teaser"
+            name: "process_teaser"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Label", name: "label", widget: "string", default: "UNSER VORGEHEN" }
+              - { label: "Titel", name: "title", widget: "string", default: "Strukturiert zum Sicherheitserfolg" }
+              - { label: "Text", name: "text", widget: "text" }
+              - { label: "Button-Text", name: "button_text", widget: "string", default: "4-Schritte-Ansatz ansehen" }
+              - label: "Schritte (4 Stück)"
+                name: "steps"
+                widget: "list"
+                fields:
+                  - { label: "Titel", name: "title", widget: "string" }
+                  - { label: "Beschreibung", name: "description", widget: "string" }
+
+          # CTA
+          - label: "📢 Call-to-Action"
+            name: "cta"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Titel", name: "title", widget: "string", default: "Lassen Sie uns Ihr Projekt absichern." }
+              - { label: "Text", name: "text", widget: "text" }
+              - { label: "Button-Text", name: "button_text", widget: "string", default: "Sicherheitskonzept anfragen →" }
+              - { label: "Button-ARIA-Label", name: "button_aria_label", widget: "string", default: "Sicherheitskonzept anfragen", required: false }
+
+          # SEO
+          - label: "🔍 SEO"
+            name: "seo"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Seiten-Titel", name: "title", widget: "string", default: "Leistungen | METRA Sicherheitsdienste GmbH" }
+              - { label: "Meta-Beschreibung", name: "description", widget: "text", default: "Sicherheitsleistungen für definierte Einsatzbereiche. Strukturiert geplant und verbindlich umgesetzt – für Baustellen, Objekte und Industrie." }
+
+
+  #-----------------------------------#
+  # 4. KONTAKT
+  #-----------------------------------#
+  - name: "kontakt"
+    label: "📞 Kontakt"
+    editor:
+      preview: false
+    files:
+      - file: "src/data/cms/kontakt.json"
+        label: "Alle Inhalte"
+        name: "kontakt"
+        fields:
+          - label: "🦸 Hero"
+            name: "hero"
+            widget: "object"
+            collapsed: false
+            fields:
+              - { label: "Label", name: "label", widget: "string", default: "KONTAKT" }
+              - { label: "Titel", name: "title", widget: "string", default: "Projektanfrage & Sicherheitskonzept" }
+              - { label: "Beschreibung", name: "description", widget: "text", default: "Beschreiben Sie Ihr Objekt oder Projekt. Auf dieser Grundlage erfolgt eine strukturierte Bewertung und Abstimmung der weiteren Schritte." }
+
+          - label: "📋 Kontakt-Daten (Sidebar)"
+            name: "contact_info"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Telefon-Label", name: "phone_label", widget: "string", default: "Telefon" }
+              - { label: "E-Mail-Label", name: "email_label", widget: "string", default: "E-Mail" }
+              - { label: "WhatsApp-Label", name: "whatsapp_label", widget: "string", default: "WhatsApp" }
+              - { label: "WhatsApp-Text", name: "whatsapp_text", widget: "string", default: "Direkte Anfrage möglich" }
+
+          - label: "📝 Formular"
+            name: "form"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Titel", name: "title", widget: "string", default: "Anfrage übermitteln" }
+              - { label: "Untertitel", name: "subtitle", widget: "text", default: "Übermitteln Sie die wichtigsten Projektdaten." }
+              - { label: "Name-Label", name: "label_name", widget: "string", default: "Name" }
+              - { label: "Name-Placeholder", name: "placeholder_name", widget: "string", default: "Ihr vollständiger Name" }
+              - { label: "E-Mail-Label", name: "label_email", widget: "string", default: "E-Mail" }
+              - { label: "E-Mail-Placeholder", name: "placeholder_email", widget: "string", default: "Kontaktadresse" }
+              - { label: "Telefon-Label", name: "label_phone", widget: "string", default: "Telefon" }
+              - { label: "Telefon-Placeholder", name: "placeholder_phone", widget: "string", default: "für Rückfragen" }
+              - { label: "Leistungsbereich-Label", name: "label_service", widget: "string", default: "Leistungsbereich" }
+              - { label: "Nachricht-Label", name: "label_message", widget: "string", default: "Nachricht" }
+              - { label: "Nachricht-Placeholder", name: "placeholder_message", widget: "string", default: "Beschreiben Sie Ihr Projekt, Einsatzort und Anforderungen." }
+              - { label: "Datenschutz-Text", name: "privacy_text", widget: "text", default: "Ich habe die Datenschutzerklärung gelesen und stimme der Verarbeitung meiner Daten zu." }
+              - { label: "Submit-Button", name: "submit_text", widget: "string", default: "Anfrage übermitteln" }
+              - { label: "Erfolgs-Titel", name: "success_title", widget: "string", default: "Ihre Anfrage wurde übermittelt." }
+              - { label: "Erfolgs-Text", name: "success_text", widget: "text", default: "Wir prüfen die Angaben und melden uns zur weiteren Abstimmung." }
+              - { label: "Fehler-Titel", name: "error_title", widget: "string", default: "Es ist ein Fehler aufgetreten." }
+              - { label: "Fehler-Text", name: "error_text", widget: "text", default: "Bitte versuchen Sie es später erneut oder kontaktieren Sie uns telefonisch." }
+              - { label: "Trust-Block Text", name: "trust_text", widget: "text", default: "Alle Anfragen werden strukturiert erfasst und vertraulich behandelt. Die weitere Abstimmung erfolgt auf Grundlage Ihrer Angaben und der projektspezifischen Anforderungen." }
+
+          - label: "🔍 SEO"
+            name: "seo"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Seiten-Titel", name: "title", widget: "string", default: "Kontakt | METRA Sicherheitsdienste GmbH" }
+              - { label: "Meta-Beschreibung", name: "description", widget: "text", default: "Kontaktieren Sie METRA Sicherheitsdienste. Telefon: 0800 8888 369 | E-Mail: info@metra-sicherheitsdienste.de | Adresse: Im Mediapark 5, 50670 Köln." }
+
+  #-----------------------------------#
+  # 5. IMPRESSUM
+  #-----------------------------------#
+  - name: "impressum"
+    label: "⚖️ Impressum"
+    editor:
+      preview: false
+    files:
+      - file: "src/data/cms/impressum.json"
+        label: "Alle Inhalte"
+        name: "impressum"
+        fields:
+          - label: "🦸 Hero"
+            name: "hero"
+            widget: "object"
+            collapsed: false
+            fields:
+              - { label: "Label", name: "label", widget: "string", default: "RECHTLICHE HINWEISE" }
+              - { label: "Titel", name: "title", widget: "string", default: "Impressum" }
+
+          - label: "📝 Inhalte"
+            name: "content"
+            widget: "object"
+            collapsed: false
+            fields:
+              - label: "Angaben gemäß § 5 TMG"
+                name: "company_section"
+                widget: "object"
+                collapsed: true
+                fields:
+                  - { label: "Abschnitts-Titel", name: "title", widget: "string", default: "Angaben gemäß § 5 TMG" }
+                  - { label: "Telefon-Label", name: "label_phone", widget: "string", default: "Telefon:" }
+                  - { label: "E-Mail-Label", name: "label_email", widget: "string", default: "E-Mail:" }
+                  - { label: "Web-Label", name: "label_web", widget: "string", default: "Web:" }
+                  - { label: "GF-Label", name: "label_owner", widget: "string", default: "Geschäftsführer:" }
+                  - { label: "HR-Label", name: "label_registration", widget: "string", default: "Handelsregister:" }
+                  - { label: "USt-Label", name: "label_vat", widget: "string", default: "USt-IdNr.:" }
+
+              - label: "Redaktionell Verantwortlicher"
+                name: "responsible_section"
+                widget: "object"
+                collapsed: true
+                fields:
+                  - { label: "Abschnitts-Titel", name: "title", widget: "string", default: "Redaktionell Verantwortlicher" }
+
+              - label: "EU-Streitschlichtung"
+                name: "eu_odr_section"
+                widget: "object"
+                collapsed: true
+                fields:
+                  - { label: "Abschnitts-Titel", name: "title", widget: "string", default: "EU-Streitschlichtung" }
+                  - { label: "Text", name: "text", widget: "text" }
+                  - { label: "OS-Link-Text", name: "link_text", widget: "string", default: "https://ec.europa.eu/consumers/odr/" }
+                  - { label: "Hinweis-Text", name: "hint_text", widget: "text", default: "Unsere E-Mail-Adresse finden Sie oben im Impressum." }
+
+              - label: "Verbraucherstreitbeilegung"
+                name: "dispute_section"
+                widget: "object"
+                collapsed: true
+                fields:
+                  - { label: "Abschnitts-Titel", name: "title", widget: "string", default: "Verbraucherstreitbeilegung / Universalschlichtungsstelle" }
+                  - { label: "Text", name: "text", widget: "text", default: "Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen." }
+
+              - label: "Haftung für Inhalte"
+                name: "content_liability_section"
+                widget: "object"
+                collapsed: true
+                fields:
+                  - { label: "Abschnitts-Titel", name: "title", widget: "string", default: "Haftung für Inhalte" }
+                  - { label: "Text Absatz 1", name: "text_1", widget: "text" }
+                  - { label: "Text Absatz 2", name: "text_2", widget: "text" }
+
+              - label: "Haftung für Links"
+                name: "link_liability_section"
+                widget: "object"
+                collapsed: true
+                fields:
+                  - { label: "Abschnitts-Titel", name: "title", widget: "string", default: "Haftung für Links" }
+                  - { label: "Text Absatz 1", name: "text_1", widget: "text" }
+                  - { label: "Text Absatz 2", name: "text_2", widget: "text" }
+
+              - label: "Urheberrecht"
+                name: "copyright_section"
+                widget: "object"
+                collapsed: true
+                fields:
+                  - { label: "Abschnitts-Titel", name: "title", widget: "string", default: "Urheberrecht" }
+                  - { label: "Text Absatz 1", name: "text_1", widget: "text" }
+                  - { label: "Text Absatz 2", name: "text_2", widget: "text" }
+
+          - label: "🔍 SEO"
+            name: "seo"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Seiten-Titel", name: "title", widget: "string", default: "Impressum | METRA Sicherheitsdienste GmbH" }
+              - { label: "Meta-Beschreibung", name: "description", widget: "text", default: "Impressum der METRA Sicherheitsdienste GmbH. Rechtliche Angaben gemäß § 5 TMG." }
+
+
+  #-----------------------------------#
+  # 6. DATENSCHUTZ
+  #-----------------------------------#
+  - name: "datenschutz"
+    label: "🔒 Datenschutz"
+    editor:
+      preview: false
+    files:
+      - file: "src/data/cms/datenschutz.json"
+        label: "Alle Inhalte"
+        name: "datenschutz"
+        fields:
+          - label: "🦸 Hero"
+            name: "hero"
+            widget: "object"
+            collapsed: false
+            fields:
+              - { label: "Label", name: "label", widget: "string", default: "DATENSCHUTZ" }
+              - { label: "Titel", name: "title", widget: "string", default: "Datenschutzerklärung" }
+
+          - label: "📝 Abschnitt 1 – Datenschutz auf einen Blick"
+            name: "section_1"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Titel", name: "title", widget: "string", default: "1. Datenschutz auf einen Blick" }
+              - { label: "Allgemeine Hinweise – Titel", name: "general_title", widget: "string", default: "Allgemeine Hinweise" }
+              - { label: "Allgemeine Hinweise – Text", name: "general_text", widget: "text" }
+              - { label: "Datenerfassung – Titel", name: "collection_title", widget: "string", default: "Datenerfassung auf dieser Website" }
+              - { label: "Verantwortlich – Frage", name: "responsible_question", widget: "string", default: "Wer ist verantwortlich für die Datenerfassung auf dieser Website?" }
+              - { label: "Verantwortlich – Antwort", name: "responsible_answer", widget: "text" }
+              - { label: "Wie erfassen – Frage", name: "how_question", widget: "string", default: "Wie erfassen wir Ihre Daten?" }
+              - { label: "Wie erfassen – Antwort 1", name: "how_answer_1", widget: "text" }
+              - { label: "Wie erfassen – Antwort 2", name: "how_answer_2", widget: "text" }
+              - { label: "Wofür – Frage", name: "why_question", widget: "string", default: "Wofür nutzen wir Ihre Daten?" }
+              - { label: "Wofür – Antwort", name: "why_answer", widget: "text" }
+              - { label: "Rechte – Frage", name: "rights_question", widget: "string", default: "Welche Rechte haben Sie bezüglich Ihrer Daten?" }
+              - { label: "Rechte – Antwort", name: "rights_answer", widget: "text" }
+
+          - label: "📝 Abschnitt 2 – Hosting"
+            name: "section_2"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Titel", name: "title", widget: "string", default: "2. Hosting" }
+              - { label: "Einleitung", name: "intro", widget: "text" }
+              - { label: "Hosting-Anbieter", name: "provider_title", widget: "string", default: "Netlify" }
+              - { label: "Anbieter-Text", name: "provider_text", widget: "text" }
+              - { label: "Datenschutz-Link", name: "privacy_link", widget: "string", default: "https://www.netlify.com/privacy/" }
+              - { label: "Rechtsgrundlage", name: "legal_text", widget: "text" }
+
+          - label: "📝 Abschnitt 3 – Allgemeine Hinweise"
+            name: "section_3"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Titel", name: "title", widget: "string", default: "3. Allgemeine Hinweise und Pflichtinformationen" }
+              - { label: "Datenschutz – Titel", name: "privacy_title", widget: "string", default: "Datenschutz" }
+              - { label: "Datenschutz – Text 1", name: "privacy_text_1", widget: "text" }
+              - { label: "Datenschutz – Text 2", name: "privacy_text_2", widget: "text" }
+              - { label: "Datenschutz – Text 3", name: "privacy_text_3", widget: "text" }
+              - { label: "Verantwortliche Stelle – Titel", name: "controller_title", widget: "string", default: "Hinweis zur verantwortlichen Stelle" }
+              - { label: "Verantwortliche Stelle – Erklärung", name: "controller_explanation", widget: "text" }
+              - { label: "Speicherdauer – Titel", name: "storage_title", widget: "string", default: "Speicherdauer" }
+              - { label: "Speicherdauer – Text", name: "storage_text", widget: "text" }
+              - { label: "Rechtsgrundlagen – Titel", name: "legal_basis_title", widget: "string", default: "Allgemeine Hinweise zu den Rechtsgrundlagen der Datenverarbeitung auf dieser Website" }
+              - { label: "Rechtsgrundlagen – Text", name: "legal_basis_text", widget: "text" }
+
+          - label: "📝 Abschnitt 4 – Datenerfassung"
+            name: "section_4"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Titel", name: "title", widget: "string", default: "4. Datenerfassung auf dieser Website" }
+              - { label: "Kontaktformular – Titel", name: "form_title", widget: "string", default: "Kontaktformular" }
+              - { label: "Kontaktformular – Text 1", name: "form_text_1", widget: "text" }
+              - { label: "Kontaktformular – Text 2", name: "form_text_2", widget: "text" }
+              - { label: "Kontaktformular – Text 3", name: "form_text_3", widget: "text" }
+              - { label: "Anfrage per E-Mail/Telefon – Titel", name: "email_request_title", widget: "string", default: "Anfrage per E-Mail, Telefon oder Telefax" }
+              - { label: "Anfrage – Text 1", name: "email_request_text_1", widget: "text" }
+              - { label: "Anfrage – Text 2", name: "email_request_text_2", widget: "text" }
+
+          - label: "📝 Abschnitt 5 – Plugins und Tools"
+            name: "section_5"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Titel", name: "title", widget: "string", default: "5. Plugins und Tools" }
+              - { label: "Web3Forms – Titel", name: "web3forms_title", widget: "string", default: "Web3Forms" }
+              - { label: "Web3Forms – Text 1", name: "web3forms_text_1", widget: "text" }
+              - { label: "Web3Forms – Text 2", name: "web3forms_text_2", widget: "text" }
+              - { label: "Web3Forms – Datenschutz-Link", name: "web3forms_privacy_link", widget: "string", default: "https://web3forms.com/privacy" }
+              - { label: "Web3Forms – Rechtsgrundlage", name: "web3forms_legal", widget: "text" }
+
+          - label: "📝 Abschnitt 6 – Ihre Rechte"
+            name: "section_6"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Titel", name: "title", widget: "string", default: "6. Ihre Rechte" }
+              - { label: "Einleitung", name: "intro", widget: "text" }
+              - label: "Rechte (6 Stück)"
+                name: "rights"
+                widget: "list"
+                fields:
+                  - { label: "Titel", name: "title", widget: "string" }
+                  - { label: "Beschreibung", name: "description", widget: "string" }
+              - { label: "Beschwerderecht – Titel", name: "complaint_title", widget: "string", default: "Beschwerderecht bei der zuständigen Aufsichtsbehörde" }
+              - { label: "Beschwerderecht – Text 1", name: "complaint_text_1", widget: "text" }
+              - { label: "Beschwerderecht – Text 2", name: "complaint_text_2", widget: "text" }
+              - { label: "BFDI-Link", name: "bfdi_link", widget: "string", default: "https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html" }
+
+          - label: "📝 Abschnitt 7 – Cookies"
+            name: "section_7"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Titel", name: "title", widget: "string", default: "7. Cookies" }
+              - { label: "Text 1", name: "text_1", widget: "text" }
+              - { label: "Text 2", name: "text_2", widget: "text" }
+              - { label: "Text 3", name: "text_3", widget: "text" }
+              - { label: "Text 4", name: "text_4", widget: "text" }
+
+          - label: "📝 Stand"
+            name: "last_updated"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Titel", name: "title", widget: "string", default: "Stand der Datenschutzerklärung" }
+              - { label: "Text", name: "text", widget: "text", default: "Diese Datenschutzerklärung hat den Stand März 2026. Aufgrund von Änderungen an unseren Leistungen oder aufgrund geänderter gesetzlicher bzw. behördlicher Vorgaben kann es notwendig sein, diese Datenschutzerklärung zu ändern." }
+
+          - label: "🔍 SEO"
+            name: "seo"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Seiten-Titel", name: "title", widget: "string", default: "Datenschutzerklärung | METRA Sicherheitsdienste GmbH" }
+              - { label: "Meta-Beschreibung", name: "description", widget: "text", default: "Datenschutzerklärung der METRA Sicherheitsdienste GmbH. Informationen zur Verarbeitung Ihrer personenbezogenen Daten." }
+
+  #-----------------------------------#
+  # 7. 404 FEHLERSEITE
+  #-----------------------------------#
+  - name: "error"
+    label: "❌ 404 Fehlerseite"
+    editor:
+      preview: false
+    files:
+      - file: "src/data/cms/error.json"
+        label: "Alle Inhalte"
+        name: "error"
+        fields:
+          - { label: "Seiten-Titel", name: "title", widget: "string", default: "404 - Seite nicht gefunden | METRA Sicherheitsdienste" }
+          - { label: "Meta-Beschreibung", name: "description", widget: "text", default: "Die angeforderte Seite konnte nicht gefunden werden. Zurück zur Startseite von METRA Sicherheitsdienste." }
+          - { label: "Hero-Überschrift (große Zahl)", name: "hero_number", widget: "string", default: "404" }
+          - { label: "Titel", name: "heading", widget: "string", default: "Seite nicht gefunden" }
+          - { label: "Beschreibung", name: "text", widget: "text", default: "Die von Ihnen gesuchte Seite existiert nicht oder wurde verschoben." }
+          - { label: "Button 1 Text", name: "btn_home_text", widget: "string", default: "Zurück zur Startseite" }
+          - { label: "Button 2 Text", name: "btn_contact_text", widget: "string", default: "Kontakt aufnehmen" }
+

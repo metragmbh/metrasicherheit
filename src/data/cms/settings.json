@@ -1,0 +1,57 @@
+{
+  "seo": {
+    "default_title": "METRA Sicherheitsdienste GmbH | Schutz · Präsenz · Verantwortung",
+    "default_description": "Professionelle Sicherheitslösungen für Baustellen, Immobilien und Unternehmen. 24/7 Sicherheitsdienste, Brandwachen, Objektschutz und exklusive Concierge-Dienste.",
+    "og_image": "/images/hero-sicherheit.webp",
+    "site_url": "https://www.metra-sicherheitsdienste.de"
+  },
+  "company": {
+    "name": "METRA Sicherheitsdienste GmbH",
+    "legal_form": "GmbH",
+    "owner": "D. Mrkaja",
+    "street": "Im Mediapark 5",
+    "zip": "50670",
+    "city": "Köln",
+    "country": "Deutschland",
+    "phone_display": "0800 8888 369",
+    "phone_raw": "08008888369",
+    "email": "info@metra-sicherheitsdienste.de",
+    "web": "www.metra-sicherheitsdienste.de",
+    "vat_id": "[USt-IdNr. wird ergänzt]",
+    "registration": "HRB 127543",
+    "registry_court": "Amtsgericht Köln",
+    "dsb": "D. Mrkaja",
+    "dsb_email": "info@metra-sicherheitsdienste.de",
+    "whatsapp_number": "491738888378"
+  },
+  "header": {
+    "claim": "Sicherheit & Struktur – auf die Sie bauen können.",
+    "nav_links": [
+      { "label": "Startseite", "href": "/", "aria_label": "Zur Startseite" },
+      { "label": "Leistungen", "href": "/leistungen", "aria_label": "Unsere Leistungen ansehen" },
+      { "label": "Kontakt", "href": "/kontakt", "aria_label": "Kontakt aufnehmen" }
+    ],
+    "cta_text": "Angebot anfordern",
+    "cta_aria_label": "Sicherheitslösung anfragen"
+  },
+  "footer": {
+    "claim": "Schutz · Präsenz · Verantwortung",
+    "service_links": [
+      { "label": "Baustellensicherheit", "href": "/leistungen#baustellensicherheit" },
+      { "label": "Objektschutz", "href": "/leistungen#objektschutz" },
+      { "label": "Brandwachen", "href": "/leistungen#brandwachen" },
+      { "label": "Empfangs- & Concierge-Dienste", "href": "/leistungen#concierge" },
+      { "label": "Werkschutz", "href": "/leistungen#werkschutz" }
+    ],
+    "company_links": [
+      { "label": "Über uns", "href": "/" },
+      { "label": "Leistungen", "href": "/leistungen" },
+      { "label": "Kontakt", "href": "/kontakt" }
+    ],
+    "legal_links": [
+      { "label": "Impressum", "href": "/impressum" },
+      { "label": "Datenschutz", "href": "/datenschutz" }
+    ],
+    "disclaimer": "Sicherheitsdienstleistungen erfolgen im Rahmen der gesetzlichen Bestimmungen nach § 34a GewO."
+  }
+}

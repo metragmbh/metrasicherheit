@@ -1,0 +1,37 @@
+{
+  "hero": {
+    "label": "KONTAKT",
+    "title": "Projektanfrage & Sicherheitskonzept",
+    "description": "Beschreiben Sie Ihr Objekt oder Projekt. Auf dieser Grundlage erfolgt eine strukturierte Bewertung und Abstimmung der weiteren Schritte."
+  },
+  "contact_info": {
+    "phone_label": "Telefon",
+    "email_label": "E-Mail",
+    "whatsapp_label": "WhatsApp",
+    "whatsapp_text": "Direkte Anfrage möglich"
+  },
+  "form": {
+    "title": "Anfrage übermitteln",
+    "subtitle": "Übermitteln Sie die wichtigsten Projektdaten.",
+    "label_name": "Name",
+    "placeholder_name": "Ihr vollständiger Name",
+    "label_email": "E-Mail",
+    "placeholder_email": "Kontaktadresse",
+    "label_phone": "Telefon",
+    "placeholder_phone": "für Rückfragen",
+    "label_service": "Leistungsbereich",
+    "label_message": "Nachricht",
+    "placeholder_message": "Beschreiben Sie Ihr Projekt, Einsatzort und Anforderungen.",
+    "privacy_text": "Ich habe die Datenschutzerklärung gelesen und stimme der Verarbeitung meiner Daten zu.",
+    "submit_text": "Anfrage übermitteln",
+    "success_title": "Ihre Anfrage wurde übermittelt.",
+    "success_text": "Wir prüfen die Angaben und melden uns zur weiteren Abstimmung.",
+    "error_title": "Es ist ein Fehler aufgetreten.",
+    "error_text": "Bitte versuchen Sie es später erneut oder kontaktieren Sie uns telefonisch.",
+    "trust_text": "Alle Anfragen werden strukturiert erfasst und vertraulich behandelt. Die weitere Abstimmung erfolgt auf Grundlage Ihrer Angaben und der projektspezifischen Anforderungen."
+  },
+  "seo": {
+    "title": "Kontakt | METRA Sicherheitsdienste GmbH",
+    "description": "Kontaktieren Sie METRA Sicherheitsdienste. Telefon: 0800 8888 369 | E-Mail: info@metra-sicherheitsdienste.de | Adresse: Im Mediapark 5, 50670 Köln."
+  }
+}
